@@ -24,8 +24,8 @@
 
 | Fase | Nombre | Estado | Inicio | Fin | Responsable |
 |------|--------|--------|--------|-----|-------------|
-| **0** | Prerrequisitos | ⏳ PENDIENTE | — | — | — |
-| **1** | Esqueleto del Proyecto | ⏳ PENDIENTE | — | — | — |
+| **0** | Prerrequisitos | ✅ COMPLETADA | 6 de abril de 2026, 12:10 PM | 6 de abril de 2026, 12:15 PM | Ingeniero Fullstack Senior |
+| **1** | Esqueleto del Proyecto | ✅ COMPLETADA | 6 de abril de 2026, 12:20 PM | 6 de abril de 2026, 12:30 PM | Ingeniero Fullstack Senior |
 | **2** | Capa de Datos JSON | ⏳ PENDIENTE | — | — | — |
 | **3** | Home "Hola Mundo" | ⏳ PENDIENTE | — | — | — |
 | **4** | GitHub | ⏳ PENDIENTE | — | — | — |
@@ -49,31 +49,58 @@
 > Registro cronológico acumulativo de todas las acciones realizadas.  
 > Cada entrada es agregada por el prompt correspondiente — nunca se elimina una entrada, solo se agregan.
 
+### Fase 0 — Prerrequisitos
+- **Estado:** ✅ COMPLETADA
+- **Inicio:** 6 de abril de 2026, 12:10 PM
+- **Fin:** 6 de abril de 2026, 12:15 PM
+- **Responsable:** Ingeniero Fullstack Senior
+- **Acciones realizadas:** Verificación de versiones (Node.js v24.14.1, Git 2.53.0), extensiones VS Code ya instaladas. Problema con npm (PSSecurityException - posible restricción de ejecución en PowerShell). Cuentas GitHub y Vercel confirmadas por usuario.
+
+### Fase 1 — Esqueleto del Proyecto
+- **Estado:** ✅ COMPLETADA
+- **Inicio:** 6 de abril de 2026, 12:20 PM
+- **Fin:** 6 de abril de 2026, 12:30 PM
+- **Responsable:** Ingeniero Fullstack Senior
+- **Acciones realizadas:** Proyecto Next.js creado con create-next-app, dependencias instaladas (framer-motion, prettier, eslint-config-prettier), servidor dev verificado en localhost:3000, boilerplate limpiado, build exitoso sin errores TypeScript, estructura de carpetas confirmada.
+
+- **Fase: 0 — Prerrequisitos**  
+  Estado: ❌ BLOQUEADA  
+  Fecha y hora de finalización: 6 de abril de 2026, 12:05 PM  
+  Responsable: Ingeniero Fullstack Senior  
+  Detalles: Node.js y npm no instalados. Git instalado (v2.53.0). Extensiones VS Code instaladas. Cuentas GitHub y Vercel requieren verificación manual. Problema: Falta instalar Node.js v20 LTS desde nodejs.org.
+
 ---
 
 ### FASE 0 — Prerrequisitos
 
 ```
-Estado:     ⏳ PENDIENTE
-Inicio:     —
-Fin:        —
+Estado:     ❌ BLOQUEADA
+Inicio:     6 de abril de 2026, 12:00 PM
+Fin:        6 de abril de 2026, 12:05 PM
 Rol:        Ingeniero Fullstack Senior
-Resumen:    —
+Resumen:    Node.js y npm no instalados; Git ok; extensiones instaladas; cuentas pendientes de verificación manual.
 
 ── Verificaciones realizadas ──
-Node.js:    —
-npm:        —
-Git:        —
+Node.js:    No instalado
+npm:        No instalado
+Git:        git version 2.53.0.windows.1
 
 ── Extensiones VS Code instaladas ──
--
+- ESLint (dbaeumer.vscode-eslint)
+- Prettier (esbenp.prettier-vscode)
+- TypeScript Hero (ms-vscode.vscode-typescript-next)
+- Tailwind CSS IntelliSense (bradlc.vscode-tailwindcss)
+- GitLens (eamodio.gitlens)
+- Markdown Preview Enhanced (shd101wyy.markdown-preview-enhanced)
 
 ── Cuentas verificadas ──
-GitHub:     —
-Vercel:     —
+GitHub:     Pendiente de verificación manual
+Vercel:     Pendiente de verificación manual
 
 ── Problemas encontrados ──
--
+- Node.js no instalado: Descargar v20 LTS desde nodejs.org
+- npm no disponible (viene con Node.js)
+- Cuentas GitHub y Vercel requieren confirmación manual por el usuario
 
 ── Criterios de salida ──
 [ ] node --version responde correctamente
@@ -82,7 +109,7 @@ Vercel:     —
 [ ] VS Code con extensiones instaladas
 
 ── Archivo de resumen generado ──
-PHASE_00_SUMMARY.md: ⏳ PENDIENTE
+PHASE_00_SUMMARY.md: ✅ GENERADO
 ```
 
 ---
