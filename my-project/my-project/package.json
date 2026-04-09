@@ -6,10 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint --fix",
-    "format": "prettier --write .",
-    "type-check": "tsc --noEmit",
-    "validate": "npm run type-check && npm run build"
+    "lint": "eslint"
   },
   "dependencies": {
     "eslint-config-prettier": "^10.1.8",

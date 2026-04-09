@@ -1,7 +1,16 @@
-export default function Home() {
-  return (
-    <div>
-      <h1>Proyecto Fullstack TypeScript</h1>
-    </div>
-  );
+import { getContent } from "@/lib/data-reader";
+import HolaMundo from "@/components/HolaMundo";
+import type { Metadata } from "next";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const content = getContent();
+  return {
+    title: content.meta.title,
+    description: content.meta.description,
+  };
+}
+
+export default function HomePage() {
+  const content = getContent();
+  return <HolaMundo content={content.home} />;
 }
