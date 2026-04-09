@@ -1,8 +1,8 @@
 {
   "home": {
     "greeting": "Hola Mundo",
-    "subtitle": "TypeScript · Next.js · Vercel",
-    "version": "1.0.0"
+    "subtitle": "Pipeline CI/CD validado ✓",
+    "version": "1.0.1"
   },
   "meta": {
     "title": "Mi Proyecto Fullstack",
