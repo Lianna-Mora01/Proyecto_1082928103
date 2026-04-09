@@ -1,4 +1,5 @@
 # 📊 ESTADO DE EJECUCIÓN
+
 ## Proyecto Fullstack TypeScript · Next.js · GitHub · Vercel
 
 > **Archivo:** Estado de ejecución e historial acumulativo  
@@ -9,38 +10,38 @@
 
 ## 🗂️ Estado General del Proyecto
 
-| Campo | Valor |
-|-------|-------|
+| Campo                   | Valor                   |
+| ----------------------- | ----------------------- |
 | **Nombre del proyecto** | _(completar en Fase 1)_ |
-| **Repositorio GitHub** | _(completar en Fase 4)_ |
-| **URL de producción** | _(completar en Fase 5)_ |
+| **Repositorio GitHub**  | _(completar en Fase 4)_ |
+| **URL de producción**   | _(completar en Fase 5)_ |
 | **Inicio del proyecto** | _(completar en Fase 0)_ |
 | **Cierre del proyecto** | _(completar en Fase 7)_ |
-| **Estado global** | ⏳ PENDIENTE DE INICIO |
+| **Estado global**       | ⏳ PENDIENTE DE INICIO  |
 
 ---
 
 ## 📋 Tablero de Fases
 
-| Fase | Nombre | Estado | Inicio | Fin | Responsable |
-|------|--------|--------|--------|-----|-------------|
-| **0** | Prerrequisitos | ✅ COMPLETADA | 6 de abril de 2026, 12:10 PM | 6 de abril de 2026, 12:15 PM | Ingeniero Fullstack Senior |
+| Fase  | Nombre                 | Estado        | Inicio                       | Fin                          | Responsable                |
+| ----- | ---------------------- | ------------- | ---------------------------- | ---------------------------- | -------------------------- |
+| **0** | Prerrequisitos         | ✅ COMPLETADA | 6 de abril de 2026, 12:10 PM | 6 de abril de 2026, 12:15 PM | Ingeniero Fullstack Senior |
 | **1** | Esqueleto del Proyecto | ✅ COMPLETADA | 6 de abril de 2026, 12:20 PM | 6 de abril de 2026, 12:30 PM | Ingeniero Fullstack Senior |
-| **2** | Capa de Datos JSON | ⏳ PENDIENTE | — | — | — |
-| **3** | Home "Hola Mundo" | ⏳ PENDIENTE | — | — | — |
-| **4** | GitHub | ⏳ PENDIENTE | — | — | — |
-| **5** | Vercel · Deploy | ⏳ PENDIENTE | — | — | — |
-| **6** | Validación CI/CD | ⏳ PENDIENTE | — | — | — |
-| **7** | Calidad y Cierre | ⏳ PENDIENTE | — | — | — |
+| **2** | Capa de Datos JSON     | ⏳ PENDIENTE  | —                            | —                            | —                          |
+| **3** | Home "Hola Mundo"      | ⏳ PENDIENTE  | —                            | —                            | —                          |
+| **4** | GitHub                 | ⏳ PENDIENTE  | —                            | —                            | —                          |
+| **5** | Vercel · Deploy        | ⏳ PENDIENTE  | —                            | —                            | —                          |
+| **6** | Validación CI/CD       | ⏳ PENDIENTE  | —                            | —                            | —                          |
+| **7** | Calidad y Cierre       | ⏳ PENDIENTE  | —                            | —                            | —                          |
 
 ### Leyenda de estados
 
-| Ícono | Significado |
-|-------|-------------|
-| ⏳ PENDIENTE | No iniciada |
-| 🟡 EN PROGRESO | Actualmente en ejecución |
-| ✅ COMPLETADA | Finalizada exitosamente |
-| ❌ BLOQUEADA | Detenida por error o dependencia |
+| Ícono          | Significado                      |
+| -------------- | -------------------------------- |
+| ⏳ PENDIENTE   | No iniciada                      |
+| 🟡 EN PROGRESO | Actualmente en ejecución         |
+| ✅ COMPLETADA  | Finalizada exitosamente          |
+| ❌ BLOQUEADA   | Detenida por error o dependencia |
 
 ---
 
@@ -50,6 +51,7 @@
 > Cada entrada es agregada por el prompt correspondiente — nunca se elimina una entrada, solo se agregan.
 
 ### Fase 0 — Prerrequisitos
+
 - **Estado:** ✅ COMPLETADA
 - **Inicio:** 6 de abril de 2026, 12:10 PM
 - **Fin:** 6 de abril de 2026, 12:15 PM
@@ -57,6 +59,7 @@
 - **Acciones realizadas:** Verificación de versiones (Node.js v24.14.1, Git 2.53.0), extensiones VS Code ya instaladas. Problema con npm (PSSecurityException - posible restricción de ejecución en PowerShell). Cuentas GitHub y Vercel confirmadas por usuario.
 
 ### Fase 1 — Esqueleto del Proyecto
+
 - **Estado:** ✅ COMPLETADA
 - **Inicio:** 6 de abril de 2026, 12:20 PM
 - **Fin:** 6 de abril de 2026, 12:30 PM
@@ -376,17 +379,17 @@ PROJECT_FINAL_REPORT.md:  ⏳ PENDIENTE
 
 ## 🗃️ Registro de Archivos Generados
 
-| Archivo | Fase | Estado | Fecha de creación |
-|---------|------|--------|-------------------|
-| `PHASE_00_SUMMARY.md` | 0 | ⏳ PENDIENTE | — |
-| `PHASE_01_SUMMARY.md` | 1 | ⏳ PENDIENTE | — |
-| `PHASE_02_SUMMARY.md` | 2 | ⏳ PENDIENTE | — |
-| `PHASE_03_SUMMARY.md` | 3 | ⏳ PENDIENTE | — |
-| `PHASE_04_SUMMARY.md` | 4 | ⏳ PENDIENTE | — |
-| `PHASE_05_SUMMARY.md` | 5 | ⏳ PENDIENTE | — |
-| `PHASE_06_SUMMARY.md` | 6 | ⏳ PENDIENTE | — |
-| `PHASE_07_SUMMARY.md` | 7 | ⏳ PENDIENTE | — |
-| `PROJECT_FINAL_REPORT.md` | 7 | ⏳ PENDIENTE | — |
+| Archivo                   | Fase | Estado       | Fecha de creación |
+| ------------------------- | ---- | ------------ | ----------------- |
+| `PHASE_00_SUMMARY.md`     | 0    | ⏳ PENDIENTE | —                 |
+| `PHASE_01_SUMMARY.md`     | 1    | ⏳ PENDIENTE | —                 |
+| `PHASE_02_SUMMARY.md`     | 2    | ⏳ PENDIENTE | —                 |
+| `PHASE_03_SUMMARY.md`     | 3    | ⏳ PENDIENTE | —                 |
+| `PHASE_04_SUMMARY.md`     | 4    | ⏳ PENDIENTE | —                 |
+| `PHASE_05_SUMMARY.md`     | 5    | ⏳ PENDIENTE | —                 |
+| `PHASE_06_SUMMARY.md`     | 6    | ⏳ PENDIENTE | —                 |
+| `PHASE_07_SUMMARY.md`     | 7    | ⏳ PENDIENTE | —                 |
+| `PROJECT_FINAL_REPORT.md` | 7    | ⏳ PENDIENTE | —                 |
 
 ---
 
@@ -394,10 +397,10 @@ PROJECT_FINAL_REPORT.md:  ⏳ PENDIENTE
 
 > Los prompts deben registrar aquí cualquier error crítico que bloquee el avance.
 
-| # | Fase | Descripción del problema | Estado | Solución aplicada |
-|---|------|--------------------------|--------|-------------------|
-| — | — | _(sin registros aún)_ | — | — |
+| #   | Fase | Descripción del problema | Estado | Solución aplicada |
+| --- | ---- | ------------------------ | ------ | ----------------- |
+| —   | —    | _(sin registros aún)_    | —      | —                 |
 
 ---
 
-*Estado de ejecución v1.0.0 — inicializado, pendiente de primera ejecución*
+_Estado de ejecución v1.0.0 — inicializado, pendiente de primera ejecución_

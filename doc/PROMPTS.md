@@ -1,4 +1,5 @@
 # 📋 PROMPTS DE EJECUCIÓN — Plan Fullstack TypeScript
+
 > Cada prompt debe ejecutarse en orden. Antes de iniciar cualquier prompt, leer los tres documentos base indicados.
 
 ---
@@ -7,11 +8,11 @@
 
 Antes de ejecutar cualquier prompt, debes leer y tener en contexto los siguientes archivos:
 
-| # | Archivo | Propósito |
-|---|---------|-----------|
-| 1 | `INFRASTRUCTURE_PLAN.md` | Arquitectura, stack y estructura del proyecto |
-| 2 | `IMPLEMENTATION_PLAN.md` | Pasos detallados por fase |
-| 3 | `EXECUTION_STATE.md` | Estado actual de ejecución e historial |
+| #   | Archivo                  | Propósito                                     |
+| --- | ------------------------ | --------------------------------------------- |
+| 1   | `INFRASTRUCTURE_PLAN.md` | Arquitectura, stack y estructura del proyecto |
+| 2   | `IMPLEMENTATION_PLAN.md` | Pasos detallados por fase                     |
+| 3   | `EXECUTION_STATE.md`     | Estado actual de ejecución e historial        |
 
 ---
 
@@ -451,15 +452,15 @@ Cada fase debe estar ✅ COMPLETADA en `EXECUTION_STATE.md` antes de iniciar la 
 
 ### Archivos generados al finalizar
 
-| Fase | Archivo de resumen generado |
-|------|-----------------------------|
-| Fase 0 | `PHASE_00_SUMMARY.md` |
-| Fase 1 | `PHASE_01_SUMMARY.md` |
-| Fase 2 | `PHASE_02_SUMMARY.md` |
-| Fase 3 | `PHASE_03_SUMMARY.md` |
-| Fase 4 | `PHASE_04_SUMMARY.md` |
-| Fase 5 | `PHASE_05_SUMMARY.md` |
-| Fase 6 | `PHASE_06_SUMMARY.md` |
+| Fase   | Archivo de resumen generado                       |
+| ------ | ------------------------------------------------- |
+| Fase 0 | `PHASE_00_SUMMARY.md`                             |
+| Fase 1 | `PHASE_01_SUMMARY.md`                             |
+| Fase 2 | `PHASE_02_SUMMARY.md`                             |
+| Fase 3 | `PHASE_03_SUMMARY.md`                             |
+| Fase 4 | `PHASE_04_SUMMARY.md`                             |
+| Fase 5 | `PHASE_05_SUMMARY.md`                             |
+| Fase 6 | `PHASE_06_SUMMARY.md`                             |
 | Fase 7 | `PHASE_07_SUMMARY.md` + `PROJECT_FINAL_REPORT.md` |
 
 ### Documentos que se actualizan durante la ejecución
@@ -469,4 +470,4 @@ Cada fase debe estar ✅ COMPLETADA en `EXECUTION_STATE.md` antes de iniciar la 
 
 ---
 
-*Prompts de ejecución v1.0.0 — sincronizados con Implementation Plan v1.0.0*
+_Prompts de ejecución v1.0.0 — sincronizados con Implementation Plan v1.0.0_

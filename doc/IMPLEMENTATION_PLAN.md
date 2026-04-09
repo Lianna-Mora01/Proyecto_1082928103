@@ -1,4 +1,5 @@
 # 🚀 Plan de Implementación por Fases
+
 ## Proyecto Fullstack TypeScript · Next.js · GitHub · Vercel
 
 > **Documento:** Plan de implementación iterativa  
@@ -9,16 +10,16 @@
 
 ## 📊 Resumen de Fases
 
-| Fase | Nombre | Duración estimada | Resultado entregable |
-|------|--------|-------------------|----------------------|
-| **0** | Prerrequisitos | 1 hora | Entorno listo para desarrollar |
-| **1** | Esqueleto del proyecto | 2–3 horas | Proyecto Next.js corriendo en local |
-| **2** | Capa de datos JSON | 1–2 horas | Lectura tipada de archivos JSON |
-| **3** | Home — "Hola Mundo" | 2–3 horas | UI animada funcionando en local |
-| **4** | GitHub | 30 minutos | Código en repositorio remoto |
-| **5** | Vercel · Deploy | 1 hora | App live en producción |
-| **6** | Validación del pipeline | 30 minutos | CI/CD automático comprobado |
-| **7** | Calidad y cierre | 1 hora | Código limpio y documentado |
+| Fase  | Nombre                  | Duración estimada | Resultado entregable                |
+| ----- | ----------------------- | ----------------- | ----------------------------------- |
+| **0** | Prerrequisitos          | 1 hora            | Entorno listo para desarrollar      |
+| **1** | Esqueleto del proyecto  | 2–3 horas         | Proyecto Next.js corriendo en local |
+| **2** | Capa de datos JSON      | 1–2 horas         | Lectura tipada de archivos JSON     |
+| **3** | Home — "Hola Mundo"     | 2–3 horas         | UI animada funcionando en local     |
+| **4** | GitHub                  | 30 minutos        | Código en repositorio remoto        |
+| **5** | Vercel · Deploy         | 1 hora            | App live en producción              |
+| **6** | Validación del pipeline | 30 minutos        | CI/CD automático comprobado         |
+| **7** | Calidad y cierre        | 1 hora            | Código limpio y documentado         |
 
 **Tiempo total estimado: 9–12 horas**
 
@@ -47,6 +48,7 @@ git --version
 ```
 
 Si algo no está instalado:
+
 - **Node.js:** Descargar desde [nodejs.org](https://nodejs.org) (seleccionar versión LTS)
 - **Git:** Descargar desde [git-scm.com](https://git-scm.com)
 
@@ -59,16 +61,17 @@ Si algo no está instalado:
 
 Instalar desde el Marketplace de VS Code:
 
-| Extensión | ID | Para qué sirve |
-|---|---|---|
-| ESLint | `dbaeumer.vscode-eslint` | Errores en tiempo real |
-| Prettier | `esbenp.prettier-vscode` | Formateo automático |
-| TypeScript Hero | `ms-vscode.vscode-typescript-next` | Soporte TS avanzado |
-| Tailwind CSS IntelliSense | `bradlc.vscode-tailwindcss` | Autocompletado de clases |
-| GitLens | `eamodio.gitlens` | Control de versiones visual |
+| Extensión                 | ID                                    | Para qué sirve              |
+| ------------------------- | ------------------------------------- | --------------------------- |
+| ESLint                    | `dbaeumer.vscode-eslint`              | Errores en tiempo real      |
+| Prettier                  | `esbenp.prettier-vscode`              | Formateo automático         |
+| TypeScript Hero           | `ms-vscode.vscode-typescript-next`    | Soporte TS avanzado         |
+| Tailwind CSS IntelliSense | `bradlc.vscode-tailwindcss`           | Autocompletado de clases    |
+| GitLens                   | `eamodio.gitlens`                     | Control de versiones visual |
 | Markdown Preview Enhanced | `shd101wyy.markdown-preview-enhanced` | Ver este archivo formateado |
 
 ### ✅ Criterio de salida Fase 0
+
 - `node --version` y `git --version` responden correctamente
 - Cuentas de GitHub y Vercel activas y vinculadas
 - VS Code con extensiones instaladas
@@ -157,6 +160,7 @@ También limpiar `app/globals.css` — dejar solo las directivas de Tailwind:
 ```
 
 ### ✅ Criterio de salida Fase 1
+
 - `npm run dev` corre sin errores
 - `npm run build` compila sin errores de TypeScript
 - Estructura de carpetas de Next.js visible en VS Code
@@ -217,10 +221,10 @@ Esta carpeta contiene los archivos JSON que actúan como base de datos del proye
 
 ## Archivos
 
-| Archivo | Descripción |
-|---------|-------------|
+| Archivo        | Descripción                                |
+| -------------- | ------------------------------------------ |
 | `content.json` | Contenido de las páginas (textos, títulos) |
-| `config.json` | Configuración global de la aplicación |
+| `config.json`  | Configuración global de la aplicación      |
 
 ## Reglas
 
@@ -336,6 +340,7 @@ Verificar en el navegador: `http://localhost:3000/api/data`
 Debe responder con el JSON de los dos archivos combinados.
 
 ### ✅ Criterio de salida Fase 2
+
 - `http://localhost:3000/api/data` responde con el JSON correcto
 - `npx tsc --noEmit` pasa sin errores
 - Los tipos están definidos y el helper funciona
@@ -501,6 +506,7 @@ npm run dev
 ```
 
 Abrir `http://localhost:3000` y confirmar:
+
 - [ ] Fondo oscuro con patrón de puntos
 - [ ] Letras de "Hola Mundo" aparecen una a una con efecto 3D
 - [ ] Línea indigo aparece con fade
@@ -521,6 +527,7 @@ El output debe mostrar:
 ```
 
 ### ✅ Criterio de salida Fase 3
+
 - Home visual funcionando en `localhost:3000`
 - Animaciones ejecutándose correctamente
 - `npm run build` sin errores de TypeScript ni de compilación
@@ -588,6 +595,7 @@ git push -u origin main
 Ir a `https://github.com/TU_USUARIO/my-project` y confirmar que todos los archivos están presentes, incluyendo la carpeta `/data`.
 
 ### ✅ Criterio de salida Fase 4
+
 - Repositorio visible en GitHub con todos los archivos
 - La carpeta `/data` con los JSON está en el repo
 - `.env.local` NO aparece en el repositorio (lo protege el `.gitignore`)
@@ -608,13 +616,13 @@ Ir a `https://github.com/TU_USUARIO/my-project` y confirmar que todos los archiv
 
 En la pantalla de configuración de Vercel:
 
-| Campo | Valor |
-|-------|-------|
+| Campo                | Valor                               |
+| -------------------- | ----------------------------------- |
 | **Framework Preset** | Next.js (detectado automáticamente) |
-| **Root Directory** | `.` (dejar en blanco) |
-| **Build Command** | `npm run build` |
-| **Output Directory** | Dejar vacío (Next.js lo maneja) |
-| **Install Command** | `npm install` |
+| **Root Directory**   | `.` (dejar en blanco)               |
+| **Build Command**    | `npm run build`                     |
+| **Output Directory** | Dejar vacío (Next.js lo maneja)     |
+| **Install Command**  | `npm install`                       |
 
 En la sección **Environment Variables**, agregar si tienes variables en `.env.example`:
 
@@ -628,6 +636,7 @@ NEXT_PUBLIC_ENV = production
 Clic en **"Deploy"**.
 
 Vercel ejecutará:
+
 1. `npm install` — instala dependencias
 2. `npm run build` — compila TypeScript y genera el build de Next.js
 3. Deploy a la red CDN global
@@ -643,6 +652,7 @@ https://my-project-[hash].vercel.app
 ```
 
 Confirmar:
+
 - [ ] La página carga correctamente
 - [ ] El efecto de animación funciona igual que en local
 - [ ] El badge de versión muestra `v1.0.0`
@@ -654,6 +664,7 @@ En el dashboard de Vercel → tu proyecto → **Settings → Domains**:
 Se puede agregar un dominio personalizado aquí en el futuro.
 
 ### ✅ Criterio de salida Fase 5
+
 - URL de Vercel accesible públicamente
 - Animación de "Hola Mundo" funcionando en producción
 - Build log sin errores de TypeScript
@@ -721,6 +732,7 @@ git checkout main
 ```
 
 ### ✅ Criterio de salida Fase 6
+
 - Cambio en `main` → deploy automático en producción ✅
 - Cambio en rama `feature/*` → deploy de preview separado ✅
 - El ciclo tarda menos de 2 minutos de extremo a extremo ✅
@@ -788,6 +800,7 @@ npm run validate
 ```
 
 Los tres pasos deben pasar sin errores:
+
 - `type-check` → TypeScript sin errores
 - `lint` → ESLint sin warnings críticos
 - `build` → Compilación exitosa
@@ -810,12 +823,12 @@ Stack: Next.js 14 · TypeScript 5 · Tailwind CSS · Framer Motion
 
 ## Comandos
 
-| Comando | Acción |
-|---------|--------|
-| `npm run dev` | Servidor de desarrollo en localhost:3000 |
-| `npm run build` | Build de producción |
-| `npm run type-check` | Verificar tipos TypeScript |
-| `npm run validate` | type-check + lint + build |
+| Comando              | Acción                                   |
+| -------------------- | ---------------------------------------- |
+| `npm run dev`        | Servidor de desarrollo en localhost:3000 |
+| `npm run build`      | Build de producción                      |
+| `npm run type-check` | Verificar tipos TypeScript               |
+| `npm run validate`   | type-check + lint + build                |
 
 ## Deploy
 
@@ -831,6 +844,7 @@ git push origin main
 ```
 
 ### ✅ Criterio de salida Fase 7
+
 - `npm run validate` pasa completamente sin errores
 - README del proyecto actualizado
 - Código formateado con Prettier
@@ -883,14 +897,14 @@ my-project/
 
 ## ⚠️ Errores Comunes y Soluciones
 
-| Error | Causa probable | Solución |
-|-------|---------------|----------|
-| `Module not found: Can't resolve 'fs'` | Importar `data-reader` en un Client Component | Asegurarse de que `page.tsx` no tenga `"use client"` |
-| `Cannot read file ... ENOENT` | La ruta del JSON es incorrecta | Verificar que `process.cwd()` apunte a la raíz |
-| `Type error: Property X does not exist` | JSON y tipos desincronizados | Actualizar `lib/types.ts` para que coincida con el JSON |
-| Build falla en Vercel pero pasa local | Versión de Node diferente | Agregar `"engines": { "node": ">=20" }` en `package.json` |
-| Animaciones no funcionan en producción | Framer Motion no instalado correctamente | Verificar `package.json` que esté en `dependencies`, no `devDependencies` |
+| Error                                   | Causa probable                                | Solución                                                                  |
+| --------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------- |
+| `Module not found: Can't resolve 'fs'`  | Importar `data-reader` en un Client Component | Asegurarse de que `page.tsx` no tenga `"use client"`                      |
+| `Cannot read file ... ENOENT`           | La ruta del JSON es incorrecta                | Verificar que `process.cwd()` apunte a la raíz                            |
+| `Type error: Property X does not exist` | JSON y tipos desincronizados                  | Actualizar `lib/types.ts` para que coincida con el JSON                   |
+| Build falla en Vercel pero pasa local   | Versión de Node diferente                     | Agregar `"engines": { "node": ">=20" }` en `package.json`                 |
+| Animaciones no funcionan en producción  | Framer Motion no instalado correctamente      | Verificar `package.json` que esté en `dependencies`, no `devDependencies` |
 
 ---
 
-*Plan de implementación v1.0.0 — basado en Infrastructure Plan v1.0.0*
+_Plan de implementación v1.0.0 — basado en Infrastructure Plan v1.0.0_

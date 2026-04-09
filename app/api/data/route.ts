@@ -8,6 +8,9 @@ export async function GET() {
 
     return NextResponse.json({ content, config }, { status: 200 });
   } catch (error) {
-    return NextResponse.json({ error: "Error al leer los datos" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Error al leer los datos" },
+      { status: 500 }
+    );
   }
 }

@@ -1,4 +1,5 @@
 # 📋 Resumen de Fase 0 — Prerrequisitos
+
 ## Proyecto Fullstack TypeScript · Next.js · GitHub · Vercel
 
 > **Fase:** 0 — Prerrequisitos  
@@ -16,11 +17,11 @@ Se verificaron todos los prerrequisitos necesarios para el desarrollo del proyec
 
 ## 🔍 Versiones verificadas
 
-| Software | Versión encontrada | Estado |
-|----------|-------------------|--------|
-| **Node.js** | v24.14.1 | ✅ Compatible (superior a v20 LTS) |
-| **npm** | No verificable | ⚠️ Problema de permisos (PSSecurityException) |
-| **Git** | git version 2.53.0.windows.1 | ✅ Compatible (2.x.x) |
+| Software    | Versión encontrada           | Estado                                        |
+| ----------- | ---------------------------- | --------------------------------------------- |
+| **Node.js** | v24.14.1                     | ✅ Compatible (superior a v20 LTS)            |
+| **npm**     | No verificable               | ⚠️ Problema de permisos (PSSecurityException) |
+| **Git**     | git version 2.53.0.windows.1 | ✅ Compatible (2.x.x)                         |
 
 ---
 
@@ -28,13 +29,13 @@ Se verificaron todos los prerrequisitos necesarios para el desarrollo del proyec
 
 Todas las extensiones recomendadas ya estaban instaladas en el entorno:
 
-| Extensión | ID | Estado |
-|-----------|----|--------|
-| ESLint | `dbaeumer.vscode-eslint` | ✅ Instalada |
-| Prettier | `esbenp.prettier-vscode` | ✅ Instalada |
-| TypeScript Hero | `ms-vscode.vscode-typescript-next` | ✅ Instalada |
-| Tailwind CSS IntelliSense | `bradlc.vscode-tailwindcss` | ✅ Instalada |
-| GitLens | `eamodio.gitlens` | ✅ Instalada |
+| Extensión                 | ID                                    | Estado       |
+| ------------------------- | ------------------------------------- | ------------ |
+| ESLint                    | `dbaeumer.vscode-eslint`              | ✅ Instalada |
+| Prettier                  | `esbenp.prettier-vscode`              | ✅ Instalada |
+| TypeScript Hero           | `ms-vscode.vscode-typescript-next`    | ✅ Instalada |
+| Tailwind CSS IntelliSense | `bradlc.vscode-tailwindcss`           | ✅ Instalada |
+| GitLens                   | `eamodio.gitlens`                     | ✅ Instalada |
 | Markdown Preview Enhanced | `shd101wyy.markdown-preview-enhanced` | ✅ Instalada |
 
 ---
