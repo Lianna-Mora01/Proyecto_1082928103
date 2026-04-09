@@ -1,4 +1,5 @@
 # 📋 Resumen de Fase 1 — Esqueleto del Proyecto
+
 ## Proyecto Fullstack TypeScript · Next.js · GitHub · Vercel
 
 > **Fase:** 1 — Esqueleto del Proyecto  
@@ -31,11 +32,13 @@ npx create-next-app@latest my-project \
 ## 📦 Dependencias instaladas con versiones
 
 ### Dependencias principales (instaladas por create-next-app):
+
 - **next:** 16.2.2
 - **react:** 19.0.0
 - **react-dom:** 19.0.0
 
 ### Dependencias de desarrollo (instaladas por create-next-app):
+
 - **@tailwindcss/postcss:** (incluido en tailwindcss)
 - **@types/node:** (última)
 - **@types/react:** (última)
@@ -46,6 +49,7 @@ npx create-next-app@latest my-project \
 - **typescript:** (última)
 
 ### Dependencias adicionales instaladas:
+
 - **framer-motion:** 12.0.0-alpha.1
 - **prettier:** 3.4.2
 - **eslint-config-prettier:** 9.1.0
@@ -88,10 +92,10 @@ my-project/
 
   Creating an optimized production build ...
 ✓ Compiled successfully in 1387ms
-✓ Finished TypeScript in 912ms    
-✓ Collecting page data using 5 workers in 203ms    
+✓ Finished TypeScript in 912ms
+✓ Collecting page data using 5 workers in 203ms
 ✓ Generating static pages using 5 workers (4/4) in 256ms
-✓ Finalizing page optimization in 5ms    
+✓ Finalizing page optimization in 5ms
 
 Route (app)
 ┌ ○ /

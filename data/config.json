@@ -1,0 +1,12 @@
+{
+  "app": {
+    "name": "My TS Project",
+    "theme": "dark",
+    "language": "es"
+  },
+  "animation": {
+    "enabled": true,
+    "duration": 0.8,
+    "easing": "easeInOut"
+  }
+}

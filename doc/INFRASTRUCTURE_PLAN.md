@@ -84,28 +84,28 @@ my-project/
 
 ### 3.1 Core del Proyecto
 
-| Tecnología | Versión | Rol |
-|---|---|---|
-| **Next.js** | 14.x (App Router) | Framework fullstack principal |
-| **TypeScript** | 5.x | Tipado estático — validación del stack |
-| **React** | 18.x | UI layer |
-| **Node.js** | 20.x LTS | Runtime (Vercel lo gestiona) |
+| Tecnología     | Versión           | Rol                                    |
+| -------------- | ----------------- | -------------------------------------- |
+| **Next.js**    | 14.x (App Router) | Framework fullstack principal          |
+| **TypeScript** | 5.x               | Tipado estático — validación del stack |
+| **React**      | 18.x              | UI layer                               |
+| **Node.js**    | 20.x LTS          | Runtime (Vercel lo gestiona)           |
 
 ### 3.2 Estilos y Animaciones
 
-| Librería | Rol |
-|---|---|
-| **Tailwind CSS** | Utilidades CSS rápidas |
-| **Framer Motion** | Animaciones elegantes en React |
-| **CSS Custom Properties** | Variables de tema globales |
+| Librería                  | Rol                            |
+| ------------------------- | ------------------------------ |
+| **Tailwind CSS**          | Utilidades CSS rápidas         |
+| **Framer Motion**         | Animaciones elegantes en React |
+| **CSS Custom Properties** | Variables de tema globales     |
 
 ### 3.3 Herramientas de Desarrollo
 
-| Herramienta | Rol |
-|---|---|
-| **ESLint** | Linter de código TypeScript |
-| **Prettier** | Formateo de código |
-| **Husky** | Git hooks (pre-commit) |
+| Herramienta     | Rol                            |
+| --------------- | ------------------------------ |
+| **ESLint**      | Linter de código TypeScript    |
+| **Prettier**    | Formateo de código             |
+| **Husky**       | Git hooks (pre-commit)         |
 | **lint-staged** | Lint solo archivos modificados |
 
 ### 3.4 Instalación Inicial
@@ -395,10 +395,7 @@ export async function GET() {
     const content = getContent();
     const config = getConfig();
 
-    return NextResponse.json(
-      { content, config },
-      { status: 200 }
-    );
+    return NextResponse.json({ content, config }, { status: 200 });
   } catch (error) {
     return NextResponse.json(
       { error: "Error al leer los datos" },
@@ -484,11 +481,11 @@ main          ← Producción (auto-deploy a Vercel)
 
 ### 9.2 Configuración de Ramas
 
-| Branch | Ambiente | URL |
-|---|---|---|
-| `main` | Production | `https://mi-proyecto.vercel.app` |
-| `develop` | Preview | `https://mi-proyecto-git-develop.vercel.app` |
-| `feature/*` | Preview | Auto-generada por Vercel |
+| Branch      | Ambiente   | URL                                          |
+| ----------- | ---------- | -------------------------------------------- |
+| `main`      | Production | `https://mi-proyecto.vercel.app`             |
+| `develop`   | Preview    | `https://mi-proyecto-git-develop.vercel.app` |
+| `feature/*` | Preview    | Auto-generada por Vercel                     |
 
 ### 9.3 `vercel.json` (opcional, control fino)
 
@@ -502,9 +499,7 @@ main          ← Producción (auto-deploy a Vercel)
   "headers": [
     {
       "source": "/api/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "no-store" }
-      ]
+      "headers": [{ "key": "Cache-Control", "value": "no-store" }]
     }
   ]
 }
@@ -536,6 +531,7 @@ main          ← Producción (auto-deploy a Vercel)
 ## ✅ 11. Checklist de Implementación
 
 ### Fase 1 — Setup Local
+
 - [ ] Crear proyecto con `create-next-app` (flags detallados en sección 3.4)
 - [ ] Instalar dependencias adicionales (`framer-motion`)
 - [ ] Configurar `tsconfig.json` con `resolveJsonModules: true`
@@ -549,6 +545,7 @@ main          ← Producción (auto-deploy a Vercel)
 - [ ] Ejecutar `npm run type-check` — debe pasar sin errores
 
 ### Fase 2 — GitHub
+
 - [ ] Inicializar repositorio: `git init`
 - [ ] Agregar `.gitignore`
 - [ ] Primer commit: `git commit -m "feat: initial project setup"`
@@ -556,6 +553,7 @@ main          ← Producción (auto-deploy a Vercel)
 - [ ] Pushear: `git push origin main`
 
 ### Fase 3 — Vercel
+
 - [ ] Conectar repositorio en el dashboard de Vercel
 - [ ] Verificar que el build pasa correctamente
 - [ ] Confirmar que la URL de producción muestra "Hola Mundo"
@@ -563,6 +561,7 @@ main          ← Producción (auto-deploy a Vercel)
 - [ ] Revisar los logs de build en Vercel (sin errores de TypeScript)
 
 ### Fase 4 — Validación del Pipeline
+
 - [ ] Hacer un cambio en `data/content.json` (ej: cambiar el subtitle)
 - [ ] Commitear y pushear a `main`
 - [ ] Verificar que Vercel despliega automáticamente
@@ -572,13 +571,13 @@ main          ← Producción (auto-deploy a Vercel)
 
 ## 🔐 12. Consideraciones de Seguridad
 
-| Aspecto | Implementación |
-|---|---|
-| **Variables sensibles** | Solo en `.env.local`, nunca en el repo |
-| **Archivos JSON** | Solo accesibles desde el servidor (no expuestos como estáticos) |
-| **API Routes** | Validar y sanitizar cualquier input futuro |
-| **Dependencias** | Usar `npm audit` regularmente |
-| **Vercel** | Habilitar protección de preview deployments si el repo es privado |
+| Aspecto                 | Implementación                                                    |
+| ----------------------- | ----------------------------------------------------------------- |
+| **Variables sensibles** | Solo en `.env.local`, nunca en el repo                            |
+| **Archivos JSON**       | Solo accesibles desde el servidor (no expuestos como estáticos)   |
+| **API Routes**          | Validar y sanitizar cualquier input futuro                        |
+| **Dependencias**        | Usar `npm audit` regularmente                                     |
+| **Vercel**              | Habilitar protección de preview deployments si el repo es privado |
 
 ---
 
@@ -616,6 +615,7 @@ FLUJO COMPLETO:
 ```
 
 **El pipeline completo valida:**
+
 - ✅ TypeScript compilando sin errores
 - ✅ Next.js App Router funcionando (SSR + Client Components)
 - ✅ Sistema de datos JSON siendo leído correctamente
@@ -624,4 +624,4 @@ FLUJO COMPLETO:
 
 ---
 
-*Documento generado como plan de infraestructura inicial — versión 1.0.0*
+_Documento generado como plan de infraestructura inicial — versión 1.0.0_
