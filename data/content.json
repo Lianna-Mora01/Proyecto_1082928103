@@ -1,7 +1,7 @@
 {
   "home": {
     "greeting": "Hola Mundo",
-    "subtitle": "Pipeline CI/CD validado ✓",
+    "subtitle": "Pipeline CI/CD validado ✓ (Preview Test)",
     "version": "1.0.1"
   },
   "meta": {
