@@ -99,6 +99,16 @@
   Inicio: 9 abril 2026, 11:45 a. m.  
   Fin: 9 abril 2026, 11:49 a. m.  
   Responsable: Ingeniero Fullstack Senior  
+  Detalles: Inicializado repositorio Git local, configurado user.email y user.name. Creado .env.example con plantilla de variables. Actualizado .gitignore. Commit semántico: 'feat: initialize fullstack TypeScript Next.js project'. Repositorio creado en GitHub. Conectado remoto, renombrada rama a main, realizado pull y push exitoso.
+
+- **Fase: 5 — Vercel · Deploy**  
+  Estado: ✅ COMPLETADA  
+  Inicio: 9 de abril de 2026, 11:51 a. m.  
+  Fin: 9 de abril de 2026, 11:52 a. m.  
+  Re-validación: 10 de abril de 2026, 12:00 PM  
+  Responsable: Ingeniero DevOps + Fullstack Senior  
+  Detalles: Repositorio importado en Vercel desde GitHub. Framework Preset: Next.js 16.2.2, Root Directory: ./my-project. Variables de entorno configuradas (NEXT_PUBLIC_APP_NAME, NEXT_PUBLIC_APP_VERSION=1.0.1). Build completado exitosamente en ~2.1s. URL de producción: https://proyecto-1082928103-ueat-86vha82pz-lianna-mora01s-projects.vercel.app. Animación de "Hola Mundo" verificada en producción con flip 3D, patrón de puntos, línea divisora, subtítulo y badge de versión funcionando correctamente. Re-validación del 10 de abril: Sincronización de estructura en my-project/ (components/, data/, lib/) para completar componentes faltantes. Re-build automático exitoso. Animación nuevamente verificada funcionando. Pipeline CI/CD automático confirmado funcional.  
+  Responsable: Ingeniero Fullstack Senior  
   Detalles: Inicializado repositorio Git local, configurado user.email y user.name. Creado .env.example con plantilla de variables. Actualizado .gitignore para permitir .env.example pero ignorar .env.local. Realizado git add y verificado que .env.local NO está en staging. Primer commit semántico: 'feat: initialize fullstack TypeScript Next.js project with JSON data layer and animated home component'. Repositorio creado en GitHub: https://github.com/Lianna-Mora01/Proyecto_1082928103.git. Conectado remoto, renombrada rama a main, realizado pull con --allow-unrelated-histories, y push exitoso. Verificado en GitHub que todos los archivos están presentes incluyendo /data.
 
 - **Fase: 5 — Vercel · Deploy**  
