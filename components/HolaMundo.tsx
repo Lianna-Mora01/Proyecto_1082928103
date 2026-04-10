@@ -46,6 +46,15 @@ export default function HolaMundo({ content }: HolaMundoProps) {
     },
   };
 
+  const authorVariant = {
+    hidden: { opacity: 0, y: 10 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { delay: 2.0, duration: 0.6 },
+    },
+  };
+
   return (
     <main className="relative flex min-h-screen flex-col items-center justify-center bg-zinc-950 overflow-hidden">
       {/* Resplandor de fondo */}
@@ -90,6 +99,17 @@ export default function HolaMundo({ content }: HolaMundoProps) {
         initial="hidden"
         animate="visible"
       />
+
+      {/* Información del autor */}
+      <motion.div
+        className="mt-6 text-center"
+        variants={authorVariant}
+        initial="hidden"
+        animate="visible"
+      >
+        <p className="text-sm font-semibold text-indigo-300">Lianna Mora</p>
+        <p className="text-xs text-zinc-500">Documento: 1082928103</p>
+      </motion.div>
 
       {/* Subtítulo */}
       <motion.p
