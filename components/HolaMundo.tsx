@@ -101,17 +101,6 @@ export default function HolaMundo({ content }: HolaMundoProps) {
         {content.subtitle}
       </motion.p>
 
-      {/* Nombre y documento */}
-      <motion.div
-        className="mt-4 space-y-1 text-center text-sm text-zinc-300"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.6, duration: 0.6 }}
-      >
-        <p>Lianna Mora</p>
-        <p>1082928103</p>
-      </motion.div>
-
       {/* Badge de versión */}
       <motion.span
         className="mt-10 rounded-full border border-zinc-700 bg-zinc-900 px-4 py-1 text-xs text-zinc-500"
