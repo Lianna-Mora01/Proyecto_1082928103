@@ -1,16 +1,16 @@
-import { getContent } from "@/lib/data-reader";
 import HolaMundo from "@/components/HolaMundo";
-import type { Metadata } from "next";
 
-export async function generateMetadata(): Promise<Metadata> {
-  const content = getContent();
-  return {
-    title: content.meta.title,
-    description: content.meta.description,
-  };
-}
+export const metadata = {
+  title: "Mi Proyecto Fullstack",
+  description: "Stack TypeScript validado y funcionando",
+};
 
 export default function HomePage() {
-  const content = getContent();
-  return <HolaMundo content={content.home} />;
+  const content = {
+    greeting: "Hola Mundo",
+    subtitle: "Pipeline CI/CD validado ✓",
+    version: "1.0.1",
+  };
+
+  return <HolaMundo content={content} />;
 }
