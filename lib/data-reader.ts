@@ -1,19 +1,11 @@
-import { readFileSync } from "fs";
-import { join } from "path";
 import type { SiteContent, SiteConfig } from "./types";
-
-const DATA_DIR = join(process.cwd(), "data");
-
-function readJson<T>(filename: string): T {
-  const filePath = join(DATA_DIR, filename);
-  const raw = readFileSync(filePath, "utf-8");
-  return JSON.parse(raw) as T;
-}
+import contentData from "../data/content.json";
+import configData from "../data/config.json";
 
 export function getContent(): SiteContent {
-  return readJson<SiteContent>("content.json");
+  return contentData as SiteContent;
 }
 
 export function getConfig(): SiteConfig {
-  return readJson<SiteConfig>("config.json");
+  return configData as SiteConfig;
 }
