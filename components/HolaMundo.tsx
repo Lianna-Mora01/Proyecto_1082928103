@@ -94,7 +94,7 @@ export default function HolaMundo({ content }: HolaMundoProps) {
 
       {/* Línea divisora animada */}
       <motion.div
-        className="mt-8 h-px w-32 bg-gradient-to-r from-transparent via-indigo-500 to-transparent"
+        className="mt-8 h-px w-32 bg-linear-to-r from-transparent via-indigo-500 to-transparent"
         variants={lineVariant}
         initial="hidden"
         animate="visible"
