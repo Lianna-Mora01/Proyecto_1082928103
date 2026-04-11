@@ -1,16 +1,9 @@
-import HolaMundo from "@/components/HolaMundo";
-
-export const metadata = {
-  title: "Mi Proyecto Fullstack",
-  description: "Stack TypeScript validado y funcionando",
-};
+'use client';
 
 export default function HomePage() {
-  const content = {
-    greeting: "Hola Mundo",
-    subtitle: "Pipeline CI/CD validado ✓",
-    version: "1.0.1",
-  };
-
-  return <HolaMundo content={content} />;
+  return (
+    <div className="flex items-center justify-center min-h-screen bg-black">
+      <h1 className="text-6xl font-bold text-white">Hola Mundo</h1>
+    </div>
+  );
 }
