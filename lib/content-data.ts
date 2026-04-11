@@ -12,4 +12,15 @@ export const contentData: SiteContent = {
   },
 };
 
-export const configData: SiteConfig = {};
+export const configData: SiteConfig = {
+  app: {
+    name: "Mi Proyecto",
+    theme: "dark",
+    language: "es",
+  },
+  animation: {
+    enabled: true,
+    duration: 300,
+    easing: "ease-in-out",
+  },
+};
