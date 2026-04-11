@@ -1,11 +1,10 @@
 import type { SiteContent, SiteConfig } from "./types";
-import contentData from "../data/content.json";
-import configData from "../data/config.json";
+import { contentData, configData } from "./content-data";
 
 export function getContent(): SiteContent {
-  return contentData as SiteContent;
+  return contentData;
 }
 
 export function getConfig(): SiteConfig {
-  return configData as SiteConfig;
+  return configData;
 }
