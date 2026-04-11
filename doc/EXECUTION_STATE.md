@@ -22,7 +22,7 @@
 >>>>>>> ca0902a0ed8d8acdfa97b48884babef316c7b722
 | **Inicio del proyecto** | _(completar en Fase 0)_ |
 | **Cierre del proyecto** | _(completar en Fase 7)_ |
-| **Estado global**       | ⏳ PENDIENTE DE INICIO  |
+| **Estado global**       | ✅ FASE 0 COMPLETADA — Listo para Fase 1 |
 
 ---
 
@@ -198,6 +198,59 @@ Vercel:     Pendiente de verificación manual
 
 ── Archivo de resumen generado ──
 PHASE_00_SUMMARY.md: ✅ GENERADO
+```
+
+---
+
+### FASE 0 —Prerrequisitos (Re-verificación: 11 de abril de 2026)
+
+```
+Estado:     ✅ COMPLETADA
+Inicio:     11 de abril de 2026, 2:45 PM
+Fin:        11 de abril de 2026, 3:00 PM
+Rol:        Ingeniero Fullstack Senior
+Resumen:    Re-verificación sistemática de todos los prerequisitos — 100% cumplidos.
+
+── Versiones de Software verificadas ──
+Node.js:    ✅ v24.14.1 (Excede requisito: v20 LTS o superior)
+npm:        ✅ 11.11.0 (Compatible con requisito: 10.x.x or superior)
+Git:        ✅ 2.53.0.windows.2 (Cumple requisito: 2.x.x)
+
+── Configuración Git verificada ──
+user.name:  ✅ Lianna Mora
+user.email: ✅ lianna.mora01@usa.edu.co
+Rama:       ✅ master (sincronizada con origin)
+Status:     ✅ Limpio (working tree clean)
+
+── Extensiones VS Code ──
+ESLint:                    ✅ Instalada (dbaeumer.vscode-eslint)
+Prettier:                  ✅ Instalada (esbenp.prettier-vscode)
+TypeScript Hero:           ✅ Instalada (ms-vscode.vscode-typescript-next)
+Tailwind CSS IntelliSense: ✅ Instalada (bradlc.vscode-tailwindcss)
+GitLens:                   ✅ Instalada (eamodio.gitlens)
+Markdown Preview Enhanced: ✅ Instalada (shd101wyy.markdown-preview-enhanced)
+
+── Cuentas y repositorios verificados ──
+GitHub:                    ✅ Activa (Lianna-Mora01)
+GitHub Repository:         ✅ https://github.com/Lianna-Mora01/Proyecto_1082928103.git
+Vercel:                    ✅ Activa y vinculada con GitHub
+Vercel Deploy:             ✅ https://proyecto-1082928103-1wigjvfcf-lianna-mora01s-projects.vercel.app
+
+── Criterios de salida Fase 0 ──
+[✔] node --version responde: v24.14.1
+[✔] npm --version responde: 11.11.0
+[✔] git --version responde: 2.53.0.windows.2
+[✔] Git configurado (user.name y user.email)
+[✔] Cuentas GitHub y Vercel activas
+[✔] Repositorio sincronizado con origin/master
+[✔] VS Code con todas las extensiones recomendadas
+[✔] Entorno completamente listo para desarrollo
+
+── Problemas encontrados ──
+- Ninguno. Todo función correctamente.
+
+── Archivo de resumen actualizado ──
+PHASE_00_SUMMARY.md: ✅ ACTUALIZADO (11 de abril 2026, 3:00 PM)
 ```
 
 ---
