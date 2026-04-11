@@ -48,7 +48,7 @@ export default function HomePage() {
       {/* Fondo con gradiente y efectos */}
       <div className="absolute inset-0 w-full h-full">
         {/* Gradiente base */}
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-purple-950 to-black" />
+        <div className="absolute inset-0 bg-linear-to-br from-slate-950 via-purple-950 to-black" />
 
         {/* Orbs animados flotantes */}
         <motion.div
@@ -129,7 +129,7 @@ export default function HomePage() {
           {greeting.split('').map((char, i) => (
             <motion.span
               key={i}
-              className="text-7xl sm:text-8xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
+              className="text-7xl sm:text-8xl font-bold bg-linear-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
               variants={letterVariants}
               style={{ display: 'inline-block', perspective: '1000px' }}
             >
@@ -140,7 +140,7 @@ export default function HomePage() {
 
         {/* Línea divisora */}
         <motion.div
-          className="h-1 w-48 bg-gradient-to-r from-transparent via-purple-500 to-transparent mx-auto mb-8"
+          className="h-1 w-48 bg-linear-to-r from-transparent via-purple-500 to-transparent mx-auto mb-8"
           variants={lineVariants}
         />
 
