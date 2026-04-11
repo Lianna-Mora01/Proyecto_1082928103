@@ -1,47 +1,47 @@
 'use client';
 
-import dynamic from 'next/dynamic';
-import { Suspense } from 'react';
+import { motion } from 'framer-motion';
 
-const AnimatedHome = dynamic(() => import('@/components/AnimatedHome'), { 
-  ssr: false,
-  loading: () => (
-    <div className="flex items-center justify-center min-h-screen bg-black">
-      <p className="text-white">Cargando...</p>
-    </div>
-  ),
-});
+export default function AnimatedHome() {
+  const name = 'Lianna Mora';
+  const doc = '1082928103';
+  const greeting = 'Hola Mundo';
 
-export default function HomePage() {
-  return (
-    <Suspense 
-      fallback={
-        <div className="flex items-center justify-center min-h-screen bg-black">
-          <p className="text-white">Cargando...</p>
-        </div>
-      }
-    >
-      <AnimatedHome />
-    </Suspense>
-  );
-}
-'use client';
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1, delayChildren: 0.3 },
+    },
+  };
 
-import dynamic from 'next/dynamic';
-import { Suspense } from 'react';
+  const letterVariants = {
+    hidden: { opacity: 0, y: 50, rotateY: -90 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      rotateY: 0,
+      transition: { type: 'spring' as const, damping: 12, stiffness: 100 },
+    },
+  };
 
-const AnimatedHome = dynamic(() => import('@/components/AnimatedHome'), { 
-  ssr: false,
-  loading: () => <div className="flex items-center justify-center min-h-screen bg-black"><p className="text-white">Cargando...</p></div>
-});
+  const textVariants = {
+    hidden: { opacity: 0, x: -30 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { type: 'spring' as const, damping: 10, stiffness: 100 },
+    },
+  };
 
-export default function HomePage() {
-  return (
-    <Suspense fallback={<div className="flex items-center justify-center min-h-screen bg-black"><p className="text-white">Cargando...</p></div>}>
-      <AnimatedHome />
-    </Suspense>
-  );
-}
+  const lineVariants = {
+    hidden: { scaleX: 0, opacity: 0 },
+    visible: {
+      scaleX: 1,
+      opacity: 1,
+      transition: { delay: 1.5, duration: 0.8 },
+    },
+  };
 
   return (
     <div className="relative min-h-screen bg-black overflow-hidden flex items-center justify-center">
