@@ -21,7 +21,7 @@ export default function HomePage() {
       opacity: 1,
       y: 0,
       rotateY: 0,
-      transition: { type: 'spring', damping: 12, stiffness: 100 },
+      transition: { type: 'spring' as const, damping: 12, stiffness: 100 },
     },
   };
 
@@ -30,7 +30,7 @@ export default function HomePage() {
     visible: {
       opacity: 1,
       x: 0,
-      transition: { type: 'spring', damping: 10, stiffness: 100 },
+      transition: { type: 'spring' as const, damping: 10, stiffness: 100 },
     },
   };
 
