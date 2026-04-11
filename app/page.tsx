@@ -44,19 +44,75 @@ export default function HomePage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-black overflow-hidden flex items-center justify-center">
-      {/* Fondo animado */}
-      <div className="absolute inset-0 opacity-30">
+    <div className="relative min-h-screen bg-black overflow-hidden flex items-center justify-center">
+      {/* Fondo con gradiente y efectos */}
+      <div className="absolute inset-0 w-full h-full">
+        {/* Gradiente base */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-purple-950 to-black" />
+
+        {/* Orbs animados flotantes */}
         <motion.div
-          className="absolute top-20 left-10 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl"
-          animate={{ y: [0, 30, 0], x: [0, 20, 0] }}
-          transition={{ duration: 8, repeat: Infinity }}
+          className="absolute top-0 left-1/4 w-96 h-96 bg-purple-600 rounded-full mix-blend-multiply filter blur-3xl opacity-40"
+          animate={{
+            y: [0, 100, 0],
+            x: [0, 50, 0],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
         />
         <motion.div
-          className="absolute top-40 right-10 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl"
-          animate={{ y: [0, -30, 0], x: [0, -20, 0] }}
-          transition={{ duration: 10, repeat: Infinity, delay: 2 }}
+          className="absolute top-40 right-1/4 w-96 h-96 bg-pink-600 rounded-full mix-blend-multiply filter blur-3xl opacity-40"
+          animate={{
+            y: [0, -100, 0],
+            x: [0, -50, 0],
+            scale: [1, 0.9, 1],
+          }}
+          transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
         />
+        <motion.div
+          className="absolute -bottom-32 left-1/3 w-80 h-80 bg-cyan-600 rounded-full mix-blend-multiply filter blur-3xl opacity-30"
+          animate={{
+            y: [0, 50, 0],
+            x: [0, -50, 0],
+          }}
+          transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut', delay: 4 }}
+        />
+
+        {/* Patrón de puntos animados */}
+        <div className="absolute inset-0 opacity-20">
+          {Array.from({ length: 50 }).map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-cyan-400 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                opacity: [0.3, 1, 0.3],
+                scale: [1, 1.5, 1],
+              }}
+              transition={{
+                duration: 3 + Math.random() * 3,
+                repeat: Infinity,
+                delay: Math.random() * 2,
+              }}
+            />
+          ))}
+        </div>
+
+        {/* Líneas de energía */}
+        <svg className="absolute inset-0 w-full h-full opacity-10">
+          <defs>
+            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#00d9ff" />
+              <stop offset="100%" stopColor="#d946ef" />
+            </linearGradient>
+          </defs>
+          <line x1="0" y1="0" x2="100%" y2="100%" stroke="url(#grad1)" strokeWidth="1" />
+          <line x1="100%" y1="0" x2="0" y2="100%" stroke="url(#grad1)" strokeWidth="1" opacity="0.5" />
+          <circle cx="50%" cy="50%" r="30%" fill="none" stroke="url(#grad1)" strokeWidth="1" />
+        </svg>
       </div>
 
       {/* Contenido principal */}
