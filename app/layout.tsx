@@ -1,9 +1,6 @@
-import type { Metadata } from "next";
-import "./globals.css";
-
-export const metadata: Metadata = {
+export const metadata = {
   title: "Hola Mundo",
-  description: "Mi primer proyecto",
+  description: "Mi primer proyecto en Vercel",
 };
 
 export default function RootLayout({
