@@ -1,23 +1,26 @@
-# /data — Base de datos en JSON
+# Datos Iniciales — CampusZen
 
-Esta carpeta contiene los archivos JSON que actúan como base de datos del proyecto.
+Este directorio contiene los datos de semilla que se cargan en la **primera ejecución del bootstrap**.
 
-## Archivos
+## Credenciales de administrador
 
-- `content.json` — contenido principal de la página y metadatos.
-- `config.json` — configuración general de la app y parámetros de animación.
+**Email:** `admin@campuszen.app`  
+**Contraseña:** `admin123`
 
-## Esquema
+> ⚠️ **IMPORTANTE:** Cambiar esta contraseña inmediatamente después de la primera ejecución en producción.
 
-### content.json
+## Estructura
 
-```json
-{
-  "home": {
-    "greeting": "Hola Mundo",
-    "subtitle": "TypeScript · Next.js · Vercel",
-    "version": "1.0.0"
-  },
+- `config.json` — Configuración del sistema (versión, nombre)
+- `seed.json` — Usuario admin inicial con contraseña hasheada con bcrypt
+
+## Notas
+
+- El `password_hash` está pre-generado con bcrypt 10 salt rounds
+- Los UUIDs están hardcodeados para que el seed sea reproducible
+- Estos datos se cargan **una sola vez** durante el bootstrap
+- Después del bootstrap, el sistema usa Supabase Postgres como única fuente de verdad
+- `data/` es **read-only** en producción
   "meta": {
     "title": "Mi Proyecto Fullstack",
     "description": "Stack TypeScript validado y funcionando"

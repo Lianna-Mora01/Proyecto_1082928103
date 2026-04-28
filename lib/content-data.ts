@@ -1,6 +1,7 @@
-import type { SiteContent, SiteConfig } from "./types";
+// Datos de contenido legacy - ya no se utilizan en CampusZen
+// Mantienen compatibilidad con componentes antiguos
 
-export const contentData: SiteContent = {
+export const contentData = {
   home: {
     greeting: "Hola Mundo",
     subtitle: "Pipeline CI/CD validado ✓",
@@ -12,15 +13,15 @@ export const contentData: SiteContent = {
   },
 };
 
-export const configData: SiteConfig = {
+export const configData = {
   app: {
     name: "Mi Proyecto",
-    theme: "dark",
-    language: "es",
+    theme: "dark" as const,
+    language: "es" as const,
   },
   animation: {
     enabled: true,
-    duration: 300,
-    easing: "ease-in-out",
+    duration: 0.8,
+    easing: "easeInOut" as const,
   },
 };

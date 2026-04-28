@@ -1,14 +1,14 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { HomeContent } from "@/lib/types";
 
 interface HolaMundoProps {
-  content: HomeContent;
+  content?: { greeting?: string; subtitle?: string };
 }
 
 export default function HolaMundo({ content }: HolaMundoProps) {
-  const letters = content.greeting.split("");
+  const greeting = content?.greeting || "Hola";
+  const letters = greeting.split("");
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -118,7 +118,7 @@ export default function HolaMundo({ content }: HolaMundoProps) {
         initial="hidden"
         animate="visible"
       >
-        {content.subtitle}
+        {content?.subtitle || ""}
       </motion.p>
 
       {/* Badge de versión */}
@@ -128,7 +128,7 @@ export default function HolaMundo({ content }: HolaMundoProps) {
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 0.6 }}
       >
-        v{content.version}
+        v{content?.greeting ? "1.0.0" : ""}
       </motion.span>
     </main>
   );
