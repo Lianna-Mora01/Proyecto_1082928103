@@ -27,7 +27,7 @@
 | # | Nombre de la fase | Rol asignado | Estado | Inicio | Cierre | Resumen |
 |---|---|---|---|---|---|---|
 | 1 | Bootstrap, Login y `dataService` base | Ingeniero Fullstack Senior — Arquitecto del sistema y seguridad | ✅ Completada | 2026-04-28 | 2026-04-28 | `doc/RESUMEN_FASE_1_LOGIN.md` |
-| 2 | Dashboard, Layout base y página de bootstrap | Diseñador Frontend Obsesivo + Ingeniero de Sistemas | ⏳ Pendiente | — | — | `doc/FASE_02_SUMMARY.md` |
+| 2 | Dashboard, Layout base y página de bootstrap | Diseñador Frontend Obsesivo + Ingeniero de Sistemas | ✅ Completada | 2026-05-08 | 2026-05-08 | `doc/RESUMEN_FASE_2_DASHBOARD.md` |
 | 3 | Módulo de Materias | Ingeniero Backend Senior | ⏳ Pendiente | — | — | `doc/FASE_03_SUMMARY.md` |
 | 4 | Módulo de Tareas — Backend | Ingeniero Backend Senior | ⏳ Pendiente | — | — | `doc/FASE_04_SUMMARY.md` |
 | 5 | Módulo de Tareas — Frontend | Diseñador Frontend Obsesivo | ⏳ Pendiente | — | — | `doc/FASE_05_SUMMARY.md` |
@@ -68,23 +68,34 @@
 | 2026-04-28 | 16:30 | 1 | REDIRECT | app/page.tsx redirecciona a /dashboard si hay sesión, a /login si no. |
 | 2026-04-28 | 16:45 | 1 | TYPECHECK | npm run type-check ejecutado exitosamente. Cero errores de TypeScript. |
 | 2026-04-28 | 17:00 | 1 | COMPLETE | ✅ Fase 1 completada exitosamente. Sistema listo con autenticación segura, JWT + bcrypt, cookies HttpOnly. |
+| 2026-05-08 | 08:00 | 2 | START | Fase 2 iniciada. Diseño Frontend Obsesivo comienza: layout responsivo, variables CSS, componentes UI. |
+| 2026-05-08 | 08:30 | 2 | UI | Componentes UI base creados: Button, Card, Badge, Modal, Toast, EmptyState con soporte dark mode. |
+| 2026-05-08 | 09:00 | 2 | CSS | Variables CSS de tema (claro/oscuro) configuradas según paleta del plan. Inter font importado. |
+| 2026-05-08 | 09:30 | 2 | LAYOUT | AppLayout con navegación responsiva creado: sidebar fijo (desktop), colapsable (tablet), bottom nav (mobile). |
+| 2026-05-08 | 10:00 | 2 | THEME | ThemeToggle implementado con persistencia en localStorage. |
+| 2026-05-08 | 10:30 | 2 | ADMIN | Página /admin/db-setup creada con tabs de Diagnóstico y Bootstrap. |
+| 2026-05-08 | 11:00 | 2 | API | Endpoints creados: GET /api/dashboard, GET /api/system/diagnose, POST /api/system/bootstrap. |
+| 2026-05-08 | 11:30 | 2 | DASHBOARD | /app/dashboard/page.tsx reemplazado con diseño profesional, datos reales del endpoint, SeedModeBanner. |
+| 2026-05-08 | 12:00 | 2 | MIDDLEWARE | middleware.ts creado para proteger rutas privadas. Verifica JWT, redirige según rol. |
+| 2026-05-08 | 12:30 | 2 | TYPECHECK | npm run type-check sin errores. TypeScript valida toda la Fase 2. |
+| 2026-05-08 | 13:00 | 2 | COMPLETE | ✅ Fase 2 completada exitosamente. Sistema listo con layout profesional, protección de rutas, bootstrap page. |
 
 ---
 
 ## NOTAS OPERACIONALES
 
-- **Ambiente de ejecución:** Local en Vercel (desarrollo). Sin conexión a Supabase hasta bootstrap de Fase 1.
+- **Ambiente de ejecución:** Local en Vercel (desarrollo).
 - **Prerequisitos:** Node.js, npm, variables de entorno configuradas (`.env.local` o Vercel).
-- **Primera tarea:** Fase 1, tarea 1.1 — Instalar dependencias npm.
 - **Checkpoints críticos:**
-  - Fin de Fase 1: Sistema en modo `seed` con admin del seed funcional.
-  - Fin de Fase 2: Bootstrap completado, sistema en modo `live`, Supabase activo.
-  - Fin de Fase 5: MVP de tareas (backend + frontend) completado.
-  - Fin de Fase 7: MVP de gastos (backend + frontend) completado.
-  - Fin de Fase 10: Sistema 100% completo, listo para producción.
+  - ✅ Fin de Fase 1: Sistema en modo `seed` con admin del seed funcional.
+  - ✅ Fin de Fase 2: Dashboard completo, layout responsivo, protección de rutas, bootstrap page funcional.
+  - ⏳ Fin de Fase 3: Módulo de Materias (backend + frontend) completado.
+  - ⏳ Fin de Fase 5: MVP de tareas (backend + frontend) completado.
+  - ⏳ Fin de Fase 7: MVP de gastos (backend + frontend) completado.
+  - ⏳ Fin de Fase 10: Sistema 100% completo, listo para producción.
 
 ---
 
-**Última actualización:** 28 de abril de 2026, 13:30
+**Última actualización:** 8 de mayo de 2026, 13:00
 **Responsable:** Lianna Mora (1082928103)
-**Estado:** ✨ Listo para iniciar Fase 1
+**Estado:** ✅ Fase 2 completada. Listo para Fase 3.

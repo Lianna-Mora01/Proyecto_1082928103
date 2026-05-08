@@ -20,6 +20,7 @@
     "eslint-config-prettier": "^10.1.8",
     "framer-motion": "^12.38.0",
     "jose": "^6.2.3",
+    "lucide-react": "^0.338.0",
     "next": "16.2.2",
     "pg": "^8.20.0",
     "prettier": "^3.8.1",
