@@ -1,98 +1,172 @@
 // app/dashboard/page.tsx
-// Dashboard temporal para Fase 1
-// Página completa se implementará en Fase 2
+// Dashboard principal de CampusZen — Fase 2
 
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { SafeUser } from '@/lib/types';
+import { useEffect, useState } from "react";
+import AppLayout from "@/components/layout/AppLayout";
+import Card from "@/components/ui/Card";
+import EmptyState from "@/components/ui/EmptyState";
+import SeedModeBanner from "@/components/admin/SeedModeBanner";
+
+interface DashboardData {
+  mode: "seed" | "live";
+  user: { id: string };
+  tasks: any[];
+  expenses: any[];
+  urgentTasks: any[];
+  monthlySummary: any;
+  weeklyStats: any;
+}
 
 export default function DashboardPage() {
-  const router = useRouter();
-  const [user, setUser] = useState<SafeUser | null>(null);
+  const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchUser() {
+    const fetchDashboard = async () => {
       try {
-        const res = await fetch('/api/auth/me');
-        if (!res.ok) {
-          router.push('/login');
-          return;
+        const response = await fetch("/api/dashboard");
+        if (response.ok) {
+          const data = await response.json();
+          setDashboardData(data);
         }
-        const data = await res.json();
-        setUser(data.user);
-      } catch {
-        router.push('/login');
+      } catch (error) {
+        console.error("Error fetching dashboard:", error);
       } finally {
         setLoading(false);
       }
-    }
+    };
 
-    fetchUser();
-  }, [router]);
-
-  async function handleLogout() {
-    await fetch('/api/auth/logout', { method: 'POST' });
-    router.push('/login');
-  }
+    fetchDashboard();
+  }, []);
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
-        <p className="text-gray-600 dark:text-gray-400">Cargando...</p>
-      </div>
+      <AppLayout>
+        <div className="p-6 text-center">Cargando dashboard...</div>
+      </AppLayout>
     );
   }
 
-  if (!user) {
-    return null;
-  }
-
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-4">
-      <div className="max-w-4xl mx-auto">
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow p-8">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">
-            ¡Bienvenido, {user.name}!
-          </h1>
-          <p className="text-gray-600 dark:text-gray-400 mb-6">
-            Email: {user.email}
-          </p>
-          <p className="text-gray-600 dark:text-gray-400 mb-6">
-            Rol: {user.role === 'admin' ? 'Administrador' : 'Estudiante'}
-          </p>
+    <AppLayout>
+      <div className="p-6 max-w-6xl mx-auto">
+        <h1 className="text-3xl font-bold text-(--cs-text-primary) mb-8">
+          Dashboard
+        </h1>
 
-          {user.role === 'admin' && (
-            <div className="bg-yellow-50 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-700 rounded p-4 mb-6">
-              <p className="text-yellow-800 dark:text-yellow-200 text-sm">
-                Eres administrador. Por favor ejecuta el bootstrap en Fase 2 para inicializar el sistema.
-              </p>
+        {/* Seed Mode Banner */}
+        {dashboardData?.mode === "seed" && <SeedModeBanner />}
+
+        {/* Grid de tarjetas resumen */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <Card>
+            <p className="text-sm text-(--cs-text-secondary) mb-2">
+              Tareas Pendientes
+            </p>
+            <p className="text-3xl font-bold text-[var(--cs-primary)]">
+              {dashboardData?.tasks.length || 0}
+            </p>
+          </Card>
+
+          <Card>
+            <p className="text-sm text-(--cs-text-secondary) mb-2">
+              Gastos del Mes
+            </p>
+            <p className="text-3xl font-bold text-[var(--cs-primary)]">
+              ${dashboardData?.monthlySummary?.totalExpenses?.toFixed(2) || "0.00"}
+            </p>
+          </Card>
+
+          <Card>
+            <p className="text-sm text-(--cs-text-secondary) mb-2">
+              Presupuesto
+            </p>
+            <p className="text-3xl font-bold text-[var(--cs-primary)]">
+              {dashboardData?.monthlySummary?.budgetPercentage
+                ? `${dashboardData.monthlySummary.budgetPercentage}%`
+                : "—"}
+            </p>
+          </Card>
+        </div>
+
+        {/* Alertas urgentes */}
+        {dashboardData?.urgentTasks && dashboardData.urgentTasks.length > 0 && (
+          <Card className="mb-8 border-l-4 border-(--cs-alert)">
+            <p className="font-semibold text-(--cs-alert) mb-3">
+              ⚠️ Tareas vencen en menos de 48 horas
+            </p>
+            <div className="space-y-2">
+              {dashboardData.urgentTasks.map((task: any, idx: number) => (
+                <div key={idx} className="text-sm text-(--cs-text-primary)">
+                  • {task.title}
+                </div>
+              ))}
             </div>
+          </Card>
+        )}
+
+        {/* Empty State */}
+        {dashboardData?.tasks.length === 0 &&
+          dashboardData?.expenses.length === 0 && (
+            <Card>
+              <EmptyState
+                icon="🚀"
+                title="¡Bienvenido a CampusZen!"
+                description="Comienza agregando tareas para tus materias o registra tus gastos. Tu espacio universitario en calma."
+                action={
+                  <div className="flex gap-2">
+                    <a
+                      href="/tasks"
+                      className="px-4 py-2 bg-(--cs-primary) text-white rounded-lg hover:opacity-90 text-sm"
+                    >
+                      Ir a Tareas
+                    </a>
+                    <a
+                      href="/expenses"
+                      className="px-4 py-2 bg-(--cs-secondary) text-(--cs-text-primary) rounded-lg hover:opacity-90 text-sm"
+                    >
+                      Ir a Gastos
+                    </a>
+                  </div>
+                }
+              />
+            </Card>
           )}
 
-          <button
-            onClick={handleLogout}
-            className="px-6 py-2 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg transition"
-          >
-            Cerrar sesión
-          </button>
-        </div>
+        {/* Resumen semanal */}
+        {dashboardData?.weeklyStats && (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+            <Card>
+              <p className="text-sm text-(--cs-text-secondary) mb-2">
+                Tareas Completadas (7 días)
+              </p>
+              <p className="text-2xl font-bold text-(--cs-success)">
+                {dashboardData.weeklyStats.tasksCompleted}
+              </p>
+            </Card>
 
-        <div className="mt-8 bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700 rounded-lg p-6">
-          <h2 className="text-lg font-semibold text-blue-900 dark:text-blue-200 mb-2">
-            Fase 1 completada ✅
-          </h2>
-          <ul className="text-sm text-blue-800 dark:text-blue-300 space-y-1">
-            <li>✓ Autenticación con JWT y bcrypt</li>
-            <li>✓ Cookies HttpOnly, Secure y SameSite</li>
-            <li>✓ dataService base implementado</li>
-            <li>✓ Login y registro funcionales</li>
-            <li>✓ Sistema de auditoría listo</li>
-          </ul>
-        </div>
+            <Card>
+              <p className="text-sm text-(--cs-text-secondary) mb-2">
+                Gastos Registrados (7 días)
+              </p>
+              <p className="text-2xl font-bold text-[var(--cs-primary)]">
+                {dashboardData.weeklyStats.expensesRecorded}
+              </p>
+            </Card>
+
+            <Card>
+              <p className="text-sm text-(--cs-text-secondary) mb-2">
+                Tareas Creadas (7 días)
+              </p>
+              <p className="text-2xl font-bold text-[var(--cs-primary)]">
+                {dashboardData.weeklyStats.tasksCreated}
+              </p>
+            </Card>
+          </div>
+        )}
       </div>
-    </div>
+    </AppLayout>
   );
 }

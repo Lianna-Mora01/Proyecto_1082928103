@@ -1,26 +1,59 @@
 @import "tailwindcss";
 
+/* CampusZen Design System — Modo Claro */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --cs-bg-primary: #F8F9FA;
+  --cs-bg-card: #FFFFFF;
+  --cs-primary: #40916C;
+  --cs-primary-dark: #2D6A4F;
+  --cs-secondary: #95D5B2;
+  --cs-text-primary: #1B1B1B;
+  --cs-text-secondary: #6C757D;
+  --cs-alert: #F4A261;
+  --cs-error: #E63946;
+  --cs-success: #2D6A4F;
+  --cs-border: #DEE2E6;
+  --cs-shadow: rgba(0, 0, 0, 0.08);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* CampusZen Design System — Modo Oscuro */
+[data-theme="dark"] {
+  --cs-bg-primary: #121212;
+  --cs-bg-card: #1E1E1E;
+  --cs-primary: #52B788;
+  --cs-primary-dark: #40916C;
+  --cs-secondary: #74C69D;
+  --cs-text-primary: #E8E8E8;
+  --cs-text-secondary: #AAAAAA;
+  --cs-alert: #F4A261;
+  --cs-error: #FF6B6B;
+  --cs-success: #95D5B2;
+  --cs-border: #2C2C2C;
+  --cs-shadow: rgba(0, 0, 0, 0.3);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  color-scheme: light;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--cs-bg-primary);
+  color: var(--cs-text-primary);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+* {
+  border-color: var(--cs-border);
+}
+
+/* Suavizar transiciones de tema */
+html,
+body,
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }

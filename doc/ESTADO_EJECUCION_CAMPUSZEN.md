@@ -27,7 +27,7 @@
 | # | Nombre de la fase | Rol asignado | Estado | Inicio | Cierre | Resumen |
 |---|---|---|---|---|---|---|
 | 1 | Bootstrap, Login y `dataService` base | Ingeniero Fullstack Senior — Arquitecto del sistema y seguridad | ✅ Completada | 2026-04-28 | 2026-04-28 | `doc/RESUMEN_FASE_1_LOGIN.md` |
-| 2 | Dashboard, Layout base y página de bootstrap | Diseñador Frontend Obsesivo + Ingeniero de Sistemas | ⏳ Pendiente | — | — | `doc/FASE_02_SUMMARY.md` |
+| 2 | Dashboard, Layout base y página de bootstrap | Diseñador Frontend Obsesivo + Ingeniero de Sistemas | ✅ Completada | 2026-05-09 | 2026-05-09 | `doc/RESUMEN_FASE_2_DASHBOARD.md` |
 | 3 | Módulo de Materias | Ingeniero Backend Senior | ⏳ Pendiente | — | — | `doc/FASE_03_SUMMARY.md` |
 | 4 | Módulo de Tareas — Backend | Ingeniero Backend Senior | ⏳ Pendiente | — | — | `doc/FASE_04_SUMMARY.md` |
 | 5 | Módulo de Tareas — Frontend | Diseñador Frontend Obsesivo | ⏳ Pendiente | — | — | `doc/FASE_05_SUMMARY.md` |
@@ -68,6 +68,18 @@
 | 2026-04-28 | 16:30 | 1 | REDIRECT | app/page.tsx redirecciona a /dashboard si hay sesión, a /login si no. |
 | 2026-04-28 | 16:45 | 1 | TYPECHECK | npm run type-check ejecutado exitosamente. Cero errores de TypeScript. |
 | 2026-04-28 | 17:00 | 1 | COMPLETE | ✅ Fase 1 completada exitosamente. Sistema listo con autenticación segura, JWT + bcrypt, cookies HttpOnly. |
+| 2026-05-09 | 09:15 | 2 | START | Fase 2 iniciada. Diseño de variables CSS (paleta claro/oscuro) completado. |
+| 2026-05-09 | 09:30 | 2 | UI_COMPONENTS | Componentes UI base creados: Button, Card, Badge, Modal, EmptyState, Toast. |
+| 2026-05-09 | 09:45 | 2 | LAYOUT | AppLayout.tsx implementado con responsive: sidebar desktop, bottom-nav mobile, tema persistente. |
+| 2026-05-09 | 10:00 | 2 | THEME_TOGGLE | ThemeToggle.tsx creado. Persistencia en localStorage funcional. |
+| 2026-05-09 | 10:15 | 2 | ADMIN_PAGES | /admin/db-setup con tabs Diagnóstico y Bootstrap implementado. |
+| 2026-05-09 | 10:30 | 2 | API_ENDPOINTS | /api/dashboard y /api/system/diagnose endpoints creados y funcionales. |
+| 2026-05-09 | 10:45 | 2 | DASHBOARD_PAGE | /app/dashboard/page.tsx implementada con tarjetas, empty state y resumen semanal. |
+| 2026-05-09 | 11:00 | 2 | MIDDLEWARE | middleware.ts de protección de rutas implementado. |
+| 2026-05-09 | 11:15 | 2 | TYPECHECK | npm run type-check ejecutado: ✅ CERO ERRORES. |
+| 2026-05-09 | 11:20 | 2 | COMPLETE | ✅ Fase 2 completada exitosamente. Dashboard, layout responsive, administración de sistema listo. |
+| 2026-05-09 | 11:35 | 2 | TAILWIND_FIX | Conversión de sintaxis Tailwind CSS v4: 117 instancias en 13 archivos convertidas de `[var(--name)]` a `(--name)`. |
+| 2026-05-09 | 11:40 | 2 | TYPECHECK_FINAL | npm run type-check post-corrección: ✅ CERO ERRORES. Validación final exitosa. |
 
 ---
 
@@ -85,6 +97,6 @@
 
 ---
 
-**Última actualización:** 28 de abril de 2026, 13:30
+**Última actualización:** 9 de mayo de 2026, 11:40
 **Responsable:** Lianna Mora (1082928103)
-**Estado:** ✨ Listo para iniciar Fase 1
+**Estado:** ✨ Fase 2 completada y validada. Listo para Fase 3
