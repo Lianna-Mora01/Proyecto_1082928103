@@ -14,7 +14,7 @@ export function withRole(
     req: NextRequest,
     context: { params?: Record<string, string | string[]> }
   ) => Promise<NextResponse>
-) {
+): (req: NextRequest, context: any) => Promise<Response> {
   return withAuth(async (req: NextRequest, context) => {
     const user = getAuthUser(req);
 

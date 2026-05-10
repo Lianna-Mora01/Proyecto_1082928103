@@ -3,6 +3,8 @@
 
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { useEffect, useState } from "react";
 import AppLayout from "@/components/layout/AppLayout";
 import Card from "@/components/ui/Card";
@@ -65,7 +67,7 @@ export default function DashboardPage() {
             <p className="text-sm text-(--cs-text-secondary) mb-2">
               Tareas Pendientes
             </p>
-            <p className="text-3xl font-bold text-[var(--cs-primary)]">
+            <p className="text-3xl font-bold text-(--cs-primary)">
               {dashboardData?.tasks.length || 0}
             </p>
           </Card>
@@ -74,7 +76,7 @@ export default function DashboardPage() {
             <p className="text-sm text-(--cs-text-secondary) mb-2">
               Gastos del Mes
             </p>
-            <p className="text-3xl font-bold text-[var(--cs-primary)]">
+            <p className="text-3xl font-bold text-(--cs-primary)">
               ${dashboardData?.monthlySummary?.totalExpenses?.toFixed(2) || "0.00"}
             </p>
           </Card>
@@ -83,7 +85,7 @@ export default function DashboardPage() {
             <p className="text-sm text-(--cs-text-secondary) mb-2">
               Presupuesto
             </p>
-            <p className="text-3xl font-bold text-[var(--cs-primary)]">
+            <p className="text-3xl font-bold text-(--cs-primary)">
               {dashboardData?.monthlySummary?.budgetPercentage
                 ? `${dashboardData.monthlySummary.budgetPercentage}%`
                 : "—"}
@@ -151,7 +153,7 @@ export default function DashboardPage() {
               <p className="text-sm text-(--cs-text-secondary) mb-2">
                 Gastos Registrados (7 días)
               </p>
-              <p className="text-2xl font-bold text-[var(--cs-primary)]">
+              <p className="text-2xl font-bold text-(--cs-primary)">
                 {dashboardData.weeklyStats.expensesRecorded}
               </p>
             </Card>
@@ -160,7 +162,7 @@ export default function DashboardPage() {
               <p className="text-sm text-(--cs-text-secondary) mb-2">
                 Tareas Creadas (7 días)
               </p>
-              <p className="text-2xl font-bold text-[var(--cs-primary)]">
+              <p className="text-2xl font-bold text-(--cs-success)">
                 {dashboardData.weeklyStats.tasksCreated}
               </p>
             </Card>

@@ -9,13 +9,13 @@ import { JWTPayload } from './types';
  * Middleware para validar sesión en API Routes
  * Agrega header Cache-Control: no-store y user al request.user
  */
-export async function withAuth(
+export function withAuth(
   handler: (
     req: NextRequest,
     context: { params?: Record<string, string | string[]> }
   ) => Promise<NextResponse>
-) {
-  return async (req: NextRequest, context: { params?: Record<string, string | string[]> }) => {
+): (req: NextRequest, context: any) => Promise<Response> {
+  return async (req: NextRequest, context: any) => {
     const token = await getTokenFromCookie();
 
     if (!token) {

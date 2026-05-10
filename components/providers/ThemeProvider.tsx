@@ -49,3 +49,15 @@ export function useTheme() {
   }
   return context;
 }
+
+export function useThemeSafe() {
+  const context = useContext(ThemeContext);
+  // Retorna valores por defecto si no está dentro del provider
+  if (!context) {
+    return {
+      theme: "light" as Theme,
+      setTheme: () => {},
+    };
+  }
+  return context;
+}

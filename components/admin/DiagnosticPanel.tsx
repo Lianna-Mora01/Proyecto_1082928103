@@ -99,7 +99,7 @@ export default function DiagnosticPanel() {
               <p className="text-sm text-(--cs-text-secondary) capitalize">
                 {table}
               </p>
-              <p className="text-lg font-bold text-[var(--cs-primary)]">
+              <p className="text-lg font-bold text-(--cs-primary)">
                 {count}
               </p>
             </div>

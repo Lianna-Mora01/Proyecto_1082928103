@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { useState } from "react";
 import AppLayout from "@/components/layout/AppLayout";
 import Card from "@/components/ui/Card";
@@ -27,7 +29,7 @@ export default function DbSetupPage() {
             onClick={() => setActiveTab("diagnostic")}
             className={`px-6 py-3 font-medium border-b-2 transition-colors ${
               activeTab === "diagnostic"
-                ? "border-[var(--cs-primary)] text-[var(--cs-primary)]"
+                ? "border-(--cs-primary) text-(--cs-primary)"
                 : "border-transparent text-(--cs-text-secondary) hover:text-(--cs-text-primary)"
             }`}
           >
@@ -37,7 +39,7 @@ export default function DbSetupPage() {
             onClick={() => setActiveTab("bootstrap")}
             className={`px-6 py-3 font-medium border-b-2 transition-colors ${
               activeTab === "bootstrap"
-                ? "border-[var(--cs-primary)] text-[var(--cs-primary)]"
+                ? "border-(--cs-primary) text-(--cs-primary)"
                 : "border-transparent text-(--cs-text-secondary) hover:text-(--cs-text-primary)"
             }`}
           >

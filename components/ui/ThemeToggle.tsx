@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import { useTheme } from "@/components/providers/ThemeProvider";
+import { useThemeSafe } from "@/components/providers/ThemeProvider";
 
 export default function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme } = useThemeSafe();
 
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";

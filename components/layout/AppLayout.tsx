@@ -31,7 +31,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           <Link href="/dashboard" className="flex items-center gap-3">
             <div className="text-2xl">🧘</div>
             {sidebarOpen && (
-              <h1 className="text-lg font-bold text-[var(--cs-primary)]">
+              <h1 className="text-lg font-bold text-(--cs-primary)">
                 CampusZen
               </h1>
             )}
@@ -66,7 +66,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       <div className="flex-1 flex flex-col">
         {/* Top Bar Mobile */}
         <header className="md:hidden bg-(--cs-bg-card) border-b border-(--cs-border) p-4 flex items-center justify-between">
-          <h1 className="text-lg font-bold text-[var(--cs-primary)]">CampusZen</h1>
+          <h1 className="text-lg font-bold text-(--cs-primary)">CampusZen</h1>
           <ThemeToggle />
         </header>
 
