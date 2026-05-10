@@ -16,21 +16,21 @@ export default function DbSetupPage() {
   return (
     <AppLayout>
       <div className="p-6">
-        <h1 className="text-3xl font-bold text-(--cs-text-primary) mb-2">
+        <h1 className="text-3xl font-bold text-[--cs-text-primary] mb-2">
           Configuración del Sistema
         </h1>
-        <p className="text-(--cs-text-secondary) mb-8">
+        <p className="text-[--cs-text-secondary] mb-8">
           Diagnóstico y bootstrap de la base de datos CampusZen
         </p>
 
         {/* Tabs */}
-        <div className="flex gap-2 mb-8 border-b border-(--cs-border)">
+        <div className="flex gap-2 mb-8 border-b border-[--cs-border]">
           <button
             onClick={() => setActiveTab("diagnostic")}
             className={`px-6 py-3 font-medium border-b-2 transition-colors ${
               activeTab === "diagnostic"
-                ? "border-(--cs-primary) text-(--cs-primary)"
-                : "border-transparent text-(--cs-text-secondary) hover:text-(--cs-text-primary)"
+                ? "border-[--cs-primary] text-[--cs-primary]"
+                : "border-transparent text-[--cs-text-secondary] hover:text-[--cs-text-primary]"
             }`}
           >
             Diagnóstico
@@ -39,8 +39,8 @@ export default function DbSetupPage() {
             onClick={() => setActiveTab("bootstrap")}
             className={`px-6 py-3 font-medium border-b-2 transition-colors ${
               activeTab === "bootstrap"
-                ? "border-(--cs-primary) text-(--cs-primary)"
-                : "border-transparent text-(--cs-text-secondary) hover:text-(--cs-text-primary)"
+                ? "border-[--cs-primary] text-[--cs-primary]"
+                : "border-transparent text-[--cs-text-secondary] hover:text-[--cs-text-primary]"
             }`}
           >
             Bootstrap & Migrations

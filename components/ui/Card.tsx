@@ -8,8 +8,8 @@ export default function Card({ children, className = "", ...props }: CardProps) 
   return (
     <div
       className={`
-        bg-(--cs-bg-card) 
-        border border-(--cs-border)
+        bg-[--cs-bg-card] 
+        border border-[--cs-border]
         rounded-lg
         p-6
         shadow-sm

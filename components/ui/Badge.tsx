@@ -7,11 +7,11 @@ interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 }
 
 const variantStyles: Record<BadgeVariant, string> = {
-  primary: "bg-(--cs-primary) text-white",
-  secondary: "bg-(--cs-secondary) text-(--cs-text-primary)",
-  alert: "bg-(--cs-alert) text-white",
-  error: "bg-(--cs-error) text-white",
-  success: "bg-(--cs-success) text-white",
+  primary: "bg-[--cs-primary] text-white",
+  secondary: "bg-[--cs-secondary] text-[--cs-text-primary]",
+  alert: "bg-[--cs-alert] text-white",
+  error: "bg-[--cs-error] text-white",
+  success: "bg-[--cs-success] text-white",
 };
 
 export default function Badge({

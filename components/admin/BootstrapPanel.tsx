@@ -44,7 +44,7 @@ export default function BootstrapPanel() {
 
   return (
     <div className="space-y-6">
-      <div className="bg-(--cs-alert) text-white p-4 rounded-lg">
+      <div className="bg-[--cs-alert] text-white p-4 rounded-lg">
         <p className="font-semibold mb-2">⚠️ Acción crítica</p>
         <p className="text-sm">
           El bootstrap ejecutará todas las migrations pendientes y cargará los datos iniciales. Esta acción es irreversible.
@@ -64,7 +64,7 @@ export default function BootstrapPanel() {
         onClose={() => setShowConfirm(false)}
         title="Confirmar Bootstrap"
       >
-        <p className="text-(--cs-text-primary) mb-6">
+        <p className="text-[--cs-text-primary] mb-6">
           ¿Estás seguro de que deseas ejecutar el bootstrap? Esto aplicará todas las migrations y cargará los datos iniciales.
         </p>
         <div className="flex gap-2">

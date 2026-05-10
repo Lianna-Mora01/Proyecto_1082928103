@@ -4,10 +4,10 @@ import { useToast } from "@/components/providers/ToastProvider";
 import React from "react";
 
 const typeStyles = {
-  success: "bg-(--cs-success) text-white",
-  error: "bg-(--cs-error) text-white",
-  info: "bg-(--cs-primary) text-white",
-  warning: "bg-(--cs-alert) text-white",
+  success: "bg-[--cs-success] text-white",
+  error: "bg-[--cs-error] text-white",
+  info: "bg-[--cs-primary] text-white",
+  warning: "bg-[--cs-alert] text-white",
 };
 
 export default function Toast() {

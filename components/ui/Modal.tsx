@@ -29,11 +29,11 @@ export default function Modal({ isOpen, onClose, title, children }: ModalProps) 
       onClick={onClose}
     >
       <div
-        className="bg-(--cs-bg-card) rounded-lg p-6 max-w-md w-full mx-4 shadow-lg"
+        className="bg-[--cs-bg-card] rounded-lg p-6 max-w-md w-full mx-4 shadow-lg"
         onClick={(e) => e.stopPropagation()}
       >
         {title && (
-          <h2 className="text-xl font-bold text-(--cs-text-primary) mb-4">
+          <h2 className="text-xl font-bold text-[--cs-text-primary] mb-4">
             {title}
           </h2>
         )}

@@ -51,7 +51,7 @@ export default function DiagnosticPanel() {
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Card>
-          <h3 className="font-semibold text-(--cs-text-primary) mb-3">
+          <h3 className="font-semibold text-[--cs-text-primary] mb-3">
             Supabase
           </h3>
           <Badge variant={diagnostics.supabase.connected ? "success" : "alert"}>
@@ -60,7 +60,7 @@ export default function DiagnosticPanel() {
         </Card>
 
         <Card>
-          <h3 className="font-semibold text-(--cs-text-primary) mb-3">
+          <h3 className="font-semibold text-[--cs-text-primary] mb-3">
             Vercel Blob
           </h3>
           <Badge variant={diagnostics.blob.connected ? "success" : "alert"}>
@@ -70,36 +70,36 @@ export default function DiagnosticPanel() {
       </div>
 
       <Card>
-        <h3 className="font-semibold text-(--cs-text-primary) mb-4">
+        <h3 className="font-semibold text-[--cs-text-primary] mb-4">
           Migrations
         </h3>
         <div className="space-y-2">
           <p>
-            <span className="text-(--cs-text-secondary)">Aplicadas:</span>{" "}
+            <span className="text-[--cs-text-secondary]">Aplicadas:</span>{" "}
             <span className="font-medium">{diagnostics.migrations.applied}</span>
           </p>
           <p>
-            <span className="text-(--cs-text-secondary)">Pendientes:</span>{" "}
+            <span className="text-[--cs-text-secondary]">Pendientes:</span>{" "}
             <span className="font-medium">{diagnostics.migrations.pending}</span>
           </p>
           <p>
-            <span className="text-(--cs-text-secondary)">Total:</span>{" "}
+            <span className="text-[--cs-text-secondary]">Total:</span>{" "}
             <span className="font-medium">{diagnostics.migrations.total}</span>
           </p>
         </div>
       </Card>
 
       <Card>
-        <h3 className="font-semibold text-(--cs-text-primary) mb-4">
+        <h3 className="font-semibold text-[--cs-text-primary] mb-4">
           Registros por tabla
         </h3>
         <div className="grid grid-cols-2 gap-4">
           {Object.entries(diagnostics.tables).map(([table, count]) => (
             <div key={table}>
-              <p className="text-sm text-(--cs-text-secondary) capitalize">
+              <p className="text-sm text-[--cs-text-secondary] capitalize">
                 {table}
               </p>
-              <p className="text-lg font-bold text-(--cs-primary)">
+              <p className="text-lg font-bold text-[--cs-primary]">
                 {count}
               </p>
             </div>
@@ -107,7 +107,7 @@ export default function DiagnosticPanel() {
         </div>
       </Card>
 
-      <p className="text-xs text-(--cs-text-secondary)">
+      <p className="text-xs text-[--cs-text-secondary]">
         Última actualización: {new Date(diagnostics.timestamp).toLocaleString()}
       </p>
     </div>

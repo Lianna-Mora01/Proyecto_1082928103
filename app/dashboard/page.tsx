@@ -54,7 +54,7 @@ export default function DashboardPage() {
   return (
     <AppLayout>
       <div className="p-6 max-w-6xl mx-auto">
-        <h1 className="text-3xl font-bold text-(--cs-text-primary) mb-8">
+        <h1 className="text-3xl font-bold text-[--cs-text-primary] mb-8">
           Dashboard
         </h1>
 
@@ -64,28 +64,28 @@ export default function DashboardPage() {
         {/* Grid de tarjetas resumen */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <Card>
-            <p className="text-sm text-(--cs-text-secondary) mb-2">
+            <p className="text-sm text-[--cs-text-secondary] mb-2">
               Tareas Pendientes
             </p>
-            <p className="text-3xl font-bold text-(--cs-primary)">
+            <p className="text-3xl font-bold text-[--cs-primary]">
               {dashboardData?.tasks.length || 0}
             </p>
           </Card>
 
           <Card>
-            <p className="text-sm text-(--cs-text-secondary) mb-2">
+            <p className="text-sm text-[--cs-text-secondary] mb-2">
               Gastos del Mes
             </p>
-            <p className="text-3xl font-bold text-(--cs-primary)">
+            <p className="text-3xl font-bold text-[--cs-primary]">
               ${dashboardData?.monthlySummary?.totalExpenses?.toFixed(2) || "0.00"}
             </p>
           </Card>
 
           <Card>
-            <p className="text-sm text-(--cs-text-secondary) mb-2">
+            <p className="text-sm text-[--cs-text-secondary] mb-2">
               Presupuesto
             </p>
-            <p className="text-3xl font-bold text-(--cs-primary)">
+            <p className="text-3xl font-bold text-[--cs-primary]">
               {dashboardData?.monthlySummary?.budgetPercentage
                 ? `${dashboardData.monthlySummary.budgetPercentage}%`
                 : "—"}
@@ -95,13 +95,13 @@ export default function DashboardPage() {
 
         {/* Alertas urgentes */}
         {dashboardData?.urgentTasks && dashboardData.urgentTasks.length > 0 && (
-          <Card className="mb-8 border-l-4 border-(--cs-alert)">
-            <p className="font-semibold text-(--cs-alert) mb-3">
+          <Card className="mb-8 border-l-4 border-[--cs-alert]">
+            <p className="font-semibold text-[--cs-alert] mb-3">
               ⚠️ Tareas vencen en menos de 48 horas
             </p>
             <div className="space-y-2">
               {dashboardData.urgentTasks.map((task: any, idx: number) => (
-                <div key={idx} className="text-sm text-(--cs-text-primary)">
+                <div key={idx} className="text-sm text-[--cs-text-primary]">
                   • {task.title}
                 </div>
               ))}
@@ -121,13 +121,13 @@ export default function DashboardPage() {
                   <div className="flex gap-2">
                     <a
                       href="/tasks"
-                      className="px-4 py-2 bg-(--cs-primary) text-white rounded-lg hover:opacity-90 text-sm"
+                      className="px-4 py-2 bg-[--cs-primary] text-white rounded-lg hover:opacity-90 text-sm"
                     >
                       Ir a Tareas
                     </a>
                     <a
                       href="/expenses"
-                      className="px-4 py-2 bg-(--cs-secondary) text-(--cs-text-primary) rounded-lg hover:opacity-90 text-sm"
+                      className="px-4 py-2 bg-[--cs-secondary] text-[--cs-text-primary] rounded-lg hover:opacity-90 text-sm"
                     >
                       Ir a Gastos
                     </a>
@@ -141,28 +141,28 @@ export default function DashboardPage() {
         {dashboardData?.weeklyStats && (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
             <Card>
-              <p className="text-sm text-(--cs-text-secondary) mb-2">
+              <p className="text-sm text-[--cs-text-secondary] mb-2">
                 Tareas Completadas (7 días)
               </p>
-              <p className="text-2xl font-bold text-(--cs-success)">
+              <p className="text-2xl font-bold text-[--cs-success]">
                 {dashboardData.weeklyStats.tasksCompleted}
               </p>
             </Card>
 
             <Card>
-              <p className="text-sm text-(--cs-text-secondary) mb-2">
+              <p className="text-sm text-[--cs-text-secondary] mb-2">
                 Gastos Registrados (7 días)
               </p>
-              <p className="text-2xl font-bold text-(--cs-primary)">
+              <p className="text-2xl font-bold text-[--cs-primary]">
                 {dashboardData.weeklyStats.expensesRecorded}
               </p>
             </Card>
 
             <Card>
-              <p className="text-sm text-(--cs-text-secondary) mb-2">
+              <p className="text-sm text-[--cs-text-secondary] mb-2">
                 Tareas Creadas (7 días)
               </p>
-              <p className="text-2xl font-bold text-(--cs-success)">
+              <p className="text-2xl font-bold text-[--cs-success]">
                 {dashboardData.weeklyStats.tasksCreated}
               </p>
             </Card>

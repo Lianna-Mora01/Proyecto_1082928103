@@ -15,23 +15,23 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   return (
-    <div className="flex h-screen bg-(--cs-bg-primary)">
+    <div className="flex h-screen bg-[--cs-bg-primary]">
       {/* Sidebar Desktop */}
       <aside
         className={`
           hidden md:flex md:flex-col
-          bg-(--cs-bg-card)
-          border-r border-(--cs-border)
+          bg-[--cs-bg-card]
+          border-r border-[--cs-border]
           transition-all duration-300
           ${sidebarOpen ? "md:w-64" : "md:w-20"}
         `}
       >
         {/* Logo */}
-        <div className="p-4 border-b border-(--cs-border)">
+        <div className="p-4 border-b border-[--cs-border]">
           <Link href="/dashboard" className="flex items-center gap-3">
             <div className="text-2xl">🧘</div>
             {sidebarOpen && (
-              <h1 className="text-lg font-bold text-(--cs-primary)">
+              <h1 className="text-lg font-bold text-[--cs-primary]">
                 CampusZen
               </h1>
             )}
@@ -44,11 +44,11 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             <Link
               key={item.href}
               href={item.href}
-              className="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-(--cs-bg-primary) transition-colors"
+              className="flex items-center gap-3 px-4 py-2 rounded-lg hover:bg-[--cs-bg-primary] transition-colors"
             >
               <span className="text-xl">{item.icon}</span>
               {sidebarOpen && (
-                <span className="text-sm font-medium text-(--cs-text-primary)">
+                <span className="text-sm font-medium text-[--cs-text-primary]">
                   {item.label}
                 </span>
               )}
@@ -57,7 +57,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         </nav>
 
         {/* Footer */}
-        <div className="p-4 border-t border-(--cs-border)">
+        <div className="p-4 border-t border-[--cs-border]">
           {sidebarOpen && <ThemeToggle />}
         </div>
       </aside>
@@ -65,8 +65,8 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
         {/* Top Bar Mobile */}
-        <header className="md:hidden bg-(--cs-bg-card) border-b border-(--cs-border) p-4 flex items-center justify-between">
-          <h1 className="text-lg font-bold text-(--cs-primary)">CampusZen</h1>
+        <header className="md:hidden bg-[--cs-bg-card] border-b border-[--cs-border] p-4 flex items-center justify-between">
+          <h1 className="text-lg font-bold text-[--cs-primary]">CampusZen</h1>
           <ThemeToggle />
         </header>
 
@@ -76,15 +76,15 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         </main>
 
         {/* Bottom Navigation Mobile */}
-        <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-(--cs-bg-card) border-t border-(--cs-border) flex justify-around">
+        <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-[--cs-bg-card] border-t border-[--cs-border] flex justify-around">
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className="flex-1 flex flex-col items-center justify-center py-3 text-center hover:bg-(--cs-bg-primary) transition-colors"
+              className="flex-1 flex flex-col items-center justify-center py-3 text-center hover:bg-[--cs-bg-primary] transition-colors"
             >
               <span className="text-xl">{item.icon}</span>
-              <span className="text-xs mt-1 text-(--cs-text-secondary)">
+              <span className="text-xs mt-1 text-[--cs-text-secondary]">
                 {item.label}
               </span>
             </Link>

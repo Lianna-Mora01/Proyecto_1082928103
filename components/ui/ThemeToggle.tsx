@@ -14,13 +14,13 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="w-full p-2 rounded-lg bg-(--cs-bg-primary) hover:opacity-80 transition-opacity flex items-center justify-center gap-2"
+      className="w-full p-2 rounded-lg bg-[--cs-bg-primary] hover:opacity-80 transition-opacity flex items-center justify-center gap-2"
       aria-label="Cambiar tema"
     >
       <span className="text-lg">
         {theme === "light" ? "🌙" : "☀️"}
       </span>
-      <span className="text-sm font-medium text-(--cs-text-primary)">
+      <span className="text-sm font-medium text-[--cs-text-primary]">
         {theme === "light" ? "Oscuro" : "Claro"}
       </span>
     </button>
