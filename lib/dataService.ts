@@ -230,3 +230,181 @@ export async function recordLogout(userId: string, userEmail: string): Promise<v
     entity: 'user',
   });
 }
+
+// ==================== SUBJECTS ====================
+
+import { Subject, CreateSubjectRequest, UpdateSubjectRequest } from './types';
+
+/**
+ * Obtiene todas las materias activas de un usuario
+ */
+export async function getSubjectsByUser(userId: string): Promise<Subject[]> {
+  const mode = await getSystemMode();
+
+  if (mode === 'seed') {
+    // En modo seed, retornar array vacío
+    return [];
+  }
+
+  const client = getSupabaseClient();
+  const { data, error } = await client
+    .from('subjects')
+    .select('*')
+    .eq('user_id', userId)
+    .eq('is_active', true)
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return data || [];
+}
+
+/**
+ * Crea una nueva materia
+ */
+export async function createSubject(userId: string, userEmail: string, data: CreateSubjectRequest): Promise<Subject> {
+  const mode = await getSystemMode();
+
+  if (mode === 'seed') {
+    throw new Error('No se pueden crear materias en modo seed.');
+  }
+
+  const client = getSupabaseClient();
+  const { data: newSubject, error } = await client
+    .from('subjects')
+    .insert({
+      user_id: userId,
+      name: data.name,
+      color: data.color || '#40916C',
+      is_active: true,
+    })
+    .select('*')
+    .single();
+
+  if (error || !newSubject) {
+    throw new Error(error?.message || 'Error al crear materia');
+  }
+
+  // Registrar en auditoría
+  await recordAudit({
+    user_id: userId,
+    user_email: userEmail,
+    action: 'create',
+    entity: 'subject',
+    entity_id: newSubject.id,
+    changes: {
+      name: { from: null, to: data.name },
+      color: { from: null, to: data.color || '#40916C' },
+    },
+  });
+
+  return newSubject as Subject;
+}
+
+/**
+ * Actualiza una materia
+ */
+export async function updateSubject(userId: string, userEmail: string, subjectId: string, updates: UpdateSubjectRequest): Promise<Subject> {
+  const mode = await getSystemMode();
+
+  if (mode === 'seed') {
+    throw new Error('No se pueden actualizar materias en modo seed.');
+  }
+
+  const client = getSupabaseClient();
+
+  // Verificar que la materia pertenece al usuario
+  const { data: existing, error: checkError } = await client
+    .from('subjects')
+    .select('*')
+    .eq('id', subjectId)
+    .eq('user_id', userId)
+    .single();
+
+  if (checkError || !existing) {
+    throw new Error('Materia no encontrada o no tienes permisos');
+  }
+
+  const { data: updated, error } = await client
+    .from('subjects')
+    .update(updates)
+    .eq('id', subjectId)
+    .eq('user_id', userId)
+    .select('*')
+    .single();
+
+  if (error || !updated) {
+    throw new Error(error?.message || 'Error al actualizar materia');
+  }
+
+  // Registrar en auditoría
+  await recordAudit({
+    user_id: userId,
+    user_email: userEmail,
+    action: 'update',
+    entity: 'subject',
+    entity_id: subjectId,
+    changes: Object.entries(updates).reduce(
+      (acc, [key, value]) => {
+        acc[key] = { from: existing[key], to: value };
+        return acc;
+      },
+      {} as Record<string, { from: unknown; to: unknown }>
+    ),
+  });
+
+  return updated as Subject;
+}
+
+/**
+ * Desactiva una materia (soft delete)
+ */
+export async function deactivateSubject(userId: string, userEmail: string, subjectId: string): Promise<void> {
+  const mode = await getSystemMode();
+
+  if (mode === 'seed') {
+    throw new Error('No se pueden desactivar materias en modo seed.');
+  }
+
+  const client = getSupabaseClient();
+
+  // Verificar que la materia pertenece al usuario
+  const { data: existing, error: checkError } = await client
+    .from('subjects')
+    .select('*')
+    .eq('id', subjectId)
+    .eq('user_id', userId)
+    .single();
+
+  if (checkError || !existing) {
+    throw new Error('Materia no encontrada o no tienes permisos');
+  }
+
+  if (!existing.is_active) {
+    throw new Error('La materia ya está desactivada');
+  }
+
+  const { error } = await client
+    .from('subjects')
+    .update({ is_active: false })
+    .eq('id', subjectId)
+    .eq('user_id', userId);
+
+  if (error) {
+    throw new Error(error?.message || 'Error al desactivar materia');
+  }
+
+  // Registrar en auditoría
+  await recordAudit({
+    user_id: userId,
+    user_email: userEmail,
+    action: 'delete',
+    entity: 'subject',
+    entity_id: subjectId,
+    changes: {
+      is_active: { from: true, to: false },
+    },
+  });
+}

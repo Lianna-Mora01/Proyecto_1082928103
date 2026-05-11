@@ -28,7 +28,7 @@
 |---|---|---|---|---|---|---|
 | 1 | Bootstrap, Login y `dataService` base | Ingeniero Fullstack Senior — Arquitecto del sistema y seguridad | ✅ Completada | 2026-04-28 | 2026-04-28 | `doc/RESUMEN_FASE_1_LOGIN.md` |
 | 2 | Dashboard, Layout base y página de bootstrap | Diseñador Frontend Obsesivo + Ingeniero de Sistemas | ✅ Completada | 2026-05-09 | 2026-05-09 | `doc/RESUMEN_FASE_2_DASHBOARD.md` |
-| 3 | Módulo de Materias | Ingeniero Backend Senior | ⏳ Pendiente | — | — | `doc/FASE_03_SUMMARY.md` |
+| 3 | Módulo de Materias | Ingeniero Backend Senior | 🔄 En progreso | 2026-05-11 | — | `doc/RESUMEN_FASE_3_MATERIAS.md` |
 | 4 | Módulo de Tareas — Backend | Ingeniero Backend Senior | ⏳ Pendiente | — | — | `doc/FASE_04_SUMMARY.md` |
 | 5 | Módulo de Tareas — Frontend | Diseñador Frontend Obsesivo | ⏳ Pendiente | — | — | `doc/FASE_05_SUMMARY.md` |
 | 6 | Módulo de Gastos — Backend | Ingeniero Backend Senior — Lógica financiera | ⏳ Pendiente | — | — | `doc/FASE_06_SUMMARY.md` |

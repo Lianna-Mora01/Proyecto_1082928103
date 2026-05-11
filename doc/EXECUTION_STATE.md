@@ -2,8 +2,8 @@
 
 ## Proyecto Fullstack TypeScript · Next.js · GitHub · Vercel
 
-> **Archivo:** Estado de ejecución e historial acumulativo  
-> **Instrucción:** Este archivo es actualizado automáticamente al INICIO y FINAL de cada fase  
+> **Archivo:** Estado de ejecución e historial acumulativo
+> **Instrucción:** Este archivo es actualizado automáticamente al INICIO y FINAL de cada fase
 > **No editar manualmente** — solo debe ser modificado por los prompts de ejecución
 
 ---
@@ -12,17 +12,12 @@
 
 | Campo                   | Valor                   |
 | ----------------------- | ----------------------- |
-| **Nombre del proyecto** | _(completar en Fase 1)_ |
-<<<<<<< HEAD
-| **Repositorio GitHub** | https://github.com/Lianna-Mora01/Proyecto_1082928103.git |
-| **URL de producción** | https://proyecto-1082928103-ueat-86vha82pz-lianna-mora01s-projects.vercel.app |
-=======
-| **Repositorio GitHub**  | _(completar en Fase 4)_ |
-| **URL de producción**   | _(completar en Fase 5)_ |
->>>>>>> ca0902a0ed8d8acdfa97b48884babef316c7b722
-| **Inicio del proyecto** | _(completar en Fase 0)_ |
+| **Nombre del proyecto** | CampusZen               |
+| **Repositorio GitHub**  | https://github.com/Lianna-Mora01/Proyecto_1082928103.git |
+| **URL de producción**   | https://proyecto-1082928103-ueat-86vha82pz-lianna-mora01s-projects.vercel.app |
+| **Inicio del proyecto** | 6 de abril de 2026      |
 | **Cierre del proyecto** | _(completar en Fase 7)_ |
-| **Estado global**       | ✅ FASE 0 COMPLETADA — Listo para Fase 1 |
+| **Estado global**       | 🟡 FASE 3 EN PROGRESO — Módulo de Materias |
 
 ---
 
@@ -32,21 +27,74 @@
 | ----- | ---------------------- | ------------- | ---------------------------- | ---------------------------- | -------------------------- |
 | **0** | Prerrequisitos         | ✅ COMPLETADA | 6 de abril de 2026, 12:10 PM | 6 de abril de 2026, 12:15 PM | Ingeniero Fullstack Senior |
 | **1** | Esqueleto del Proyecto | ✅ COMPLETADA | 6 de abril de 2026, 12:20 PM | 6 de abril de 2026, 12:30 PM | Ingeniero Fullstack Senior |
-<<<<<<< HEAD
-| **2** | Capa de Datos JSON | ✅ COMPLETADA | 9 abril 2026, 11:21 a. m. | 9 abril 2026, 11:25 a. m. | Ingeniero Fullstack Senior |
-| **3** | Home "Hola Mundo" | ✅ COMPLETADA | 9 abril 2026, 11:28 a. m. | 9 abril 2026, 11:45 a. m. | Diseñador UX/UI Senior + Desarrollador Frontend |
-| **4** | GitHub | ✅ COMPLETADA | 9 abril 2026, 11:45 a. m. | 9 abril 2026, 11:49 a. m. | Ingeniero Fullstack Senior |
-| **5** | Vercel · Deploy | ✅ COMPLETADA | 9 abril 2026, 11:51 a. m. | 9 abril 2026, 11:52 a. m. | Ingeniero DevOps + Fullstack Senior |
-| **6** | Validación CI/CD | ✅ COMPLETADA | 9 abril 2026, 11:54 a. m. | 9 abril 2026, 11:55 a. m. | Ingeniero DevOps Senior |
-| **7** | Calidad y Cierre | ✅ COMPLETADA | 9 abril 2026, 11:57 a. m. | 9 abril 2026, 12:15 p. m. | Tech Lead / Ingeniero Fullstack Senior |
-=======
-| **2** | Capa de Datos JSON     | ⏳ PENDIENTE  | —                            | —                            | —                          |
-| **3** | Home "Hola Mundo"      | ⏳ PENDIENTE  | —                            | —                            | —                          |
+| **2** | Capa de Datos JSON     | ✅ COMPLETADA | 9 abril 2026, 11:21 AM      | 9 abril 2026, 11:25 AM      | Ingeniero Fullstack Senior |
+| **3** | Módulo de Materias     | 🟡 EN PROGRESO| 10 abril 2026, 2:00 PM      | —                            | Backend Senior             |
 | **4** | GitHub                 | ⏳ PENDIENTE  | —                            | —                            | —                          |
 | **5** | Vercel · Deploy        | ⏳ PENDIENTE  | —                            | —                            | —                          |
 | **6** | Validación CI/CD       | ⏳ PENDIENTE  | —                            | —                            | —                          |
 | **7** | Calidad y Cierre       | ⏳ PENDIENTE  | —                            | —                            | —                          |
->>>>>>> ca0902a0ed8d8acdfa97b48884babef316c7b722
+
+### Leyenda de estados
+
+| Ícono          | Significado                      |
+| -------------- | -------------------------------- |
+| ⏳ PENDIENTE   | No iniciada                      |
+| 🟡 EN PROGRESO | Actualmente en ejecución         |
+| ✅ COMPLETADA  | Finalizada exitosamente          |
+| ❌ BLOQUEADA   | Detenida por error o dependencia |
+
+---
+
+## 📜 Historial de Ejecución
+
+> Registro cronológico acumulativo de todas las acciones realizadas.
+> Cada entrada es agregada por el prompt correspondiente — nunca se elimina una entrada, solo se agregan.
+
+### Fase 0 — Prerrequisitos
+
+- **Estado:** ✅ COMPLETADA
+- **Inicio:** 6 de abril de 2026, 12:10 PM
+- **Fin:** 6 de abril de 2026, 12:15 PM
+- **Responsable:** Ingeniero Fullstack Senior
+- **Acciones realizadas:** Verificación de versiones (Node.js v24.14.1, Git 2.53.0), extensiones VS Code ya instaladas. Problema con npm (PSSecurityException - posible restricción de ejecución en PowerShell). Cuentas GitHub y Vercel confirmadas por usuario.
+
+### Fase 1 — Esqueleto del Proyecto
+
+- **Estado:** ✅ COMPLETADA
+- **Inicio:** 6 de abril de 2026, 12:20 PM
+- **Fin:** 6 de abril de 2026, 12:30 PM
+- **Responsable:** Ingeniero Fullstack Senior
+- **Acciones realizadas:** Proyecto Next.js creado con create-next-app, dependencias instaladas (framer-motion, prettier, eslint-config-prettier), servidor dev verificado en localhost:3000, boilerplate limpiado, build exitoso sin errores TypeScript, estructura de carpetas confirmada.
+
+### Fase 2 — Capa de Datos JSON
+
+- **Estado:** ✅ COMPLETADA
+- **Inicio:** 9 abril 2026, 11:21 AM
+- **Fin:** 9 abril 2026, 11:25 AM
+- **Responsable:** Ingeniero Fullstack Senior
+- **Acciones realizadas:** Creación de `/data/content.json`, `/data/config.json`, `lib/types.ts`, `lib/data-reader.ts`, y el endpoint `app/api/data/route.ts`. Validación de `tsconfig.json`, compilación con `tsc --noEmit` sin errores, respuesta correcta de `/api/data`.
+
+### Fase 3 — Módulo de Materias
+
+- **Estado:** 🟡 EN PROGRESO
+- **Inicio:** 10 abril 2026, 2:00 PM
+- **Fin:** —
+- **Responsable:** Backend Senior
+- **Acciones realizadas:**
+  - ✅ Migration SQL creada (`supabase/migrations/0002_init_subjects.sql`) con tabla subjects, índices y RLS policies
+  - ✅ Tipos TypeScript agregados (`lib/types.ts`) - interfaces Subject, CreateSubjectRequest, UpdateSubjectRequest
+  - ✅ Schemas Zod implementados (`lib/schemas.ts`) - createSubjectSchema, updateSubjectSchema
+  - ✅ Funciones dataService extendidas (`lib/dataService.ts`) - getSubjectsByUser, createSubject, updateSubject, deactivateSubject
+  - ✅ API routes creadas (`app/api/subjects/route.ts`, `app/api/subjects/[id]/route.ts`) - GET/POST/PUT/DELETE con validación de ownership
+  - ✅ Errores de sintaxis corregidos - type-check exitoso sin errores TypeScript
+  - ✅ Página de perfil creada (`app/profile/page.tsx`) con sección "Mis materias"
+  - ✅ Componentes UI implementados (`SubjectsManager`, `AddSubjectForm`, `EditSubjectModal`, `SubjectItem`)
+  - ⏳ Migration pendiente de aplicar (requiere variables de entorno Supabase)
+  - ⏳ Pruebas de seguridad pendientes (verificar que usuarios no puedan editar materias de otros)
+
+---
+
+*Última actualización: 10 abril 2026, 3:30 PM*
 
 ### Leyenda de estados
 

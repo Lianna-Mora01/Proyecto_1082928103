@@ -49,6 +49,25 @@ export type UpdateUserRequest = Partial<{
   notifications_enabled: boolean;
 }>;
 
+export interface Subject {
+  id: string;
+  user_id: string;
+  name: string;
+  color: string;
+  is_active: boolean;
+  created_at: string;
+}
+
+export type CreateSubjectRequest = {
+  name: string;
+  color?: string;
+};
+
+export type UpdateSubjectRequest = {
+  name?: string;
+  color?: string;
+};
+
 export type LoginRequest = {
   email: string;
   password: string;
@@ -58,15 +77,6 @@ export type LoginResponse = {
   success: boolean;
   user?: SafeUser;
   error?: string;
-};
-
-export type Subject = {
-  id: string;
-  user_id: string;
-  name: string;
-  color: string;
-  is_active: boolean;
-  created_at: string;
 };
 
 export type Task = {

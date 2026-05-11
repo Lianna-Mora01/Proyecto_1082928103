@@ -48,8 +48,18 @@ export const auditEntrySchema = z.object({
   action: z.enum(['create', 'update', 'delete', 'login', 'logout', 'register', 'bootstrap', 'admin']),
   entity: z.enum(['user', 'subject', 'task', 'expense', 'system']),
   entity_id: z.string().optional(),
-  changes: z.record(z.string(), z.any()).optional(),
-  metadata: z.record(z.string(), z.any()).optional(),
+  changes: z.record(z.string(), z.object({ from: z.unknown(), to: z.unknown() })).optional(),
+  metadata: z.record(z.string(), z.unknown()).optional(),
+});
+
+export const createSubjectSchema = z.object({
+  name: z.string().min(1, 'El nombre es requerido').max(100, 'El nombre no puede exceder 100 caracteres'),
+  color: z.string().regex(/^#[0-9A-F]{6}$/i, 'Color debe ser un código hexadecimal válido').optional(),
+});
+
+export const updateSubjectSchema = z.object({
+  name: z.string().min(1, 'El nombre es requerido').max(100, 'El nombre no puede exceder 100 caracteres').optional(),
+  color: z.string().regex(/^#[0-9A-F]{6}$/i, 'Color debe ser un código hexadecimal válido').optional(),
 });
 
 export type LoginSchema = z.infer<typeof loginSchema>;
