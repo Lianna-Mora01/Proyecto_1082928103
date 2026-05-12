@@ -10,6 +10,8 @@ import AppLayout from "@/components/layout/AppLayout";
 import Card from "@/components/ui/Card";
 import EmptyState from "@/components/ui/EmptyState";
 import SeedModeBanner from "@/components/admin/SeedModeBanner";
+import { AlertBanner } from "@/components/tasks/AlertBanner";
+import { useRouter } from "next/navigation";
 
 interface DashboardData {
   mode: "seed" | "live";
@@ -61,6 +63,18 @@ export default function DashboardPage() {
         {/* Seed Mode Banner */}
         {dashboardData?.mode === "seed" && <SeedModeBanner />}
 
+        {/* Banner de alertas urgentes (Fase 5) */}
+        {dashboardData?.urgentTasks && dashboardData.urgentTasks.length > 0 && (
+          <div className="mb-8">
+            <AlertBanner
+              urgentTasks={dashboardData.urgentTasks}
+              onViewTasks={() => {
+                window.location.href = '/tasks?status=pendiente';
+              }}
+            />
+          </div>
+        )}
+
         {/* Grid de tarjetas resumen */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <Card>
@@ -92,22 +106,6 @@ export default function DashboardPage() {
             </p>
           </Card>
         </div>
-
-        {/* Alertas urgentes */}
-        {dashboardData?.urgentTasks && dashboardData.urgentTasks.length > 0 && (
-          <Card className="mb-8 border-l-4 border-[--cs-alert]">
-            <p className="font-semibold text-[--cs-alert] mb-3">
-              ⚠️ Tareas vencen en menos de 48 horas
-            </p>
-            <div className="space-y-2">
-              {dashboardData.urgentTasks.map((task: any, idx: number) => (
-                <div key={idx} className="text-sm text-[--cs-text-primary]">
-                  • {task.title}
-                </div>
-              ))}
-            </div>
-          </Card>
-        )}
 
         {/* Empty State */}
         {dashboardData?.tasks.length === 0 &&
