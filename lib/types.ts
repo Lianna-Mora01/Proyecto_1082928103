@@ -93,6 +93,28 @@ export type Task = {
   updated_at: string;
 };
 
+export type TaskWithSubject = Task & {
+  subject_name?: string | null;
+  subject_color?: string | null;
+  isUrgent?: boolean; // Calculado: due_date < NOW() + 48h
+};
+
+export type CreateTaskRequest = {
+  subject_id: string | null;
+  title: string;
+  description?: string | null;
+  due_date: string; // ISO 8601, no puede ser pasado
+  priority?: 'alta' | 'media' | 'baja';
+};
+
+export type UpdateTaskRequest = {
+  subject_id?: string | null;
+  title?: string;
+  description?: string | null;
+  due_date?: string;
+  priority?: 'alta' | 'media' | 'baja';
+};
+
 export type Expense = {
   id: string;
   user_id: string;

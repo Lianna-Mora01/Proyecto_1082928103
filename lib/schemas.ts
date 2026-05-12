@@ -62,7 +62,44 @@ export const updateSubjectSchema = z.object({
   color: z.string().regex(/^#[0-9A-F]{6}$/i, 'Color debe ser un código hexadecimal válido').optional(),
 });
 
+export const createTaskSchema = z.object({
+  subject_id: z.string().uuid('ID de materia inválido').nullable().default(null),
+  title: z.string().min(1, 'El título es requerido').max(200, 'El título no puede exceder 200 caracteres'),
+  description: z.string().max(5000, 'La descripción no puede exceder 5000 caracteres').nullable().default(null),
+  due_date: z.string().datetime('Fecha límite debe ser un ISO 8601 válido').refine(
+    (dateStr) => {
+      const date = new Date(dateStr);
+      const now = new Date();
+      // RN-03: Fecha límite no puede ser pasada
+      return date > now;
+    },
+    {
+      message: 'La fecha límite no puede ser anterior a la fecha actual',
+    }
+  ),
+  priority: z.enum(['alta', 'media', 'baja'], { message: 'Prioridad inválida' }).default('media'),
+});
+
+export const updateTaskSchema = z.object({
+  subject_id: z.string().uuid('ID de materia inválido').nullable().optional(),
+  title: z.string().min(1, 'El título es requerido').max(200).optional(),
+  description: z.string().max(5000).nullable().optional(),
+  due_date: z.string().datetime('Fecha límite debe ser un ISO 8601 válido').refine(
+    (dateStr) => {
+      const date = new Date(dateStr);
+      const now = new Date();
+      return date > now;
+    },
+    {
+      message: 'La fecha límite no puede ser anterior a la fecha actual',
+    }
+  ).optional(),
+  priority: z.enum(['alta', 'media', 'baja']).optional(),
+});
+
 export type LoginSchema = z.infer<typeof loginSchema>;
 export type RegisterSchema = z.infer<typeof registerSchema>;
 export type ChangePasswordSchema = z.infer<typeof changePasswordSchema>;
 export type UpdateUserSchema = z.infer<typeof updateUserSchema>;
+export type CreateTaskSchema = z.infer<typeof createTaskSchema>;
+export type UpdateTaskSchema = z.infer<typeof updateTaskSchema>;
