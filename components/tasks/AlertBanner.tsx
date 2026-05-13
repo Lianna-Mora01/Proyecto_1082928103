@@ -29,7 +29,7 @@ export function AlertBanner({ urgentTasks, onViewTasks }: AlertBannerProps) {
         exit={{ opacity: 0, height: 0, y: -10 }}
         transition={{ duration: 0.3 }}
         className="
-          bg-gradient-to-r from-orange-50 to-orange-100
+          bg-linear-to-r from-orange-100 to-orange-200
           dark:from-orange-900 dark:to-orange-800
           border-l-4 border-orange-500 dark:border-orange-400
           rounded-lg shadow-sm
@@ -42,7 +42,7 @@ export function AlertBanner({ urgentTasks, onViewTasks }: AlertBannerProps) {
             <motion.div
               animate={{ y: [0, -2, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
-              className="flex-shrink-0 pt-0.5"
+              className="shrink-0 pt-1"
             >
               <AlertTriangle className="w-5 h-5 text-orange-600 dark:text-orange-300" />
             </motion.div>
@@ -54,7 +54,7 @@ export function AlertBanner({ urgentTasks, onViewTasks }: AlertBannerProps) {
               </h3>
 
               <p className="text-sm text-orange-800 dark:text-orange-200 mb-3">
-                Menos de 48 horas de vencimiento. {plural ? 'Revisa' : 'Revisa'} las tareas pendientes.
+                Menos de 48 horas de vencimiento. Revisa {plural ? 'las tareas' : 'la tarea'} pendiente{plural ? 's' : ''}.
               </p>
 
               {/* Lista de tareas urgentes */}
@@ -78,7 +78,7 @@ export function AlertBanner({ urgentTasks, onViewTasks }: AlertBannerProps) {
                     {/* Punto de color según prioridad */}
                     <div
                       className={`
-                        w-2 h-2 rounded-full flex-shrink-0 mt-1
+                        w-2 h-2 rounded-full mt-1.5
                         ${
                           task.priority === 'alta'
                             ? 'bg-red-500'
@@ -105,7 +105,7 @@ export function AlertBanner({ urgentTasks, onViewTasks }: AlertBannerProps) {
                 {/* Mostrar "más" si hay más de 3 tareas urgentes */}
                 {urgentCount > 3 && (
                   <p className="text-xs text-orange-700 dark:text-orange-300 px-2">
-                    +{urgentCount - 3} más {plural ? 'tareas' : 'tarea'}...
+                    +{urgentCount - 3} más {urgentCount - 3 === 1 ? 'tarea' : 'tareas'}...
                   </p>
                 )}
               </motion.div>
