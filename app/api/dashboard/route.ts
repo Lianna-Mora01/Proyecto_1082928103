@@ -1,5 +1,5 @@
 import { withAuth } from "@/lib/withAuth";
-import { getSystemMode } from "@/lib/dataService";
+import { getSystemMode, getTasks, getExpenses, getMonthlySummary, getUserById } from "@/lib/dataService";
 import { NextResponse, NextRequest } from "next/server";
 
 async function handler(req: NextRequest) {
@@ -25,32 +25,65 @@ async function handler(req: NextRequest) {
         expenses: [],
         urgentTasks: [],
         monthlySummary: null,
+        expenseSummary: null,
       });
     }
 
-    // En modo live, retornar datos consolidados (placeholders por ahora)
+    // En modo live, retornar datos reales
+    const [tasks, expenses, userData] = await Promise.all([
+      getTasks(userId),
+      getExpenses(userId),
+      getUserById(userId),
+    ]);
+
+    // Calcular tareas urgentes (menos de 48 horas)
+    const now = new Date();
+    const urgentTasks = tasks.filter(task => {
+      if (task.status !== 'pendiente') return false;
+      const dueDate = new Date(task.due_date);
+      const hoursUntilDue = (dueDate.getTime() - now.getTime()) / (1000 * 60 * 60);
+      return hoursUntilDue <= 48;
+    });
+
+    // Obtener resumen de gastos del mes actual
+    const currentMonth = new Date();
+    const year = currentMonth.getFullYear();
+    const month = currentMonth.getMonth() + 1;
+    const expenseSummary = await getMonthlySummary(userId, year, month);
+
+    // Calcular estadísticas semanales
+    const oneWeekAgo = new Date();
+    oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+
+    const weeklyStats = {
+      tasksCompleted: tasks.filter(task =>
+        task.status === 'completada' &&
+        new Date(task.completed_at || '') >= oneWeekAgo
+      ).length,
+      expensesRecorded: expenses.filter(expense =>
+        new Date(expense.created_at) >= oneWeekAgo
+      ).length,
+      tasksCreated: tasks.filter(task =>
+        new Date(task.created_at) >= oneWeekAgo
+      ).length,
+    };
+
     return NextResponse.json(
       {
         mode: "live",
         user: { id: userId },
-        tasks: [],
-        expenses: [],
-        urgentTasks: [],
+        tasks,
+        expenses,
+        urgentTasks,
         monthlySummary: {
-          totalExpenses: 0,
-          budgetMonthly: null,
-          budgetPercentage: null,
-          expensesByCategory: {},
-          expensesByPaymentMethod: {
-            "Efectivo": 0,
-            "Tarjeta": 0,
-          },
+          totalExpenses: expenseSummary.totalAmount,
+          budgetMonthly: userData?.budget_monthly || null,
+          budgetPercentage: expenseSummary.budgetPercentage,
+          expensesByCategory: expenseSummary.byCategory,
+          expensesByPaymentMethod: expenseSummary.byPaymentMethod,
         },
-        weeklyStats: {
-          tasksCompleted: 0,
-          expensesRecorded: 0,
-          tasksCreated: 0,
-        },
+        expenseSummary,
+        weeklyStats,
       },
       {
         headers: {

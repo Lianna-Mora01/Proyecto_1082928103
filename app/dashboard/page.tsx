@@ -1,5 +1,5 @@
 // app/dashboard/page.tsx
-// Dashboard principal de CampusZen — Fase 2
+// Dashboard principal de CampusZen — Fase 2 + Fase 7
 
 "use client";
 
@@ -11,6 +11,9 @@ import Card from "@/components/ui/Card";
 import EmptyState from "@/components/ui/EmptyState";
 import SeedModeBanner from "@/components/admin/SeedModeBanner";
 import { AlertBanner } from "@/components/tasks/AlertBanner";
+import ExpenseChart from "@/components/charts/ExpenseChart";
+import BudgetBar from "@/components/expenses/BudgetBar";
+import { ExpenseSummary } from "@/lib/types";
 import { useRouter } from "next/navigation";
 
 interface DashboardData {
@@ -21,6 +24,7 @@ interface DashboardData {
   urgentTasks: any[];
   monthlySummary: any;
   weeklyStats: any;
+  expenseSummary: ExpenseSummary | null;
 }
 
 export default function DashboardPage() {
@@ -93,7 +97,7 @@ export default function DashboardPage() {
               Gastos del Mes
             </p>
             <p className="text-3xl font-bold text-[--cs-primary]">
-              ${dashboardData?.monthlySummary?.totalExpenses?.toFixed(2) || "0.00"}
+              ${dashboardData?.expenseSummary?.totalAmount?.toLocaleString() || "0"}
             </p>
           </Card>
 
@@ -102,12 +106,27 @@ export default function DashboardPage() {
               Presupuesto
             </p>
             <p className="text-3xl font-bold text-[--cs-primary]">
-              {dashboardData?.monthlySummary?.budgetPercentage
-                ? `${dashboardData.monthlySummary.budgetPercentage}%`
+              {dashboardData?.expenseSummary?.budgetPercentage !== null && dashboardData?.expenseSummary?.budgetPercentage !== undefined
+                ? `${dashboardData.expenseSummary.budgetPercentage}%`
                 : "—"}
             </p>
           </Card>
         </div>
+
+        {/* BudgetBar y gráfica de gastos (Fase 7) */}
+        {dashboardData?.expenseSummary && (
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+            <div className="lg:col-span-1">
+              <BudgetBar
+                totalAmount={dashboardData.expenseSummary.totalAmount}
+                budgetPercentage={dashboardData.expenseSummary.budgetPercentage}
+              />
+            </div>
+            <div className="lg:col-span-2">
+              <ExpenseChart data={dashboardData.expenseSummary.byCategory} />
+            </div>
+          </div>
+        )}
 
         {/* Empty State */}
         {dashboardData?.tasks.length === 0 &&
