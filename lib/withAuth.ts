@@ -2,8 +2,10 @@
 // Middleware para proteger rutas privadas
 
 import { NextRequest, NextResponse } from 'next/server';
-import { getTokenFromCookie, verifyJWT } from './auth';
+import { verifyJWT } from './auth';
 import { JWTPayload } from './types';
+
+const SESSION_COOKIE_NAME = 'campuszen_session';
 
 /**
  * Middleware para validar sesión en API Routes
@@ -16,7 +18,7 @@ export function withAuth(
   ) => Promise<NextResponse>
 ): (req: NextRequest, context: any) => Promise<Response> {
   return async (req: NextRequest, context: any) => {
-    const token = await getTokenFromCookie();
+    const token = req.cookies.get(SESSION_COOKIE_NAME)?.value || null;
 
     if (!token) {
       return NextResponse.json(
