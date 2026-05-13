@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { verifyJWT } from "@/lib/auth";
+
+const SESSION_COOKIE_NAME = 'campuszen_session';
 
 // Rutas protegidas que requieren autenticación
 const protectedRoutes = [
@@ -8,12 +9,6 @@ const protectedRoutes = [
   "/expenses",
   "/profile",
   "/admin",
-  "/api/dashboard",
-  "/api/tasks",
-  "/api/expenses",
-  "/api/subjects",
-  "/api/users",
-  "/api/audit",
 ];
 
 // Rutas públicas
@@ -22,31 +17,22 @@ const publicRoutes = ["/", "/login", "/register", "/api/auth"];
 export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
 
-  // Permitir rutas públicas y API de auth y system
+  // Permitir rutas públicas
   if (publicRoutes.some((route) => path.startsWith(route))) {
     return NextResponse.next();
   }
 
-  // Para rutas protegidas, verificar JWT
+  // Para rutas protegidas (solo páginas, no API)
   if (protectedRoutes.some((route) => path.startsWith(route))) {
-    const token = request.cookies.get("sessionToken")?.value;
+    const token = request.cookies.get(SESSION_COOKIE_NAME)?.value;
 
     if (!token) {
       // Redirigir a login si no hay token
       return NextResponse.redirect(new URL("/login", request.url));
     }
 
-    try {
-      const payload = verifyJWT(token);
-      if (!payload) {
-        return NextResponse.redirect(new URL("/login", request.url));
-      }
-      // Token válido, continuar
-      return NextResponse.next();
-    } catch (error) {
-      // Token inválido, redirigir a login
-      return NextResponse.redirect(new URL("/login", request.url));
-    }
+    // Token existe, continuar (validación completa en API routes con withAuth)
+    return NextResponse.next();
   }
 
   return NextResponse.next();
