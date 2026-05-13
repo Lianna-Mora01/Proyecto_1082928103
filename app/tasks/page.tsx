@@ -36,12 +36,16 @@ export default function TasksPage() {
         setError(null);
 
         // Cargar tareas
-        const tasksRes = await fetch('/api/tasks');
+        const tasksRes = await fetch('/api/tasks', {
+          credentials: 'include',
+        });
         if (!tasksRes.ok) throw new Error('Error al cargar tareas');
         const { tasks: loadedTasks } = await tasksRes.json();
 
         // Cargar materias
-        const subjectsRes = await fetch('/api/subjects');
+        const subjectsRes = await fetch('/api/subjects', {
+          credentials: 'include',
+        });
         if (!subjectsRes.ok) throw new Error('Error al cargar materias');
         const { subjects: loadedSubjects } = await subjectsRes.json();
 
@@ -105,6 +109,7 @@ export default function TasksPage() {
         const res = await fetch('/api/tasks', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
           body: JSON.stringify(formData),
         });
 

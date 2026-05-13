@@ -15,7 +15,9 @@ export default function LoginPage() {
   useEffect(() => {
     async function checkSession() {
       try {
-        const res = await fetch('/api/auth/me');
+        const res = await fetch('/api/auth/me', {
+          credentials: 'include',
+        });
         if (res.ok) {
           router.push('/dashboard');
         }

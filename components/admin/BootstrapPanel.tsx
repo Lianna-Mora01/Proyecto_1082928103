@@ -16,6 +16,7 @@ export default function BootstrapPanel() {
       const response = await fetch("/api/system/bootstrap", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({
           secret: process.env.NEXT_PUBLIC_ADMIN_BOOTSTRAP_SECRET || "",
         }),

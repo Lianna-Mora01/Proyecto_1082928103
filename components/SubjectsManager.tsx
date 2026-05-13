@@ -17,7 +17,9 @@ export function SubjectsManager() {
   const loadSubjects = async () => {
     try {
       setLoading(true);
-      const response = await fetch('/api/subjects');
+      const response = await fetch('/api/subjects', {
+        credentials: 'include',
+      });
       if (!response.ok) {
         throw new Error('Error al cargar materias');
       }
@@ -40,6 +42,7 @@ export function SubjectsManager() {
       const response = await fetch('/api/subjects', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify(data),
       });
 

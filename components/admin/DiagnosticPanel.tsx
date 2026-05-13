@@ -21,7 +21,9 @@ export default function DiagnosticPanel() {
   useEffect(() => {
     const fetchDiagnostics = async () => {
       try {
-        const response = await fetch("/api/system/diagnose");
+        const response = await fetch("/api/system/diagnose", {
+          credentials: 'include',
+        });
         if (!response.ok) throw new Error("Error al obtener diagnósticos");
         const data = await response.json();
         setDiagnostics(data);
