@@ -1,8 +1,8 @@
-# My Project — Fullstack TypeScript
+# CampusZen — Student Financial & Academic Management Platform
 
-A production-ready fullstack application showcasing modern web development with TypeScript, Next.js 14, and automated deployment.
+A production-ready fullstack application for university students to manage courses, tasks, and expenses with professional financial insights.
 
-**Stack:** Next.js 14 · TypeScript 5 · React 19 · Tailwind CSS · Framer Motion
+**Stack:** Next.js 16 · TypeScript 5 · React 19 · Tailwind CSS · Framer Motion · Supabase Postgres · RLS Security
 
 **Live Demo:** https://proyecto-1082928103-ueat-86vha82pz-lianna-mora01s-projects.vercel.app
 
@@ -10,15 +10,56 @@ A production-ready fullstack application showcasing modern web development with 
 
 ---
 
+## ⚡ Quick Start
+
+### Prerequisites
+- Node.js 18+ and npm
+- Supabase account (free tier okay)
+
+### Setup Steps
+
+```bash
+# 1. Clone and install
+git clone <repo>
+cd Proyecto\ lianna
+npm install
+
+# 2. Configure Supabase (REQUIRED)
+cp .env.example .env.local
+# Edit .env.local with your Supabase credentials
+# See SETUP_SUPABASE.md for detailed instructions
+
+# 3. Verify setup
+npm run verify-supabase
+
+# 4. Start development server
+npm run dev
+
+# 5. Open browser and bootstrap database
+# Go to: http://localhost:3000/admin/db-setup
+```
+
+**Status Check:**
+```bash
+npm run type-check    # TypeScript validation
+npm run validate      # Full build validation
+```
+
+> 📋 **Detailed Setup Checklist:** See [SETUP_CHECKLIST.md](./SETUP_CHECKLIST.md) to verify all steps
+
+---
+
 ## 🎯 Features
 
-✅ **Fullstack TypeScript** — Strict type checking end-to-end  
-✅ **Server-side Data Access** — JSON files read from the server, never exposed to the client  
-✅ **API Routes** — REST endpoints with Next.js App Router  
-✅ **Animated UI** — Framer Motion for professional animations  
-✅ **Automatic Deployment** — CI/CD pipeline with GitHub → Vercel  
-✅ **Code Quality** — ESLint, Prettier, and TypeScript validation  
-✅ **Responsive Design** — Tailwind CSS utility-first styling  
+✅ **Authentication** — Login/Register with JWT + Postgres RLS  
+✅ **Course Management** — Create, organize, and track subjects  
+✅ **Task Management** — Create tasks with priority, due dates, and urgency alerts  
+✅ **Financial Tracking** — Track expenses by category with budgets  
+✅ **Reports & Analytics** — Visualize spending and academic progress  
+✅ **Responsive Design** — Mobile-first UI with Tailwind CSS  
+✅ **Animations** — Framer Motion for smooth UX  
+✅ **Security** — Row-Level Security (RLS) on all data  
+✅ **Automated Deployment** — GitHub → Vercel CI/CD pipeline  
 
 ---
 
