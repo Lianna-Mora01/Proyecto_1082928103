@@ -735,3 +735,327 @@ export async function deleteTask(userId: string, userEmail: string, taskId: stri
     },
   });
 }
+
+// ==================== EXPENSES ====================
+
+import { Expense, ExpenseSummary, CreateExpenseRequest, UpdateExpenseRequest } from './types';
+
+/**
+ * Obtiene todos los gastos de un usuario
+ * Ordenados por fecha descendente (más recientes primero)
+ */
+export async function getExpenses(userId: string, filters?: { category?: string; payment_method?: string; month?: string }): Promise<Expense[]> {
+  const mode = await getSystemMode();
+
+  if (mode === 'seed') {
+    return [];
+  }
+
+  const client = getSupabaseClient();
+  let query = client
+    .from('expenses')
+    .select('*')
+    .eq('user_id', userId);
+
+  if (filters?.category) {
+    query = query.eq('category', filters.category);
+  }
+  if (filters?.payment_method) {
+    query = query.eq('payment_method', filters.payment_method);
+  }
+  if (filters?.month) {
+    // month en formato YYYY-MM
+    const [year, month] = filters.month.split('-');
+    const startDate = `${year}-${month}-01`;
+    const endDate = new Date(parseInt(year), parseInt(month), 0).toISOString().split('T')[0]; // Último día del mes
+    query = query.gte('expense_date', startDate).lte('expense_date', endDate);
+  }
+
+  const { data, error } = await query.order('expense_date', { ascending: false });
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return data || [];
+}
+
+/**
+ * Crea un nuevo gasto
+ * RN-15: Anti-duplicado en último minuto
+ * RN-01: Monto > 0 (validado con CHECK en DB + Zod)
+ */
+export async function createExpense(userId: string, userEmail: string, data: CreateExpenseRequest): Promise<Expense> {
+  const mode = await getSystemMode();
+
+  if (mode === 'seed') {
+    throw new Error('No se pueden crear gastos en modo seed.');
+  }
+
+  const client = getSupabaseClient();
+
+  // RN-15: Verificar anti-duplicado en último minuto (60 segundos)
+  // Buscar si existe un gasto con mismo nombre, monto, categoría y fecha creado en el último minuto
+  const oneMinuteAgo = new Date(Date.now() - 60 * 1000).toISOString();
+  const { data: recentExpense, error: checkError } = await client
+    .from('expenses')
+    .select('*')
+    .eq('user_id', userId)
+    .eq('name', data.name)
+    .eq('amount', data.amount)
+    .eq('category', data.category)
+    .eq('expense_date', data.expense_date)
+    .gte('created_at', oneMinuteAgo)
+    .single();
+
+  // Si existe una coincidencia exacta en el último minuto, retornar error 409
+  if (recentExpense && !checkError) {
+    const error = new Error('DUPLICATE_EXPENSE');
+    (error as any).status = 409;
+    throw error;
+  }
+
+  // Crear gasto
+  const { data: newExpense, error } = await client
+    .from('expenses')
+    .insert({
+      user_id: userId,
+      name: data.name,
+      amount: data.amount,
+      category: data.category,
+      payment_method: data.payment_method,
+      expense_date: data.expense_date,
+    })
+    .select('*')
+    .single();
+
+  if (error || !newExpense) {
+    // Si el error es del CHECK (monto inválido)
+    if (error?.message?.includes('CHECK') || error?.message?.includes('amount')) {
+      const err = new Error('INVALID_AMOUNT');
+      (err as any).status = 400;
+      throw err;
+    }
+    throw new Error(error?.message || 'Error al crear gasto');
+  }
+
+  // Registrar en auditoría
+  await recordAudit({
+    user_id: userId,
+    user_email: userEmail,
+    action: 'create',
+    entity: 'expense',
+    entity_id: newExpense.id,
+    changes: {
+      name: { from: null, to: data.name },
+      amount: { from: null, to: data.amount },
+      category: { from: null, to: data.category },
+      payment_method: { from: null, to: data.payment_method },
+      expense_date: { from: null, to: data.expense_date },
+    },
+  });
+
+  return newExpense as Expense;
+}
+
+/**
+ * Actualiza un gasto
+ */
+export async function updateExpense(userId: string, userEmail: string, expenseId: string, updates: UpdateExpenseRequest): Promise<Expense> {
+  const mode = await getSystemMode();
+
+  if (mode === 'seed') {
+    throw new Error('No se pueden actualizar gastos en modo seed.');
+  }
+
+  const client = getSupabaseClient();
+
+  // Verificar que el gasto pertenece al usuario
+  const { data: existing, error: checkError } = await client
+    .from('expenses')
+    .select('*')
+    .eq('id', expenseId)
+    .eq('user_id', userId)
+    .single();
+
+  if (checkError || !existing) {
+    throw new Error('Gasto no encontrado o no tienes permisos');
+  }
+
+  const { data: updated, error } = await client
+    .from('expenses')
+    .update(updates)
+    .eq('id', expenseId)
+    .eq('user_id', userId)
+    .select('*')
+    .single();
+
+  if (error || !updated) {
+    throw new Error(error?.message || 'Error al actualizar gasto');
+  }
+
+  // Registrar en auditoría
+  await recordAudit({
+    user_id: userId,
+    user_email: userEmail,
+    action: 'update',
+    entity: 'expense',
+    entity_id: expenseId,
+    changes: Object.entries(updates).reduce(
+      (acc, [key, value]) => {
+        acc[key] = { from: existing[key], to: value };
+        return acc;
+      },
+      {} as Record<string, { from: unknown; to: unknown }>
+    ),
+  });
+
+  return updated as Expense;
+}
+
+/**
+ * Elimina un gasto
+ */
+export async function deleteExpense(userId: string, userEmail: string, expenseId: string): Promise<void> {
+  const mode = await getSystemMode();
+
+  if (mode === 'seed') {
+    throw new Error('No se pueden eliminar gastos en modo seed.');
+  }
+
+  const client = getSupabaseClient();
+
+  // Verificar que el gasto pertenece al usuario
+  const { data: existing, error: checkError } = await client
+    .from('expenses')
+    .select('*')
+    .eq('id', expenseId)
+    .eq('user_id', userId)
+    .single();
+
+  if (checkError || !existing) {
+    throw new Error('Gasto no encontrado o no tienes permisos');
+  }
+
+  const { error } = await client
+    .from('expenses')
+    .delete()
+    .eq('id', expenseId)
+    .eq('user_id', userId);
+
+  if (error) {
+    throw new Error(error?.message || 'Error al eliminar gasto');
+  }
+
+  // Registrar en auditoría
+  await recordAudit({
+    user_id: userId,
+    user_email: userEmail,
+    action: 'delete',
+    entity: 'expense',
+    entity_id: expenseId,
+    changes: {
+      name: { from: existing.name, to: null },
+      amount: { from: existing.amount, to: null },
+    },
+  });
+}
+
+/**
+ * Obtiene el resumen mensual de gastos
+ * RN-12: Si budget_monthly es null, budgetPercentage es null
+ * Calcula totales con SQL GROUP BY en el servidor
+ */
+export async function getMonthlySummary(userId: string, year: number, month: number): Promise<ExpenseSummary> {
+  const mode = await getSystemMode();
+
+  if (mode === 'seed') {
+    return {
+      totalAmount: 0,
+      byCategory: {},
+      byPaymentMethod: {},
+      budgetPercentage: null,
+    };
+  }
+
+  const client = getSupabaseClient();
+
+  // Obtener presupuesto del usuario
+  const { data: user, error: userError } = await client
+    .from('users')
+    .select('budget_monthly')
+    .eq('id', userId)
+    .single();
+
+  if (userError) {
+    throw new Error('Error al obtener presupuesto del usuario');
+  }
+
+  const budget = user?.budget_monthly || null;
+
+  // Calcular total del mes con SQL
+  const startDate = `${year}-${month.toString().padStart(2, '0')}-01`;
+  const endDate = new Date(year, month, 0).toISOString().split('T')[0]; // Último día del mes
+
+  // Total general
+  const { data: totalData, error: totalError } = await client
+    .from('expenses')
+    .select('amount')
+    .eq('user_id', userId)
+    .gte('expense_date', startDate)
+    .lte('expense_date', endDate);
+
+  if (totalError) {
+    throw new Error('Error al calcular total de gastos');
+  }
+
+  const totalAmount = totalData?.reduce((sum, expense) => sum + parseFloat(String(expense.amount)), 0) || 0;
+
+  // Totales por categoría con GROUP BY
+  const { data: categoryData, error: categoryError } = await client
+    .from('expenses')
+    .select('category, amount')
+    .eq('user_id', userId)
+    .gte('expense_date', startDate)
+    .lte('expense_date', endDate);
+
+  if (categoryError) {
+    throw new Error('Error al calcular gastos por categoría');
+  }
+
+  const byCategory: Record<string, number> = {};
+  (categoryData || []).forEach((expense: any) => {
+    const category = expense.category;
+    const amount = parseFloat(String(expense.amount));
+    byCategory[category] = (byCategory[category] || 0) + amount;
+  });
+
+  // Totales por método de pago con GROUP BY
+  const { data: paymentData, error: paymentError } = await client
+    .from('expenses')
+    .select('payment_method, amount')
+    .eq('user_id', userId)
+    .gte('expense_date', startDate)
+    .lte('expense_date', endDate);
+
+  if (paymentError) {
+    throw new Error('Error al calcular gastos por método de pago');
+  }
+
+  const byPaymentMethod: Record<string, number> = {};
+  (paymentData || []).forEach((expense: any) => {
+    const method = expense.payment_method;
+    const amount = parseFloat(String(expense.amount));
+    byPaymentMethod[method] = (byPaymentMethod[method] || 0) + amount;
+  });
+
+  // Calcular porcentaje del presupuesto
+  const budgetPercentage = budget !== null ? Math.round((totalAmount / budget) * 100) : null;
+
+  return {
+    totalAmount,
+    byCategory,
+    byPaymentMethod,
+    budgetPercentage,
+  };
+}

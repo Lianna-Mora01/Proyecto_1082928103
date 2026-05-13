@@ -127,4 +127,40 @@ export type Expense = {
   updated_at: string;
 };
 
+export type ExpenseSummary = {
+  totalAmount: number;
+  byCategory: Record<string, number>;
+  byPaymentMethod: Record<string, number>;
+  budgetPercentage: number | null; // null si no hay presupuesto definido
+};
+
+export const EXPENSE_CATEGORIES = [
+  'Fotocopias',
+  'Transporte',
+  'Comida',
+  'Materiales',
+  'Otro'
+] as const;
+
+export const PAYMENT_METHODS = [
+  'Efectivo',
+  'Tarjeta'
+] as const;
+
+export type CreateExpenseRequest = {
+  name: string;
+  amount: number;
+  category: typeof EXPENSE_CATEGORIES[number];
+  payment_method: typeof PAYMENT_METHODS[number];
+  expense_date: string; // ISO 8601
+};
+
+export type UpdateExpenseRequest = {
+  name?: string;
+  amount?: number;
+  category?: typeof EXPENSE_CATEGORIES[number];
+  payment_method?: typeof PAYMENT_METHODS[number];
+  expense_date?: string;
+};
+
 export type SystemMode = 'seed' | 'live';

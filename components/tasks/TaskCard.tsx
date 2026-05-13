@@ -144,7 +144,7 @@ export function TaskCard({
             {task.subject_name && (
               <>
                 <div
-                  className="w-2 h-2 rounded-full flex-shrink-0"
+                  className="w-2 h-2 rounded-full shrink-0"
                   style={{ backgroundColor: task.subject_color || '#40916C' }}
                 />
                 <span className="truncate">{task.subject_name}</span>
@@ -155,7 +155,7 @@ export function TaskCard({
 
           {/* Fecha de vencimiento */}
           <span
-            className={`flex-shrink-0 font-medium ${
+            className={`shrink-0 font-medium ${
               (task.isUrgent ?? false) ? 'text-orange-600 dark:text-orange-400 font-semibold' : ''
             }`}
           >
