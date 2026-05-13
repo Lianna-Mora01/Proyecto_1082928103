@@ -11,7 +11,8 @@
     "type-check": "tsc --noEmit",
     "validate": "npm run type-check && npm run build",
     "verify-supabase": "node scripts/verify-supabase-setup.js",
-    "setup-supabase": "echo 'Lee SETUP_SUPABASE.md para instrucciones de configuración'"
+    "setup-supabase": "echo 'Lee SETUP_SUPABASE.md para instrucciones de configuración'",
+    "post-setup": "node scripts/post-setup-validation.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.105.1",
