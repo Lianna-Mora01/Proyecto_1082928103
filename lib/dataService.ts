@@ -6,7 +6,7 @@ import { getSupabaseClient } from './supabase';
 import { getSeedUserByEmail } from './seedReader';
 import { appendAudit } from './blobAudit';
 import { hashPassword } from './auth';
-import { User, SafeUser, CreateUserRequest, UpdateUserRequest, AuditEntry, SystemMode } from './types';
+import { User, SafeUser, CreateUserRequest, UpdateUserRequest, AuditEntry, SystemMode, AdminAction, AdminUserMetadata } from './types';
 import { randomUUID } from 'crypto';
 
 let _systemMode: SystemMode | null = null;
@@ -52,6 +52,45 @@ async function recordAudit(entry: Omit<AuditEntry, 'id' | 'timestamp'>): Promise
     ...entry,
   };
   await appendAudit(auditEntry);
+}
+
+async function logAdminAction(
+  adminId: string,
+  adminEmail: string,
+  action: AdminAction,
+  targetUserId: string | null,
+  targetUserEmail: string | null,
+  details: Record<string, unknown> = {}
+): Promise<void> {
+  const mode = await getSystemMode();
+  if (mode === 'live') {
+    const client = getSupabaseClient();
+    const { error } = await client.from('admin_logs').insert({
+      admin_id: adminId,
+      admin_email: adminEmail,
+      action,
+      target_user_id: targetUserId,
+      target_user_email: targetUserEmail,
+      details,
+    });
+
+    if (error) {
+      throw new Error(error.message);
+    }
+  }
+
+  await recordAudit({
+    user_id: adminId,
+    user_email: adminEmail,
+    action: 'admin',
+    entity: 'user',
+    entity_id: targetUserId || undefined,
+    metadata: {
+      admin_action: action,
+      target_user_email: targetUserEmail,
+      ...details,
+    },
+  });
 }
 
 // ==================== AUTH & USERS ====================
@@ -194,6 +233,116 @@ export async function updateUser(id: string, updates: UpdateUserRequest): Promis
   });
 
   return updated as SafeUser;
+}
+
+export async function getAdminUsers(): Promise<AdminUserMetadata[]> {
+  const mode = await getSystemMode();
+
+  if (mode === 'seed') {
+    return [];
+  }
+
+  const client = getSupabaseClient();
+  const { data: users, error } = await client
+    .from('users')
+    .select(
+      `id, name, email, role, theme, budget_monthly, notifications_enabled, is_active, last_login_at, created_at, tasks(id), expenses(id)`
+    )
+    .order('created_at', { ascending: false });
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return (users || []).map((user: any) => {
+    const taskCount = Array.isArray(user.tasks) ? user.tasks.length : 0;
+    const expenseCount = Array.isArray(user.expenses) ? user.expenses.length : 0;
+    const { tasks, expenses, ...safeUser } = user;
+    return {
+      ...safeUser,
+      taskCount,
+      expenseCount,
+    } as AdminUserMetadata;
+  });
+}
+
+export async function setUserActiveState(
+  adminId: string,
+  adminEmail: string,
+  targetUserId: string,
+  isActive: boolean
+): Promise<SafeUser> {
+  const mode = await getSystemMode();
+
+  if (mode === 'seed') {
+    throw new Error('No se pueden actualizar usuarios en modo seed.');
+  }
+
+  const client = getSupabaseClient();
+  const { data: updated, error } = await client
+    .from('users')
+    .update({ is_active: isActive })
+    .eq('id', targetUserId)
+    .select(
+      'id, name, email, role, theme, budget_monthly, notifications_enabled, is_active, last_login_at, created_at'
+    )
+    .single();
+
+  if (error || !updated) {
+    throw new Error(error?.message || 'Error al actualizar estado de usuario');
+  }
+
+  await logAdminAction(
+    adminId,
+    adminEmail,
+    isActive ? 'activate' : 'suspend',
+    targetUserId,
+    updated.email,
+    { is_active: isActive }
+  );
+
+  return updated as SafeUser;
+}
+
+export async function deleteUserById(
+  adminId: string,
+  adminEmail: string,
+  targetUserId: string
+): Promise<void> {
+  const mode = await getSystemMode();
+
+  if (mode === 'seed') {
+    throw new Error('No se pueden eliminar usuarios en modo seed.');
+  }
+
+  const client = getSupabaseClient();
+  const { data: targetUser, error: targetError } = await client
+    .from('users')
+    .select('id, email, name')
+    .eq('id', targetUserId)
+    .single();
+
+  if (targetError || !targetUser) {
+    throw new Error('Usuario objetivo no encontrado');
+  }
+
+  const { error: deleteError } = await client
+    .from('users')
+    .delete()
+    .eq('id', targetUserId);
+
+  if (deleteError) {
+    throw new Error(deleteError.message);
+  }
+
+  await logAdminAction(
+    adminId,
+    adminEmail,
+    'delete',
+    targetUserId,
+    targetUser.email,
+    { target_user_name: targetUser.name }
+  );
 }
 
 /**

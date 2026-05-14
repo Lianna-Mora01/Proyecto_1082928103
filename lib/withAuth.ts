@@ -3,6 +3,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { verifyJWT } from './auth';
+import { getUserById } from './dataService';
 import { JWTPayload } from './types';
 
 const SESSION_COOKIE_NAME = 'campuszen_session';
@@ -31,6 +32,14 @@ export function withAuth(
     if (!payload) {
       return NextResponse.json(
         { error: 'Sesión expirada. Inicia sesión de nuevo.' },
+        { status: 401 }
+      );
+    }
+
+    const currentUser = await getUserById(payload.userId);
+    if (!currentUser || !currentUser.is_active) {
+      return NextResponse.json(
+        { error: 'Sesión inválida o cuenta desactivada.' },
         { status: 401 }
       );
     }

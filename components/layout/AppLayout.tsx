@@ -1,10 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import ThemeToggle from "@/components/ui/ThemeToggle";
 
-const navItems = [
+const baseNavItems = [
   { label: "Dashboard", href: "/dashboard", icon: "📊" },
   { label: "Tareas", href: "/tasks", icon: "✓" },
   { label: "Gastos", href: "/expenses", icon: "💰" },
@@ -13,6 +15,30 @@ const navItems = [
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    async function fetchRole() {
+      try {
+        const res = await fetch('/api/auth/me', { credentials: 'include' });
+        if (!res.ok) {
+          setIsAdmin(false);
+          return;
+        }
+
+        const data = await res.json();
+        setIsAdmin(data.user?.role === 'admin');
+      } catch {
+        setIsAdmin(false);
+      }
+    }
+
+    fetchRole();
+  }, []);
+
+  const navItems = isAdmin
+    ? [...baseNavItems, { label: 'Admin', href: '/admin', icon: '🛠️' }]
+    : baseNavItems;
 
   return (
     <div className="flex h-screen bg-[--cs-bg-primary]">

@@ -12,9 +12,17 @@ export interface User {
   is_active: boolean;
   last_login_at: string | null;
   created_at: string;
+  password_hash?: string;
 }
 
 export type SafeUser = Omit<User, 'password_hash'>;
+
+export type AdminAction = 'suspend' | 'activate' | 'delete' | 'bootstrap';
+
+export type AdminUserMetadata = SafeUser & {
+  taskCount: number;
+  expenseCount: number;
+};
 
 export interface JWTPayload {
   userId: string;
