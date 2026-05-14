@@ -18,7 +18,7 @@
 | **Archivo de referencia** | `doc/PLAN_CAMPUSZEN.md` |
 | **Archivo de resumen inicial** | `doc/FASE_00_SUMMARY.md` |
 | **Fecha de inicio** | 28 de abril de 2026 |
-| Estado general | ✅ Completada: Fase 7 terminada. Frontend de gastos con BudgetBar, gráficas responsive y dashboard integrado. |
+| Estado general | ✅ Completada: Fase 8 terminada. Exportación de reportes en PDF y Excel implementada completamente. |
 
 ---
 
@@ -33,7 +33,7 @@
 | 5 | Módulo de Tareas — Frontend | Diseñador Frontend Obsesivo especializado en interfaces de gestión de tareas | ✅ Completada | 2026-05-12 | 2026-05-12 | `doc/RESUMEN_FASE_5_TAREAS_FRONT.md` |
 | 6 | Módulo de Gastos — Backend | Ingeniero Backend Senior — Lógica financiera | ✅ Completada | 2026-05-13 | 2026-05-13 | `doc/RESUMEN_FASE_6_GASTOS_BACK.md` |
 | 7 | Módulo de Gastos — Frontend | Diseñador Frontend Obsesivo | ✅ Completada | 2026-05-13 | 2026-05-13 | `doc/RESUMEN_FASE_7_GASTOS_FRONT.md` |
-| 8 | Exportación de reportes | Ingeniero Backend Senior | ⏳ Pendiente | — | — | `doc/FASE_08_SUMMARY.md` |
+| 8 | Exportación de reportes | Ingeniero Backend Senior | ✅ Completada | 2026-05-14 | 2026-05-14 | `doc/RESUMEN_FASE_8_EXPORTACION.md` |
 | 9 | Panel de Administración (usuarios + auditoría) | Ingeniero Fullstack Senior | ⏳ Pendiente | — | — | `doc/FASE_09_SUMMARY.md` |
 | 10 | Perfil, configuración y pulido final | Diseñador Frontend Obsesivo + Ingeniero Fullstack | ⏳ Pendiente | — | — | `doc/FASE_10_SUMMARY.md` |
 
@@ -97,6 +97,20 @@
 | 2026-05-13 | 12:45 | 6 | TESTS | Script de pruebas ejecutado: 16/16 pruebas pasadas. Validación de Zod, tipos, anti-duplicado, summary, categorías, fechas. |
 | 2026-05-13 | 13:00 | 6 | COMPLETE | ✅ Fase 6 completada exitosamente. Módulo de gastos backend listo con máxima rigor financiero. RN-01, RN-04, RN-09, RN-12, RN-15 implementadas. |
 | 2026-05-13 | 13:15 | 7 | START | Fase 7 iniciada. Implementación del módulo de gastos frontend con visualización de datos financieros. |
+| 2026-05-14 | 09:00 | 8 | START | Fase 8 iniciada. Implementación de exportación de reportes en PDF y Excel desde el servidor. |
+| 2026-05-14 | 09:15 | 8 | DEPS | Instaladas dependencias jsPDF, jspdf-autotable, xlsx. |
+| 2026-05-14 | 09:30 | 8 | EXPORT_SERVICE | lib/exportService.ts creado: funciones generatePDFBuffer y generateExcelBuffer con formato robusto. |
+| 2026-05-14 | 09:45 | 8 | API_PDF | API Route GET /api/export/pdf?month=YYYY-MM implementada. Validación de período, retorna 404 si no hay gastos. |
+| 2026-05-14 | 10:00 | 8 | API_XLSX | API Route GET /api/export/xlsx?month=YYYY-MM implementada. Misma validación y manejo de errores que PDF. |
+| 2026-05-14 | 10:15 | 8 | HEADERS | Headers HTTP correctos: Content-Type, Content-Disposition con nombre de archivo (campuszen-gastos-YYYYMM.{pdf,xlsx}). |
+| 2026-05-14 | 10:30 | 8 | PDF_FORMAT | PDF incluye: encabezado con nombre del usuario, período, tabla de gastos paginada, totales por categoría, totales por medio de pago, información de presupuesto. |
+| 2026-05-14 | 10:45 | 8 | EXCEL_FORMAT | Excel incluye: Hoja 1 (Gastos) con tabla completa de transacciones. Hoja 2 (Resumen) con desglose por categoría y medio de pago con porcentajes. |
+| 2026-05-14 | 11:00 | 8 | FRONTEND_INTEGRATION | app/expenses/page.tsx actualizada: botones de exportación habilitados con funciones handleDownloadPDF y handleDownloadExcel. |
+| 2026-05-14 | 11:15 | 8 | LOADING_STATE | Estados exportingPDF y exportingExcel agregados. Spinner de carga mostrado durante descarga. Botones deshabilitados mientras se generan reportes. |
+| 2026-05-14 | 11:30 | 8 | ERROR_HANDLING | Toast de error mostrado si no hay gastos en el período (HTTP 404). Mensajes claros al usuario. |
+| 2026-05-14 | 11:45 | 8 | TYPE_SAFETY | Correcciones de tipos TypeScript: RGBColor tupla para colores PDF, conversión Buffer a Uint8Array, tipos correctos para APIs. |
+| 2026-05-14 | 12:00 | 8 | TYPECHECK | npm run type-check ejecutado: ✅ CERO ERRORES. Todo código es type-safe. |
+| 2026-05-14 | 12:15 | 8 | COMPLETE | ✅ Fase 8 completada exitosamente. Exportación de reportes PDF y Excel totalmente funcional. RF-20, RF-21 implementados. RS-08 respetada. |
 
 ---
 
@@ -114,6 +128,6 @@
 
 ---
 
-**Última actualización:** 13 de mayo de 2026, 13:00
+**Última actualización:** 14 de mayo de 2026, 12:15
 **Responsable:** Lianna Mora (1082928103)
-**Estado:** ✅ Fase 6 completada. Módulo de gastos backend con lógica financiera rigurosa. Listo para Fase 7 (Frontend).
+**Estado:** ✅ Fase 8 completada. Exportación de reportes (PDF y Excel) implementada completamente. Listo para Fase 9 (Panel de Administración).

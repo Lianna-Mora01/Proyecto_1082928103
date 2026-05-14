@@ -4,7 +4,6 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
 import LoginForm from '@/components/auth/LoginForm';
 import CampusZenLogo from '@/components/auth/CampusZenLogo';
 
@@ -31,20 +30,19 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4 py-12 relative overflow-hidden">
       {/* Patrón de fondo sutil */}
-      <div className="absolute inset-0 opacity-5">
+      <div className="absolute inset-0 opacity-5 pointer-events-none">
         <div className="absolute top-10 right-10 w-32 h-32 transform rotate-45">
-          <path
-            d="M24 8C24 8 16 16 16 24C16 32 20 40 24 40C28 40 32 32 32 24C32 16 24 8 24 8Z"
-            fill="#40916C"
-          />
+          <svg className="w-full h-full" viewBox="0 0 48 48" fill="none">
+            <path
+              d="M24 8C24 8 16 16 16 24C16 32 20 40 24 40C28 40 32 32 32 24C32 16 24 8 24 8Z"
+              fill="#40916C"
+            />
+          </svg>
         </div>
       </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, ease: 'easeOut' }}
-        className="w-full max-w-md"
+      <div
+        className="w-full max-w-md animate-in fade-in slide-in-from-bottom-4 duration-500"
       >
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 space-y-6">
           {/* Logo y branding */}
@@ -71,7 +69,7 @@ export default function LoginPage() {
             </p>
           </div>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }

@@ -25,6 +25,8 @@ export default function ExpensesPage() {
   const [showForm, setShowForm] = useState(false);
   const [editingExpense, setEditingExpense] = useState<Expense | null>(null);
   const [formLoading, setFormLoading] = useState(false);
+  const [exportingPDF, setExportingPDF] = useState(false);
+  const [exportingExcel, setExportingExcel] = useState(false);
   const { addToast } = useToast();
 
   // Cargar gastos y resumen
@@ -164,6 +166,84 @@ export default function ExpensesPage() {
     }
   };
 
+  // Descargar PDF
+  const handleDownloadPDF = async () => {
+    setExportingPDF(true);
+    try {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const monthStr = `${year}-${month}`;
+
+      const res = await fetch(`/api/export/pdf?month=${monthStr}`, {
+        credentials: 'include',
+      });
+
+      if (!res.ok) {
+        const error = await res.json();
+        addToast(error.error || 'No hay gastos para este período', 'error');
+        return;
+      }
+
+      // Crear blob y descargar
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `campuszen-gastos-${monthStr}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+
+      addToast('PDF descargado exitosamente', 'success');
+    } catch (error) {
+      addToast('Error al descargar PDF', 'error');
+      console.error('Error:', error);
+    } finally {
+      setExportingPDF(false);
+    }
+  };
+
+  // Descargar Excel
+  const handleDownloadExcel = async () => {
+    setExportingExcel(true);
+    try {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const monthStr = `${year}-${month}`;
+
+      const res = await fetch(`/api/export/xlsx?month=${monthStr}`, {
+        credentials: 'include',
+      });
+
+      if (!res.ok) {
+        const error = await res.json();
+        addToast(error.error || 'No hay gastos para este período', 'error');
+        return;
+      }
+
+      // Crear blob y descargar
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `campuszen-gastos-${monthStr}.xlsx`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+
+      addToast('Excel descargado exitosamente', 'success');
+    } catch (error) {
+      addToast('Error al descargar Excel', 'error');
+      console.error('Error:', error);
+    } finally {
+      setExportingExcel(false);
+    }
+  };
+
   // Calcular resumen efectivo vs tarjeta
   const paymentSummary = summary ? {
     efectivo: summary.byPaymentMethod['Efectivo'] || 0,
@@ -199,20 +279,20 @@ export default function ExpensesPage() {
             ➕ Nuevo gasto
           </Button>
 
-          {/* Botones de exportación (deshabilitados para Fase 8) */}
+          {/* Botones de exportación */}
           <Button
-            disabled
-            title="Disponible próximamente"
-            className="opacity-50 cursor-not-allowed"
+            onClick={handleDownloadPDF}
+            disabled={exportingPDF}
+            className={exportingPDF ? 'opacity-50 cursor-not-allowed' : ''}
           >
-            📄 Exportar PDF
+            {exportingPDF ? '⏳ Generando PDF...' : '📄 Exportar PDF'}
           </Button>
           <Button
-            disabled
-            title="Disponible próximamente"
-            className="opacity-50 cursor-not-allowed"
+            onClick={handleDownloadExcel}
+            disabled={exportingExcel}
+            className={exportingExcel ? 'opacity-50 cursor-not-allowed' : ''}
           >
-            📊 Exportar Excel
+            {exportingExcel ? '⏳ Generando Excel...' : '📊 Exportar Excel'}
           </Button>
         </div>
       </div>
