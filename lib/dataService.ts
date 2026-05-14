@@ -235,6 +235,44 @@ export async function updateUser(id: string, updates: UpdateUserRequest): Promis
   return updated as SafeUser;
 }
 
+export async function updateUserPassword(id: string, newPassword: string): Promise<void> {
+  const mode = await getSystemMode();
+
+  if (mode === 'seed') {
+    throw new Error('No se puede cambiar la contraseña en modo seed.');
+  }
+
+  const currentUser = await getUserById(id);
+  if (!currentUser) {
+    throw new Error('Usuario no encontrado');
+  }
+
+  const passwordHash = await hashPassword(newPassword);
+  const client = getSupabaseClient();
+  const { error } = await client
+    .from('users')
+    .update({ password_hash: passwordHash })
+    .eq('id', id);
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  await recordAudit({
+    user_id: id,
+    user_email: currentUser.email,
+    action: 'update',
+    entity: 'user',
+    entity_id: id,
+    changes: {
+      password_hash: {
+        from: '[protected]',
+        to: '[protected]',
+      },
+    },
+  });
+}
+
 export async function getAdminUsers(): Promise<AdminUserMetadata[]> {
   const mode = await getSystemMode();
 
