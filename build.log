@@ -1,0 +1,91 @@
+﻿
+> my-project@0.1.0 build
+> next build
+
+Ôû▓ Next.js 16.2.2 (Turbopack)
+
+node.exe : ÔÜá The "middleware" file convention is deprecated. Please use 
+"proxy" instead. Learn more: 
+https://nextjs.org/docs/messages/middleware-to-proxy
+En línea: 1 Carácter: 1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (ÔÜá The "middle...leware-to-proxy 
+   :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+  Creating an optimized production build ...
+Ô£ô Compiled successfully in 4.8s
+  Running TypeScript ...
+  Finished TypeScript in 4.0s ...
+  Collecting page data using 19 workers ...
+Supabase credentials not found. System will run in seed mode until bootstrap.
+Supabase credentials not found. System will run in seed mode until bootstrap.
+Supabase credentials not found. System will run in seed mode until bootstrap.
+Supabase credentials not found. System will run in seed mode until bootstrap.
+Supabase credentials not found. System will run in seed mode until bootstrap.
+Supabase credentials not found. System will run in seed mode until bootstrap.
+Supabase credentials not found. System will run in seed mode until bootstrap.
+Supabase credentials not found. System will run in seed mode until bootstrap.
+Supabase credentials not found. System will run in seed mode until bootstrap.
+Supabase credentials not found. System will run in seed mode until bootstrap.
+Supabase credentials not found. System will run in seed mode until bootstrap.
+Supabase credentials not found. System will run in seed mode until bootstrap.
+Supabase credentials not found. System will run in seed mode until bootstrap.
+Supabase credentials not found. System will run in seed mode until bootstrap.
+Supabase credentials not found. System will run in seed mode until bootstrap.
+Supabase credentials not found. System will run in seed mode until bootstrap.
+Supabase credentials not found. System will run in seed mode until bootstrap.
+Supabase credentials not found. System will run in seed mode until bootstrap.
+Supabase credentials not found. System will run in seed mode until bootstrap.
+  Generating static pages using 19 workers (0/33) ...
+  Generating static pages using 19 workers (8/33) 
+  Generating static pages using 19 workers (16/33) 
+  Generating static pages using 19 workers (24/33) 
+Ô£ô Generating static pages using 19 workers (33/33) in 472ms
+  Finalizing page optimization ...
+
+Route (app)
+Ôöî Ôùï /
+Ôö£ Ôùï /_not-found
+Ôö£ Ôùï /admin
+Ôö£ Ôùï /admin/audit
+Ôö£ Ôùï /admin/db-setup
+Ôö£ Ôùï /admin/users
+Ôö£ ãÆ /api/audit
+Ôö£ ãÆ /api/auth/change-password
+Ôö£ ãÆ /api/auth/login
+Ôö£ ãÆ /api/auth/logout
+Ôö£ ãÆ /api/auth/me
+Ôö£ ãÆ /api/auth/register
+Ôö£ ãÆ /api/dashboard
+Ôö£ ãÆ /api/data
+Ôö£ ãÆ /api/expenses
+Ôö£ ãÆ /api/expenses/[id]
+Ôö£ ãÆ /api/expenses/summary
+Ôö£ ãÆ /api/export/pdf
+Ôö£ ãÆ /api/export/xlsx
+Ôö£ ãÆ /api/subjects
+Ôö£ ãÆ /api/subjects/[id]
+Ôö£ ãÆ /api/system/bootstrap
+Ôö£ ãÆ /api/system/diagnose
+Ôö£ ãÆ /api/system/migrate
+Ôö£ ãÆ /api/system/mode
+Ôö£ ãÆ /api/tasks
+Ôö£ ãÆ /api/tasks/[id]
+Ôö£ ãÆ /api/tasks/[id]/complete
+Ôö£ ãÆ /api/users
+Ôö£ ãÆ /api/users/[id]
+Ôö£ Ôùï /dashboard
+Ôö£ Ôùï /expenses
+Ôö£ Ôùï /login
+Ôö£ Ôùï /profile
+Ôö£ Ôùï /register
+Ôöö Ôùï /tasks
+
+
+ãÆ Proxy (Middleware)
+
+Ôùï  (Static)   prerendered as static content
+ãÆ  (Dynamic)  server-rendered on demand
+
