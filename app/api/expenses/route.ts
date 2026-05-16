@@ -16,7 +16,7 @@ async function getHandler(req: NextRequest): Promise<Response> {
 
     const expenses = await getExpenses(user.userId, { category, payment_method, month });
 
-    return NextResponse.json(expenses);
+    return NextResponse.json({ expenses });
   } catch (error) {
     console.error('Error en GET /api/expenses:', error);
     return NextResponse.json(

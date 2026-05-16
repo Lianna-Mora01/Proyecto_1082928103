@@ -39,8 +39,9 @@ export default function ExpensesPage() {
         credentials: 'include',
       });
       if (expensesRes.ok) {
-        const { expenses: loadedExpenses } = await expensesRes.json();
-        setExpenses(loadedExpenses);
+        const loadedExpensesResponse = await expensesRes.json();
+        const loadedExpenses = loadedExpensesResponse?.expenses ?? loadedExpensesResponse ?? [];
+        setExpenses(Array.isArray(loadedExpenses) ? loadedExpenses : []);
       }
 
       // Cargar resumen del mes actual
