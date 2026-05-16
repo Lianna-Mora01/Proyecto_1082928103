@@ -7,7 +7,7 @@ import { withAuth, getAuthUser } from '@/lib/withAuth';
 import { getTasks, createTask } from '@/lib/dataService';
 import { createTaskSchema } from '@/lib/schemas';
 
-async function getHandler(req: NextRequest): Promise<Response> {
+async function getHandler(req: NextRequest): Promise<NextResponse> {
   try {
     const user = getAuthUser(req);
 
@@ -32,7 +32,7 @@ async function getHandler(req: NextRequest): Promise<Response> {
   }
 }
 
-async function postHandler(req: NextRequest): Promise<Response> {
+async function postHandler(req: NextRequest): Promise<NextResponse> {
   try {
     const user = getAuthUser(req);
     const body = await req.json();

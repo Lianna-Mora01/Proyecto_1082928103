@@ -11,7 +11,7 @@ import { updateTaskSchema } from '@/lib/schemas';
 async function getHandler(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
-): Promise<Response> {
+): Promise<NextResponse> {
   try {
     const user = getAuthUser(req);
     const { id: taskId } = await params;
@@ -40,7 +40,7 @@ async function getHandler(
 async function putHandler(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
-): Promise<Response> {
+): Promise<NextResponse> {
   try {
     const user = getAuthUser(req);
     const { id: taskId } = await params;
@@ -94,7 +94,7 @@ async function putHandler(
 async function deleteHandler(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
-): Promise<Response> {
+): Promise<NextResponse> {
   try {
     const user = getAuthUser(req);
     const { id: taskId } = await params;

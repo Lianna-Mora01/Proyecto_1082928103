@@ -9,7 +9,7 @@ import { updateExpenseSchema } from '@/lib/schemas';
 async function putHandler(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
-): Promise<Response> {
+): Promise<NextResponse> {
   try {
     const user = getAuthUser(req);
     const { id } = await params;
@@ -72,7 +72,7 @@ async function putHandler(
 async function deleteHandler(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
-): Promise<Response> {
+): Promise<NextResponse> {
   try {
     const user = getAuthUser(req);
     const { id } = await params;

@@ -6,7 +6,7 @@ import { withAuth, getAuthUser } from '@/lib/withAuth';
 import { getExpenses, createExpense } from '@/lib/dataService';
 import { createExpenseSchema } from '@/lib/schemas';
 
-async function getHandler(req: NextRequest): Promise<Response> {
+async function getHandler(req: NextRequest): Promise<NextResponse> {
   try {
     const user = getAuthUser(req);
     const { searchParams } = new URL(req.url);
@@ -29,7 +29,7 @@ async function getHandler(req: NextRequest): Promise<Response> {
 export const GET = withAuth(getHandler);
 export const POST = withAuth(postHandler);
 
-async function postHandler(req: NextRequest): Promise<Response> {
+async function postHandler(req: NextRequest): Promise<NextResponse> {
   try {
     const user = getAuthUser(req);
     const body = await req.json();

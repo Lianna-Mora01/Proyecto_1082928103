@@ -9,7 +9,7 @@ import { completeTask } from '@/lib/dataService';
 async function postHandler(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
-): Promise<Response> {
+): Promise<NextResponse> {
   try {
     const user = getAuthUser(req);
     const { id: taskId } = await params;

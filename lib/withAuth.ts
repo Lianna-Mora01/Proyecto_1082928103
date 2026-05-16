@@ -12,12 +12,12 @@ const SESSION_COOKIE_NAME = 'campuszen_session';
  * Middleware para validar sesión en API Routes
  * Agrega header Cache-Control: no-store y user al request.user
  */
-export function withAuth(
+export function withAuth<C>(
   handler: (
     req: NextRequest,
-    context: { params?: Record<string, string | string[]> }
+    context: C
   ) => Promise<NextResponse>
-): (req: NextRequest, context: any) => Promise<Response> {
+): (req: NextRequest, context: C) => Promise<NextResponse> {
   return async (req: NextRequest, context: any) => {
     const token = req.cookies.get(SESSION_COOKIE_NAME)?.value || null;
 

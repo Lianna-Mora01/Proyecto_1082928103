@@ -11,7 +11,7 @@ interface RouteParams {
   params: Promise<{ id: string }>;
 }
 
-async function putHandler(req: NextRequest, { params }: RouteParams): Promise<Response> {
+async function putHandler(req: NextRequest, { params }: RouteParams): Promise<NextResponse> {
   try {
     const user = getAuthUser(req);
     const { id } = await params;
@@ -57,7 +57,7 @@ async function putHandler(req: NextRequest, { params }: RouteParams): Promise<Re
 export const PUT = withAuth(putHandler);
 export const DELETE = withAuth(deleteHandler);
 
-async function deleteHandler(req: NextRequest, { params }: RouteParams): Promise<Response> {
+async function deleteHandler(req: NextRequest, { params }: RouteParams): Promise<NextResponse> {
   try {
     const user = getAuthUser(req);
     const { id } = await params;

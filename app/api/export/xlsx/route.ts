@@ -6,7 +6,7 @@ import { withAuth, getAuthUser } from '@/lib/withAuth';
 import { getExpenses, getMonthlySummary } from '@/lib/dataService';
 import { generateExcelBuffer } from '@/lib/exportService';
 
-async function getHandler(req: NextRequest): Promise<Response> {
+async function getHandler(req: NextRequest): Promise<NextResponse> {
   try {
     const user = getAuthUser(req);
     const { searchParams } = new URL(req.url);
