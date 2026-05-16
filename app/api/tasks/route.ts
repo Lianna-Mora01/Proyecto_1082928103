@@ -3,11 +3,11 @@
 // POST: Crea una nueva tarea
 
 import { NextRequest, NextResponse } from 'next/server';
-import { getAuthUser } from '@/lib/withAuth';
+import { withAuth, getAuthUser } from '@/lib/withAuth';
 import { getTasks, createTask } from '@/lib/dataService';
 import { createTaskSchema } from '@/lib/schemas';
 
-export async function GET(req: NextRequest): Promise<Response> {
+async function getHandler(req: NextRequest): Promise<Response> {
   try {
     const user = getAuthUser(req);
 
@@ -32,15 +32,11 @@ export async function GET(req: NextRequest): Promise<Response> {
   }
 }
 
-export async function POST(req: NextRequest): Promise<Response> {
+async function postHandler(req: NextRequest): Promise<Response> {
   try {
     const user = getAuthUser(req);
     const body = await req.json();
 
-    // Validar entrada con Zod
-    // RN-02: Requiere title, due_date
-    // RN-03: Fecha límite no puede ser pasada (validado en schema)
-    // RN-14: subject_id puede ser null
     const validation = createTaskSchema.safeParse(body);
     if (!validation.success) {
       return NextResponse.json(
@@ -76,3 +72,6 @@ export async function POST(req: NextRequest): Promise<Response> {
     );
   }
 }
+
+export const GET = withAuth(getHandler);
+export const POST = withAuth(postHandler);

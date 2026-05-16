@@ -2,11 +2,11 @@
 // CRUD para gastos
 
 import { NextRequest, NextResponse } from 'next/server';
-import { getAuthUser } from '@/lib/withAuth';
+import { withAuth, getAuthUser } from '@/lib/withAuth';
 import { getExpenses, createExpense } from '@/lib/dataService';
 import { createExpenseSchema } from '@/lib/schemas';
 
-export async function GET(req: NextRequest): Promise<Response> {
+async function getHandler(req: NextRequest): Promise<Response> {
   try {
     const user = getAuthUser(req);
     const { searchParams } = new URL(req.url);
@@ -26,7 +26,10 @@ export async function GET(req: NextRequest): Promise<Response> {
   }
 }
 
-export async function POST(req: NextRequest): Promise<Response> {
+export const GET = withAuth(getHandler);
+export const POST = withAuth(postHandler);
+
+async function postHandler(req: NextRequest): Promise<Response> {
   try {
     const user = getAuthUser(req);
     const body = await req.json();

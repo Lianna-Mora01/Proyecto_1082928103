@@ -2,11 +2,11 @@
 // Actualizar y eliminar gasto específico
 
 import { NextRequest, NextResponse } from 'next/server';
-import { getAuthUser } from '@/lib/withAuth';
+import { withAuth, getAuthUser } from '@/lib/withAuth';
 import { updateExpense, deleteExpense } from '@/lib/dataService';
 import { updateExpenseSchema } from '@/lib/schemas';
 
-export async function PUT(
+async function putHandler(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ): Promise<Response> {
@@ -69,7 +69,7 @@ export async function PUT(
   }
 }
 
-export async function DELETE(
+async function deleteHandler(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ): Promise<Response> {

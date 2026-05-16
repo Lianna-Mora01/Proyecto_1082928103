@@ -4,11 +4,11 @@
 // DELETE: Elimina una tarea
 
 import { NextRequest, NextResponse } from 'next/server';
-import { getAuthUser } from '@/lib/withAuth';
+import { withAuth, getAuthUser } from '@/lib/withAuth';
 import { getTasks, updateTask, deleteTask } from '@/lib/dataService';
 import { updateTaskSchema } from '@/lib/schemas';
 
-export async function GET(
+async function getHandler(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ): Promise<Response> {
@@ -37,7 +37,7 @@ export async function GET(
   }
 }
 
-export async function PUT(
+async function putHandler(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ): Promise<Response> {
@@ -91,7 +91,7 @@ export async function PUT(
   }
 }
 
-export async function DELETE(
+async function deleteHandler(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ): Promise<Response> {

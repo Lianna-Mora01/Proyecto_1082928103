@@ -3,7 +3,7 @@
 // DELETE: Desactiva una materia (soft delete)
 
 import { NextRequest, NextResponse } from 'next/server';
-import { getAuthUser } from '@/lib/withAuth';
+import { withAuth, getAuthUser } from '@/lib/withAuth';
 import { updateSubject, deactivateSubject } from '@/lib/dataService';
 import { updateSubjectSchema } from '@/lib/schemas';
 
@@ -11,7 +11,7 @@ interface RouteParams {
   params: Promise<{ id: string }>;
 }
 
-export async function PUT(req: NextRequest, { params }: RouteParams): Promise<Response> {
+async function putHandler(req: NextRequest, { params }: RouteParams): Promise<Response> {
   try {
     const user = getAuthUser(req);
     const { id } = await params;
@@ -54,7 +54,10 @@ export async function PUT(req: NextRequest, { params }: RouteParams): Promise<Re
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: RouteParams): Promise<Response> {
+export const PUT = withAuth(putHandler);
+export const DELETE = withAuth(deleteHandler);
+
+async function deleteHandler(req: NextRequest, { params }: RouteParams): Promise<Response> {
   try {
     const user = getAuthUser(req);
     const { id } = await params;

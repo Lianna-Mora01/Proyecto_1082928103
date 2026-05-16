@@ -2,11 +2,11 @@
 // Exportar gastos en Excel
 
 import { NextRequest, NextResponse } from 'next/server';
-import { getAuthUser } from '@/lib/withAuth';
+import { withAuth, getAuthUser } from '@/lib/withAuth';
 import { getExpenses, getMonthlySummary } from '@/lib/dataService';
 import { generateExcelBuffer } from '@/lib/exportService';
 
-export async function GET(req: NextRequest): Promise<Response> {
+async function getHandler(req: NextRequest): Promise<Response> {
   try {
     const user = getAuthUser(req);
     const { searchParams } = new URL(req.url);
@@ -69,3 +69,5 @@ export async function GET(req: NextRequest): Promise<Response> {
     );
   }
 }
+
+export const GET = withAuth(getHandler);

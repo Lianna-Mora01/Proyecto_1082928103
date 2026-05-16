@@ -3,10 +3,10 @@
 // RN-05: Endpoint separado porque completar es una acción de negocio irreversible, no una edición
 
 import { NextRequest, NextResponse } from 'next/server';
-import { getAuthUser } from '@/lib/withAuth';
+import { withAuth, getAuthUser } from '@/lib/withAuth';
 import { completeTask } from '@/lib/dataService';
 
-export async function POST(
+async function postHandler(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ): Promise<Response> {
@@ -41,3 +41,5 @@ export async function POST(
     );
   }
 }
+
+export const POST = withAuth(postHandler);
