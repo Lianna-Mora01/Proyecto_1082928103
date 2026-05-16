@@ -3,7 +3,7 @@
 // Encapsula Supabase, Blob, seed en un API tipado
 
 import { getSupabaseClient } from './supabase';
-import { getSeedUserByEmail } from './seedReader';
+import { getSeedUserByEmail, getSeedUserById } from './seedReader';
 import { appendAudit } from './blobAudit';
 import { hashPassword } from './auth';
 import { User, SafeUser, CreateUserRequest, UpdateUserRequest, AuditEntry, SystemMode, AdminAction, AdminUserMetadata } from './types';
@@ -125,13 +125,13 @@ export async function getUserById(id: string): Promise<SafeUser | null> {
   const mode = await getSystemMode();
 
   if (mode === 'seed') {
-    const seedUser = await getSeedUserByEmail('admin@campuszen.app');
-    if (seedUser && seedUser.id === id) {
-      // Retornar sin password_hash
-      const { password_hash, ...safe } = seedUser;
-      return safe as SafeUser;
+    const seedUser = await getSeedUserById(id);
+    if (!seedUser) {
+      return null;
     }
-    return null;
+
+    const { password_hash, ...safe } = seedUser;
+    return safe as SafeUser;
   }
 
   const client = getSupabaseClient();

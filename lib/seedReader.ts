@@ -32,6 +32,12 @@ export async function getSeedUserByEmail(email: string): Promise<(User & { passw
   return data.users.find((u) => u.email === email) || null;
 }
 
+export async function getSeedUserById(id: string): Promise<(User & { password_hash: string }) | null> {
+  const data = await getSeedData();
+  if (!data.users) return null;
+  return data.users.find((u) => u.id === id) || null;
+}
+
 export async function getSeedConfig(): Promise<Record<string, unknown>> {
   return readSeedFile('config.json');
 }

@@ -3,8 +3,8 @@
     {
       "id": "550e8400-e29b-41d4-a716-446655440000",
       "name": "Admin CampusZen",
-      "email": "admin@campuszen.app",
-      "password_hash": "$2b$10$A1RbAkB7qhg0ny.sOQlwyewc2CHeCm203mtTWMHQx8Kc4bnDUVkka",
+      "email": "admin@campuszen.com",
+      "password_hash": "$2b$10$SQwJ2yWe1qJ2uW.WJzsQLeH91dDHpRyBz2zDh7IJXWGVTtQzl3a1y",
       "role": "admin",
       "theme": "light",
       "budget_monthly": null,

@@ -59,7 +59,7 @@
 |---|---|---|---|---|
 | 2026-04-28 | 13:30 | — | INIT | Proyecto inicializado. Archivo `ESTADO_EJECUCION_CAMPUSZEN.md` creado. Sistema listo para comenzar Fase 1. |
 | 2026-04-28 | 14:45 | 1 | START | Fase 1 iniciada. Instalación de dependencias completada (bcryptjs, jose, @supabase/supabase-js, @vercel/blob, pg, zod). |
-| 2026-04-28 | 15:00 | 1 | CONFIG | Estructura data/ creada. seed.json con admin@campuszen.app inicializado. Migration 0001_init_users.sql creada. |
+| 2026-04-28 | 15:00 | 1 | CONFIG | Estructura data/ creada. seed.json con admin@campuszen.com inicializado. Migration 0001_init_users.sql creada. |
 | 2026-04-28 | 15:15 | 1 | LIBS | Librerías de persistencia completadas: supabase.ts, blobAudit.ts, pgMigrate.ts, seedReader.ts. |
 | 2026-04-28 | 15:30 | 1 | AUTH | Módulo de autenticación completado: auth.ts (JWT, bcrypt), withAuth.ts, withRole.ts. |
 | 2026-04-28 | 15:45 | 1 | SERVICE | dataService.ts (punto de acceso único) implementado. Soporta modo seed y live. |

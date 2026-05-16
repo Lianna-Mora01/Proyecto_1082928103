@@ -361,7 +361,7 @@ data/
   README.md             ← Instrucciones para el estudiante
 ```
 
-> **Importante:** El `password_hash` de `seed.json` se genera **en build time o manualmente con un script**, nunca en runtime. El hash de `admin123` con bcrypt 10 salt rounds queda hardcodeado en el seed.
+> **Importante:** El `password_hash` de `seed.json` se genera **en build time o manualmente con un script**, nunca en runtime. El hash de `Admin123*` con bcrypt 10 salt rounds queda hardcodeado en el seed.
 
 ### 10.2 Estructura de `supabase/migrations/`
 
@@ -875,7 +875,7 @@ doc/
 
 | Paso | Pantalla | Acción |
 |---|---|---|
-| 1 | Login | Sistema en modo `seed`. Admin ingresa con credenciales del `data/seed.json` (ej: `admin@campuszen.app` / `admin123`). |
+| 1 | Login | Sistema en modo `seed`. Admin ingresa con credenciales del `data/seed.json` (ej: `admin@campuszen.com` / `Admin123*`). |
 | 2 | Dashboard | Admin ve un banner: "El sistema está en modo seed. Por favor ejecuta el bootstrap desde Configuración del sistema." |
 | 3 | /admin/db-setup | Admin ve diagnóstico: Supabase OK, Blob OK, 0 migrations aplicadas, 4 pendientes. |
 | 4 | /admin/db-setup | Admin hace clic en "Ejecutar bootstrap". Confirma con modal. |
@@ -982,7 +982,7 @@ doc/
 |---|---|
 | 1.1 | Instalar: `bcryptjs jose @supabase/supabase-js @vercel/blob pg @types/bcryptjs @types/pg` |
 | 1.2 | Crear proyecto en Supabase. Crear Blob Store privado en Vercel. Configurar todas las variables de entorno (`.env.local` y Vercel). |
-| 1.3 | Crear estructura `data/`: `config.json`, `seed.json` con admin inicial (password `admin123` ya hasheado), `README.md`. |
+| 1.3 | Crear estructura `data/`: `config.json`, `seed.json` con admin inicial (password `Admin123*` ya hasheado), `README.md`. |
 | 1.4 | Crear `supabase/migrations/0001_init_users.sql` con la tabla `users` y la tabla `_migrations`. |
 | 1.5 | Crear `lib/supabase.ts`: cliente para server (service role). |
 | 1.6 | Crear `lib/blobAudit.ts`: `appendAudit`, `readAuditMonth`, con `withFileLock` y `getBlobToken()` lazy. |

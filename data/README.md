@@ -4,8 +4,8 @@ Este directorio contiene los datos de semilla que se cargan en la **primera ejec
 
 ## Credenciales de administrador
 
-**Email:** `admin@campuszen.app`  
-**Contraseña:** `admin123`
+**Email:** `admin@campuszen.com`  
+**Contraseña:** `Admin123*`
 
 > ⚠️ **IMPORTANTE:** Cambiar esta contraseña inmediatamente después de la primera ejecución en producción.
 

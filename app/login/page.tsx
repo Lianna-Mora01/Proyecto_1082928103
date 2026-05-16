@@ -65,7 +65,7 @@ export default function LoginPage() {
           {/* Footer */}
           <div className="text-center text-xs text-gray-500 dark:text-gray-400">
             <p>
-              Credenciales de demo: <strong>admin@campuszen.app</strong> / <strong>admin123</strong>
+              Credenciales de demo: <strong>admin@campuszen.com</strong> / <strong>Admin123*</strong>
             </p>
           </div>
         </div>

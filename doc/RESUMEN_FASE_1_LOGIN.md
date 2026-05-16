@@ -28,7 +28,7 @@
 
 ### 1.3 Estructura data/ ✅
 - [x] `data/config.json` — Configuración del sistema
-- [x] `data/seed.json` — Usuario admin (email: admin@campuszen.app, password: admin123)
+- [x] `data/seed.json` — Usuario admin (email: admin@campuszen.com, password: Admin123*)
 - [x] `data/README.md` — Documentación de credenciales
 - [x] Password admin hasheado con bcrypt 10 salt rounds
 
