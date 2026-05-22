@@ -2,7 +2,7 @@
 // ÚNICO punto de acceso a datos
 // Encapsula Supabase, Blob, seed en un API tipado
 
-import { getSupabaseClient } from './supabase';
+import { getSupabaseClient, hasSupabaseCredentials } from './supabase';
 import { getSeedUserByEmail, getSeedUserById } from './seedReader';
 import { appendAudit } from './blobAudit';
 import { hashPassword } from './auth';
@@ -17,6 +17,12 @@ let _systemMode: SystemMode | null = null;
  */
 export async function getSystemMode(): Promise<SystemMode> {
   if (_systemMode !== null) return _systemMode;
+
+  // Si no hay credenciales, devolver 'seed' inmediatamente
+  if (!hasSupabaseCredentials()) {
+    _systemMode = 'seed';
+    return _systemMode;
+  }
 
   try {
     const client = getSupabaseClient();

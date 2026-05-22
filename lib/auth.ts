@@ -14,7 +14,8 @@ const JWT_EXPIRES_IN = 24 * 60 * 60; // 24 horas en segundos
  * Debe estar configurada en .env.local o Vercel
  */
 function getJWTSecret(): Uint8Array {
-  const secret = process.env.JWT_SECRET;
+  // Soporta ambos formatos: Vercel (SUPABASE_CAMPUSZEN_*) y estándar
+  const secret = process.env.SUPABASE_CAMPUSZEN_SUPABASE_JWT_SECRET || process.env.JWT_SECRET;
   if (!secret || secret.length < 32) {
     throw new Error(
       'JWT_SECRET debe estar configurado con mínimo 32 caracteres en .env.local'

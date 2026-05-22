@@ -3,7 +3,6 @@
 export const dynamic = "force-dynamic";
 
 import { useState } from "react";
-import AppLayout from "@/components/layout/AppLayout";
 import Card from "@/components/ui/Card";
 import DiagnosticPanel from "@/components/admin/DiagnosticPanel";
 import BootstrapPanel from "@/components/admin/BootstrapPanel";
@@ -14,8 +13,11 @@ export default function DbSetupPage() {
   );
 
   return (
-    <AppLayout>
-      <div className="p-6">
+    <div className="min-h-screen bg-[--cs-bg-primary]">
+      <header className="bg-[--cs-bg-secondary] border-b border-[--cs-border] p-4">
+        <h1 className="text-xl font-bold text-[--cs-text-primary]">CampusZen - Setup</h1>
+      </header>
+      <main className="p-6 max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold text-[--cs-text-primary] mb-2">
           Configuración del Sistema
         </h1>
@@ -64,7 +66,7 @@ export default function DbSetupPage() {
             </div>
           )}
         </div>
-      </div>
-    </AppLayout>
+      </main>
+    </div>
   );
 }

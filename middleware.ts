@@ -11,8 +11,8 @@ const protectedRoutes = [
   "/admin",
 ];
 
-// Rutas públicas
-const publicRoutes = ["/", "/login", "/register", "/api/auth"];
+// Rutas públicas (incluyendo db-setup para bootstrap inicial)
+const publicRoutes = ["/", "/login", "/register", "/api/auth", "/db-setup"];
 
 export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
