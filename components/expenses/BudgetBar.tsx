@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { formatCOP } from '@/lib/format';
 
 interface BudgetBarProps {
   totalAmount: number;
@@ -65,7 +66,7 @@ export default function BudgetBar({ totalAmount, budgetPercentage }: BudgetBarPr
       </div>
 
       <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400">
-        <span>${totalAmount.toLocaleString()}</span>
+        <span>{formatCOP(totalAmount)}</span>
         <span className={getTextColor()}>
           {getMessage()}
         </span>

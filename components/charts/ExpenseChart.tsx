@@ -9,6 +9,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from 'recharts';
+import { formatCOP, formatCOPNumber } from '@/lib/format';
 
 interface ExpenseChartProps {
   data: Record<string, number>; // byCategory del ExpenseSummary
@@ -57,10 +58,10 @@ export default function ExpenseChart({ data }: ExpenseChartProps) {
           <YAxis
             tick={{ fontSize: 12, fill: '#6B7280' }}
             axisLine={{ stroke: '#D1D5DB' }}
-            tickFormatter={(value) => `$${value}`}
+            tickFormatter={(value) => formatCOPNumber(value)}
           />
           <Tooltip
-            formatter={(value: any) => value !== undefined && value !== null ? [`$${Number(value).toLocaleString()}`, 'Monto'] : ['—', 'Monto']}
+            formatter={(value: any) => value !== undefined && value !== null ? [formatCOP(Number(value)), 'Monto'] : ['—', 'Monto']}
             labelStyle={{ color: '#1F2937' }}
             contentStyle={{
               backgroundColor: '#FFFFFF',

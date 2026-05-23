@@ -14,6 +14,7 @@ import { AlertBanner } from "@/components/tasks/AlertBanner";
 import ExpenseChart from "@/components/charts/ExpenseChart";
 import BudgetBar from "@/components/expenses/BudgetBar";
 import { ExpenseSummary } from "@/lib/types";
+import { formatCOP } from "@/lib/format";
 import { useRouter } from "next/navigation";
 
 interface DashboardData {
@@ -113,7 +114,7 @@ export default function DashboardPage() {
               Gastos del Mes
             </p>
             <p className="text-3xl font-bold text-[--cs-primary]">
-              ${dashboardData?.expenseSummary?.totalAmount?.toLocaleString() || "0"}
+              {formatCOP(dashboardData?.expenseSummary?.totalAmount)}
             </p>
           </Card>
 

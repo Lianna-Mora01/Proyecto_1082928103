@@ -9,6 +9,7 @@ import BudgetBar from '@/components/expenses/BudgetBar';
 import Modal from '@/components/ui/Modal';
 import Button from '@/components/ui/Button';
 import { useToast } from '@/components/providers/ToastProvider';
+import { formatCOP } from '@/lib/format';
 
 interface ExpenseFormData {
   name: string;
@@ -309,19 +310,19 @@ export default function ExpensesPage() {
             <div className="flex justify-between">
               <span className="text-sm text-gray-600 dark:text-gray-400">Total gastado</span>
               <span className="font-medium text-gray-900 dark:text-white">
-                ${summary?.totalAmount.toLocaleString() || 0}
+                {formatCOP(summary?.totalAmount)}
               </span>
             </div>
             <div className="flex justify-between">
               <span className="text-sm text-gray-600 dark:text-gray-400">💵 Efectivo</span>
               <span className="text-sm text-gray-900 dark:text-white">
-                ${paymentSummary.efectivo.toLocaleString()}
+                {formatCOP(paymentSummary.efectivo)}
               </span>
             </div>
             <div className="flex justify-between">
               <span className="text-sm text-gray-600 dark:text-gray-400">💳 Tarjeta</span>
               <span className="text-sm text-gray-900 dark:text-white">
-                ${paymentSummary.tarjeta.toLocaleString()}
+                {formatCOP(paymentSummary.tarjeta)}
               </span>
             </div>
           </div>

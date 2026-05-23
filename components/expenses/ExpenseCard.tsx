@@ -1,6 +1,7 @@
 'use client';
 
 import { Expense } from '@/lib/types';
+import { formatCOP } from '@/lib/format';
 
 interface ExpenseCardProps {
   expense: Expense;
@@ -55,7 +56,7 @@ export default function ExpenseCard({ expense, onEdit, onDelete }: ExpenseCardPr
           </div>
 
           <div className="text-lg font-semibold text-gray-900 dark:text-white">
-            ${expense.amount.toLocaleString()}
+            {formatCOP(expense.amount)}
           </div>
         </div>
 

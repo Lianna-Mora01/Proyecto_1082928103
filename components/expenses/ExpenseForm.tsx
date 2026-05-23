@@ -99,23 +99,27 @@ export default function ExpenseForm({
 
       <div>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
-          Monto *
+          Monto (COP) *
         </label>
         <div className="relative">
-          <span className="absolute left-3 top-2 text-gray-500 dark:text-gray-400">$</span>
+          <span className="absolute left-3 top-2 text-gray-500 dark:text-gray-400 text-sm font-medium">
+            $
+          </span>
           <input
             type="number"
-            step="0.01"
-            min="0.01"
+            step="1"
+            min="1"
+            inputMode="numeric"
             value={formData.amount}
             onChange={(e) => handleChange('amount', e.target.value)}
             className={`w-full pl-8 pr-3 py-2 border rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-white ${
               errors.amount ? 'border-red-500' : 'border-gray-300 dark:border-gray-600'
             } focus:outline-none focus:ring-2 focus:ring-green-600`}
-            placeholder="0.00"
+            placeholder="Ej. 15000"
             disabled={isLoading}
           />
         </div>
+        <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">Monto en pesos colombianos, sin decimales.</p>
         {errors.amount && (
           <p className="mt-1 text-sm text-red-600 dark:text-red-400">{errors.amount}</p>
         )}
