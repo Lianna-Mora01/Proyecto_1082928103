@@ -60,28 +60,39 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           bg-[--cs-bg-card]
           border-r border-[--cs-border]
           transition-all duration-300
-          ${sidebarOpen ? "md:w-64" : "md:w-20"}
+          ${sidebarOpen ? "md:w-72" : "md:w-20"}
         `}
       >
-        {/* Logo */}
-        <div className="p-6 border-b border-[--cs-border-soft]">
+        {/* Logo grande */}
+        <div className="px-6 pt-7 pb-6 border-b border-[--cs-border-soft]">
           <Link href="/dashboard" className="flex items-center gap-3">
             <span
-              className="inline-flex items-center justify-center w-10 h-10 rounded-2xl text-white"
-              style={{ background: "var(--cs-gradient-primary)" }}
+              className="inline-flex items-center justify-center w-12 h-12 rounded-2xl text-white shrink-0"
+              style={{
+                background: "var(--cs-gradient-primary)",
+                boxShadow: "0 8px 20px var(--cs-shadow-md)",
+              }}
             >
-              <Leaf size={20} />
+              <Leaf size={24} />
             </span>
             {sidebarOpen && (
-              <h1 className="text-xl font-bold tracking-tight" style={{ color: "var(--cs-title)" }}>
-                CampusZen
-              </h1>
+              <div className="flex flex-col">
+                <span
+                  className="text-2xl font-bold tracking-tight leading-none"
+                  style={{ color: "var(--cs-title)" }}
+                >
+                  CampusZen
+                </span>
+                <span className="text-[11px] text-[--cs-text-secondary] mt-1 tracking-wide uppercase">
+                  Tu calma estudiantil
+                </span>
+              </div>
             )}
           </Link>
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 p-4 space-y-1">
+        <nav className="flex-1 px-4 py-6 space-y-1.5">
           {navItems.map(({ label, href, Icon }) => {
             const active = isActive(href);
             return (
@@ -89,18 +100,31 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
                 key={href}
                 href={href}
                 className={`
-                  flex items-center gap-3 px-4 py-2.5 rounded-2xl
-                  transition-all duration-200
+                  relative flex items-center gap-3 px-4 py-3 rounded-2xl
+                  transition-all duration-200 group
                   ${
                     active
-                      ? "bg-[--cs-bg-soft] text-[--cs-title] font-medium"
-                      : "text-[--cs-text-primary] hover:bg-[--cs-bg-soft]"
+                      ? "bg-[--cs-bg-soft] font-semibold"
+                      : "text-[--cs-text-primary] hover:bg-[--cs-bg-soft] hover:translate-x-0.5"
                   }
                 `}
+                style={active ? { color: "var(--cs-title)" } : undefined}
               >
+                {/* Barra lateral verde oscuro cuando activo */}
+                {active && (
+                  <span
+                    aria-hidden
+                    className="absolute left-0 top-2 bottom-2 w-1 rounded-r-full"
+                    style={{ background: "var(--cs-primary-darker)" }}
+                  />
+                )}
                 <Icon
-                  size={18}
-                  className={active ? "text-[--cs-primary]" : "text-[--cs-text-secondary]"}
+                  size={20}
+                  className={
+                    active
+                      ? "text-[--cs-primary-darker]"
+                      : "text-[--cs-text-secondary] group-hover:text-[--cs-primary]"
+                  }
                 />
                 {sidebarOpen && <span className="text-sm">{label}</span>}
               </Link>
@@ -109,7 +133,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         </nav>
 
         {/* Footer */}
-        <div className="p-4 border-t border-[--cs-border-soft]">
+        <div className="px-4 py-4 border-t border-[--cs-border-soft]">
           {sidebarOpen && <ThemeToggle />}
         </div>
       </aside>
@@ -120,12 +144,12 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
         <header className="md:hidden bg-[--cs-bg-card] border-b border-[--cs-border-soft] p-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span
-              className="inline-flex items-center justify-center w-8 h-8 rounded-xl text-white"
+              className="inline-flex items-center justify-center w-9 h-9 rounded-xl text-white"
               style={{ background: "var(--cs-gradient-primary)" }}
             >
-              <Leaf size={16} />
+              <Leaf size={18} />
             </span>
-            <h1 className="text-lg font-bold" style={{ color: "var(--cs-title)" }}>
+            <h1 className="text-lg font-bold tracking-tight" style={{ color: "var(--cs-title)" }}>
               CampusZen
             </h1>
           </div>

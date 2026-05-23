@@ -16,6 +16,7 @@ import BudgetBar from "@/components/expenses/BudgetBar";
 import { ExpenseSummary } from "@/lib/types";
 import { formatCOP } from "@/lib/format";
 import { useRouter } from "next/navigation";
+import { ListTodo, Wallet, Target } from "lucide-react";
 
 interface DashboardData {
   mode: "seed" | "live";
@@ -98,36 +99,71 @@ export default function DashboardPage() {
           </div>
         )}
 
-        {/* Grid de tarjetas resumen */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <Card>
-            <p className="text-sm text-[--cs-text-secondary] mb-2">
-              Tareas Pendientes
-            </p>
-            <p className="text-3xl font-bold text-[--cs-primary]">
-              {dashboardData?.tasks.length || 0}
-            </p>
-          </Card>
+        {/* Grid de stat cards premium */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+          {[
+            {
+              label: "Tareas Pendientes",
+              value: String(dashboardData?.tasks.length || 0),
+              Icon: ListTodo,
+              accentFrom: "#7BAE7F",
+              accentTo: "#A8D5A2",
+            },
+            {
+              label: "Gastos del Mes",
+              value: formatCOP(dashboardData?.expenseSummary?.totalAmount),
+              Icon: Wallet,
+              accentFrom: "#5D9763",
+              accentTo: "#7BAE7F",
+            },
+            {
+              label: "Presupuesto Usado",
+              value:
+                dashboardData?.expenseSummary?.budgetPercentage !== null &&
+                dashboardData?.expenseSummary?.budgetPercentage !== undefined
+                  ? `${dashboardData.expenseSummary.budgetPercentage}%`
+                  : "—",
+              Icon: Target,
+              accentFrom: "#A8D5A2",
+              accentTo: "#C2E2BD",
+            },
+          ].map((stat) => (
+            <div
+              key={stat.label}
+              className="relative overflow-hidden rounded-3xl border border-[--cs-border] bg-[--cs-bg-card] p-6 cs-shadow-card hover:cs-shadow-lg hover:-translate-y-1 transition-all duration-300"
+            >
+              {/* Burbuja decorativa */}
+              <div
+                aria-hidden
+                className="absolute -top-12 -right-12 w-40 h-40 rounded-full opacity-20 blur-2xl pointer-events-none"
+                style={{ background: `linear-gradient(135deg, ${stat.accentFrom}, ${stat.accentTo})` }}
+              />
 
-          <Card>
-            <p className="text-sm text-[--cs-text-secondary] mb-2">
-              Gastos del Mes
-            </p>
-            <p className="text-3xl font-bold text-[--cs-primary]">
-              {formatCOP(dashboardData?.expenseSummary?.totalAmount)}
-            </p>
-          </Card>
+              <div className="relative flex items-start justify-between gap-4">
+                <div className="min-w-0">
+                  <p className="text-sm font-medium text-[--cs-text-secondary] mb-3">
+                    {stat.label}
+                  </p>
+                  <p
+                    className="text-4xl font-bold tracking-tight leading-none"
+                    style={{ color: "var(--cs-title)" }}
+                  >
+                    {stat.value}
+                  </p>
+                </div>
 
-          <Card>
-            <p className="text-sm text-[--cs-text-secondary] mb-2">
-              Presupuesto
-            </p>
-            <p className="text-3xl font-bold text-[--cs-primary]">
-              {dashboardData?.expenseSummary?.budgetPercentage !== null && dashboardData?.expenseSummary?.budgetPercentage !== undefined
-                ? `${dashboardData.expenseSummary.budgetPercentage}%`
-                : "—"}
-            </p>
-          </Card>
+                <span
+                  className="inline-flex items-center justify-center w-12 h-12 rounded-2xl text-white shrink-0"
+                  style={{
+                    background: `linear-gradient(135deg, ${stat.accentFrom}, ${stat.accentTo})`,
+                    boxShadow: `0 8px 20px ${stat.accentFrom}40`,
+                  }}
+                >
+                  <stat.Icon size={22} />
+                </span>
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* BudgetBar y gráfica de gastos (Fase 7) */}

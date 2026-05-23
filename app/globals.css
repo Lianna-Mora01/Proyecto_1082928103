@@ -113,3 +113,15 @@ textarea::placeholder {
 .cs-shadow-elevated {
   box-shadow: 0 10px 30px var(--cs-shadow-md), 0 4px 8px var(--cs-shadow);
 }
+
+.cs-shadow-lg {
+  box-shadow: 0 20px 50px -10px var(--cs-shadow-md), 0 6px 16px var(--cs-shadow);
+}
+
+/* Subtle floating decoration usado en stat cards */
+.cs-decor-bubble {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(2px);
+  pointer-events: none;
+}

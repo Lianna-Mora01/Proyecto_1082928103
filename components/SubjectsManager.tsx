@@ -121,11 +121,12 @@ export function SubjectsManager() {
 
   return (
     <div>
-      {/* Lista de materias */}
-      <div className="space-y-4 mb-6">
+      {/* Grid de materias */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-6">
         {subjects.length === 0 ? (
-          <div className="text-center py-8 text-gray-500">
-            No tienes materias registradas aún.
+          <div className="col-span-full text-center py-12 rounded-2xl border-2 border-dashed border-[--cs-border] bg-[--cs-bg-soft]">
+            <p className="text-[--cs-text-secondary]">No tienes materias registradas aún.</p>
+            <p className="text-xs text-[--cs-text-secondary] mt-1">Crea tu primera materia para empezar a organizar tus tareas.</p>
           </div>
         ) : (
           subjects.map((subject) => (
@@ -143,7 +144,7 @@ export function SubjectsManager() {
       {!showAddForm && (
         <button
           onClick={() => setShowAddForm(true)}
-          className="w-full py-3 px-4 border-2 border-dashed border-gray-300 rounded-lg text-gray-600 hover:border-gray-400 hover:text-gray-800 transition-colors"
+          className="w-full py-4 px-4 border-2 border-dashed border-[--cs-border] rounded-2xl text-[--cs-text-secondary] hover:border-[--cs-primary] hover:text-[--cs-primary] hover:bg-[--cs-bg-soft] transition-all duration-200 font-medium"
         >
           + Agregar Materia
         </button>
