@@ -44,17 +44,28 @@ export function TaskForm({
 }: TaskFormProps) {
   const isEditing = !!initialData;
 
+  // El <input type="date"> exige YYYY-MM-DD. Si initialData trae ISO, lo convertimos.
+  const toDateInputValue = (value: string | null | undefined): string => {
+    if (!value) return '';
+    try {
+      return new Date(value).toISOString().split('T')[0];
+    } catch {
+      return '';
+    }
+  };
+
   // Estado del formulario
   const [formData, setFormData] = useState({
     subject_id: initialData?.subject_id || null,
     title: initialData?.title || '',
     description: initialData?.description || '',
-    due_date: initialData?.due_date || '',
+    due_date: toDateInputValue(initialData?.due_date),
     priority: initialData?.priority || 'media',
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [touched, setTouched] = useState<{ [key: string]: boolean }>({});
+  const [submitAttempted, setSubmitAttempted] = useState(false);
 
   // Calcular fecha mínima (hoy)
   const today = new Date();
@@ -145,6 +156,8 @@ export function TaskForm({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitAttempted(true);
+    setTouched({ title: true, description: true, due_date: true, priority: true });
 
     // Validar todos los campos
     const allFieldsValid =
@@ -157,6 +170,12 @@ export function TaskForm({
       return;
     }
 
+    // El schema exige ISO 8601 datetime; el <input type="date"> devuelve YYYY-MM-DD.
+    // Convertimos a fin del día local para que .refine(date > now) pase también si eligen "hoy".
+    const dueDateIso = formData.due_date
+      ? new Date(formData.due_date + 'T23:59:59').toISOString()
+      : '';
+
     // Validar con schema completo
     try {
       const schema = isEditing ? updateTaskSchema : createTaskSchema;
@@ -164,7 +183,7 @@ export function TaskForm({
         subject_id: formData.subject_id,
         title: formData.title,
         description: formData.description || null,
-        due_date: formData.due_date,
+        due_date: dueDateIso,
         priority: formData.priority,
       });
 
@@ -172,14 +191,14 @@ export function TaskForm({
         subject_id: formData.subject_id,
         title: formData.title,
         description: formData.description || null,
-        due_date: formData.due_date,
+        due_date: dueDateIso,
         priority: formData.priority as 'alta' | 'media' | 'baja',
       });
     } catch (error) {
       if (error instanceof ZodError) {
         const newErrors: FormErrors = {};
         error.issues.forEach((issue) => {
-          const path = issue.path.join('.');
+          const path = issue.path.join('.') || '_form';
           newErrors[path] = issue.message;
         });
         setErrors(newErrors);
@@ -201,6 +220,17 @@ export function TaskForm({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
+      {/* Banner de error general (cuando hay errores y se intentó enviar) */}
+      {submitAttempted && hasErrors && (
+        <motion.div
+          initial={{ opacity: 0, y: -5 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="rounded-lg border border-red-200 bg-red-50 dark:bg-red-900/20 dark:border-red-800 p-3 text-sm text-red-700 dark:text-red-200"
+          role="alert"
+        >
+          Revisa los campos marcados antes de guardar.
+        </motion.div>
+      )}
       {/* Campo: Materia */}
       <motion.div initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">

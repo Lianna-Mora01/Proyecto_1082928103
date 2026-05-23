@@ -91,6 +91,10 @@ async function putHandler(
   }
 }
 
+export const GET = withAuth(getHandler);
+export const PUT = withAuth(putHandler);
+export const DELETE = withAuth(deleteHandler);
+
 async function deleteHandler(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }

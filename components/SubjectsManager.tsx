@@ -24,7 +24,7 @@ export function SubjectsManager() {
         throw new Error('Error al cargar materias');
       }
       const data = await response.json();
-      setSubjects(data);
+      setSubjects(Array.isArray(data?.subjects) ? data.subjects : []);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Error desconocido');
     } finally {

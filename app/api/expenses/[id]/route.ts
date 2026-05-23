@@ -32,7 +32,7 @@ async function putHandler(
 
     const expense = await updateExpense(user.userId, user.email, id, validation.data);
 
-    return NextResponse.json(expense);
+    return NextResponse.json({ expense });
   } catch (error) {
     console.error('Error en PUT /api/expenses/[id]:', error);
 
@@ -68,6 +68,9 @@ async function putHandler(
     );
   }
 }
+
+export const PUT = withAuth(putHandler);
+export const DELETE = withAuth(deleteHandler);
 
 async function deleteHandler(
   req: NextRequest,

@@ -51,7 +51,7 @@ async function postHandler(req: NextRequest): Promise<NextResponse> {
 
     const expense = await createExpense(user.userId, user.email, validation.data);
 
-    return NextResponse.json(expense, { status: 201 });
+    return NextResponse.json({ expense }, { status: 201 });
   } catch (error) {
     console.error('Error en POST /api/expenses:', error);
 
