@@ -17,4 +17,5 @@ CREATE TABLE IF NOT EXISTS expenses (
 );
 
 CREATE INDEX IF NOT EXISTS idx_expenses_user_date ON expenses(user_id, expense_date DESC);
-CREATE INDEX IF NOT EXISTS idx_expenses_user_month ON expenses(user_id, DATE_TRUNC('month', expense_date));
+-- idx_expenses_user_month removido: DATE_TRUNC no es IMMUTABLE, Postgres no lo acepta en indices.
+-- Los queries mensuales (gte/lte sobre expense_date) ya estan cubiertos por idx_expenses_user_date.
