@@ -28,42 +28,41 @@ export default function LoginPage() {
   }, [router]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4 py-12 relative overflow-hidden">
-      {/* Patrón de fondo sutil */}
-      <div className="absolute inset-0 opacity-5 pointer-events-none">
-        <div className="absolute top-10 right-10 w-32 h-32 transform rotate-45">
-          <svg className="w-full h-full" viewBox="0 0 48 48" fill="none">
-            <path
-              d="M24 8C24 8 16 16 16 24C16 32 20 40 24 40C28 40 32 32 32 24C32 16 24 8 24 8Z"
-              fill="#40916C"
-            />
-          </svg>
-        </div>
-      </div>
-
+    <div
+      className="min-h-screen flex items-center justify-center px-4 py-12 relative overflow-hidden"
+      style={{ background: "var(--cs-gradient-soft)" }}
+    >
+      {/* Decoraciones sutiles */}
       <div
-        className="w-full max-w-md animate-in fade-in slide-in-from-bottom-4 duration-500"
-      >
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 space-y-6">
+        className="absolute -top-24 -right-24 w-72 h-72 rounded-full opacity-30 blur-3xl pointer-events-none"
+        style={{ background: "var(--cs-secondary)" }}
+      />
+      <div
+        className="absolute -bottom-24 -left-24 w-72 h-72 rounded-full opacity-20 blur-3xl pointer-events-none"
+        style={{ background: "var(--cs-primary)" }}
+      />
+
+      <div className="w-full max-w-md animate-in fade-in slide-in-from-bottom-4 duration-500 relative">
+        <div className="bg-[--cs-bg-card] border border-[--cs-border] rounded-3xl cs-shadow-elevated p-8 space-y-6">
           {/* Logo y branding */}
           <div className="text-center space-y-3">
             <CampusZenLogo />
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+            <h1 className="text-3xl font-bold" style={{ color: "var(--cs-title)" }}>
               CampusZen
             </h1>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
-              Tu espacio universitario, en calma.
+            <p className="text-sm text-[--cs-text-secondary]">
+              Tu espacio universitario, en calma. 🌿
             </p>
           </div>
 
           {/* Divisor */}
-          <div className="h-px bg-gray-200 dark:bg-gray-700"></div>
+          <div className="h-px bg-[--cs-border-soft]"></div>
 
           {/* Formulario */}
           <LoginForm />
 
           {/* Footer */}
-          <div className="text-center text-xs text-gray-500 dark:text-gray-400">
+          <div className="text-center text-xs text-[--cs-text-secondary]">
             <p>
               Credenciales de demo: <strong>admin@campuszen.com</strong> / <strong>Admin123*</strong>
             </p>

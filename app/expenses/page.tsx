@@ -260,23 +260,20 @@ export default function ExpensesPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 p-6 max-w-6xl mx-auto">
       {/* Header con acciones */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+          <h1 className="text-3xl font-bold" style={{ color: "var(--cs-title)" }}>
             Gastos
           </h1>
-          <p className="text-gray-600 dark:text-gray-400">
+          <p className="text-sm text-[--cs-text-secondary]">
             Gestiona tus gastos universitarios
           </p>
         </div>
 
-        <div className="flex gap-3">
-          <Button
-            onClick={() => setShowForm(true)}
-            className="bg-green-700 hover:bg-green-800"
-          >
+        <div className="flex gap-3 flex-wrap">
+          <Button onClick={() => setShowForm(true)}>
             ➕ Nuevo gasto
           </Button>
 

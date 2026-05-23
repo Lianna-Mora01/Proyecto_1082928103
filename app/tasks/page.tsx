@@ -188,7 +188,7 @@ export default function TasksPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-900 py-6 px-4 sm:px-6">
+    <div className="min-h-screen bg-[--cs-bg-primary] py-6 px-4 sm:px-6">
       <div className="max-w-6xl mx-auto">
         {/* Banner de alerta si hay tareas urgentes */}
         <motion.div
@@ -203,8 +203,10 @@ export default function TasksPage() {
         {/* Encabezado */}
         <div className="flex items-center justify-between mb-8">
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }}>
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">Mis Tareas</h1>
-            <p className="text-gray-600 dark:text-gray-400">
+            <h1 className="text-4xl font-bold mb-2" style={{ color: "var(--cs-title)" }}>
+              Mis Tareas
+            </h1>
+            <p className="text-sm text-[--cs-text-secondary]">
               {pendingTasks.length} pendiente{pendingTasks.length !== 1 ? 's' : ''}
             </p>
           </motion.div>
@@ -214,16 +216,11 @@ export default function TasksPage() {
               setEditingTask(null);
               setIsModalOpen(true);
             }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="
-              flex items-center gap-2 px-4 py-3 rounded-lg
-              bg-blue-500 dark:bg-blue-600 text-white font-medium
-              hover:bg-blue-600 dark:hover:bg-blue-700
-              shadow-md hover:shadow-lg transition-all duration-200
-            "
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            className="cs-gradient text-white inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl font-medium shadow-sm hover:shadow-md transition-all duration-200"
           >
-            <Plus size={20} />
+            <Plus size={18} />
             Nueva Tarea
           </motion.button>
         </div>

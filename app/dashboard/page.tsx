@@ -30,16 +30,23 @@ interface DashboardData {
 export default function DashboardPage() {
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [userName, setUserName] = useState<string>("");
 
   useEffect(() => {
-    const fetchDashboard = async () => {
+    const fetchAll = async () => {
       try {
-        const response = await fetch("/api/dashboard", {
-          credentials: 'include',
-        });
-        if (response.ok) {
-          const data = await response.json();
+        const [dashboardRes, meRes] = await Promise.all([
+          fetch("/api/dashboard", { credentials: "include" }),
+          fetch("/api/auth/me", { credentials: "include" }),
+        ]);
+        if (dashboardRes.ok) {
+          const data = await dashboardRes.json();
           setDashboardData(data);
+        }
+        if (meRes.ok) {
+          const me = await meRes.json();
+          const fullName = me?.user?.name || "";
+          setUserName(fullName.split(" ")[0] || fullName);
         }
       } catch (error) {
         console.error("Error fetching dashboard:", error);
@@ -48,7 +55,7 @@ export default function DashboardPage() {
       }
     };
 
-    fetchDashboard();
+    fetchAll();
   }, []);
 
   if (loading) {
@@ -62,9 +69,18 @@ export default function DashboardPage() {
   return (
     <AppLayout>
       <div className="p-6 max-w-6xl mx-auto">
-        <h1 className="text-3xl font-bold text-[--cs-text-primary] mb-8">
-          Dashboard
-        </h1>
+        <header className="mb-8">
+          <p className="text-sm text-[--cs-text-secondary] mb-1">
+            {new Date().toLocaleDateString("es", {
+              weekday: "long",
+              day: "numeric",
+              month: "long",
+            })}
+          </p>
+          <h1 className="text-3xl font-bold" style={{ color: "var(--cs-title)" }}>
+            Tú puedes con todo{userName ? `, ${userName}` : ""} <span aria-hidden>🌿</span>
+          </h1>
+        </header>
 
         {/* Seed Mode Banner */}
         {dashboardData?.mode === "seed" && <SeedModeBanner />}

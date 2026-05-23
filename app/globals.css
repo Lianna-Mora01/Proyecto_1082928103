@@ -1,36 +1,49 @@
-/* Optimizado para Vercel: importación con preflight deshabilitado */
 @import "tailwindcss";
 
-/* CampusZen Design System — Modo Claro */
+/* CampusZen Design System — Modo Claro (Sage Palette) */
 :root {
-  --cs-bg-primary: #F8F9FA;
+  --cs-bg-primary: #F8FAF7;       /* crema */
   --cs-bg-card: #FFFFFF;
-  --cs-primary: #40916C;
-  --cs-primary-dark: #2D6A4F;
-  --cs-secondary: #95D5B2;
-  --cs-text-primary: #1B1B1B;
-  --cs-text-secondary: #6C757D;
+  --cs-bg-soft: #EEF6EC;          /* fondo suave para hover/active */
+  --cs-primary: #7BAE7F;          /* verde salvia */
+  --cs-primary-dark: #5D9763;
+  --cs-primary-darker: #2D5016;
+  --cs-secondary: #A8D5A2;        /* verde menta */
+  --cs-text-primary: #4A5568;     /* gris pizarra */
+  --cs-text-secondary: #718096;
+  --cs-title: #2D5016;            /* verde oscuro para titulos */
   --cs-alert: #F4A261;
   --cs-error: #E63946;
-  --cs-success: #2D6A4F;
-  --cs-border: #DEE2E6;
-  --cs-shadow: rgba(0, 0, 0, 0.08);
+  --cs-success: #2D5016;
+  --cs-border: #DCE9D7;           /* border-green-100 */
+  --cs-border-soft: #EDF5EB;
+  --cs-shadow: rgba(45, 80, 22, 0.06);
+  --cs-shadow-md: rgba(45, 80, 22, 0.10);
+  --cs-gradient-primary: linear-gradient(135deg, #7BAE7F 0%, #A8D5A2 100%);
+  --cs-gradient-soft: linear-gradient(135deg, #F8FAF7 0%, #EEF6EC 100%);
 }
 
 /* CampusZen Design System — Modo Oscuro */
 [data-theme="dark"] {
-  --cs-bg-primary: #121212;
-  --cs-bg-card: #1E1E1E;
-  --cs-primary: #52B788;
-  --cs-primary-dark: #40916C;
-  --cs-secondary: #74C69D;
-  --cs-text-primary: #E8E8E8;
-  --cs-text-secondary: #AAAAAA;
+  --cs-bg-primary: #1A1F1B;
+  --cs-bg-card: #232A24;
+  --cs-bg-soft: #2A322B;
+  --cs-primary: #95C499;
+  --cs-primary-dark: #7BAE7F;
+  --cs-primary-darker: #5D9763;
+  --cs-secondary: #C2E2BD;
+  --cs-text-primary: #E2E8E0;
+  --cs-text-secondary: #A0AEC0;
+  --cs-title: #C2E2BD;
   --cs-alert: #F4A261;
   --cs-error: #FF6B6B;
-  --cs-success: #95D5B2;
-  --cs-border: #2C2C2C;
+  --cs-success: #95C499;
+  --cs-border: #2F3A30;
+  --cs-border-soft: #283129;
   --cs-shadow: rgba(0, 0, 0, 0.3);
+  --cs-shadow-md: rgba(0, 0, 0, 0.4);
+  --cs-gradient-primary: linear-gradient(135deg, #5D9763 0%, #7BAE7F 100%);
+  --cs-gradient-soft: linear-gradient(135deg, #1A1F1B 0%, #232A24 100%);
 }
 
 html {
@@ -46,10 +59,15 @@ body {
   color: var(--cs-text-primary);
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   transition: background-color 0.3s, color 0.3s;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-* {
-  border-color: var(--cs-border);
+/* Titulos con verde oscuro */
+h1, h2, h3 {
+  color: var(--cs-title);
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 /* Suavizar transiciones de tema */
@@ -57,4 +75,27 @@ html,
 body,
 * {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Utility: gradiente primario para botones destacados */
+.cs-gradient {
+  background: var(--cs-gradient-primary);
+  color: white;
+}
+
+.cs-gradient:hover {
+  filter: brightness(0.95);
+}
+
+/* Utility: shadow suave coherente con la paleta */
+.cs-shadow-soft {
+  box-shadow: 0 1px 3px var(--cs-shadow), 0 1px 2px var(--cs-shadow);
+}
+
+.cs-shadow-card {
+  box-shadow: 0 4px 12px var(--cs-shadow), 0 2px 4px var(--cs-shadow);
+}
+
+.cs-shadow-elevated {
+  box-shadow: 0 10px 30px var(--cs-shadow-md), 0 4px 8px var(--cs-shadow);
 }

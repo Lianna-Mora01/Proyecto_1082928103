@@ -10,16 +10,20 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variantStyles: Record<ButtonVariant, string> = {
-  primary: "bg-[--cs-primary] text-white hover:bg-[--cs-primary-dark] active:scale-95",
-  secondary: "bg-[--cs-secondary] text-[--cs-text-primary] hover:opacity-80 active:scale-95",
-  danger: "bg-[--cs-error] text-white hover:opacity-90 active:scale-95",
-  ghost: "bg-transparent text-[--cs-text-primary] hover:bg-[--cs-bg-card] border border-[--cs-border] active:scale-95",
+  primary:
+    "cs-gradient text-white shadow-sm hover:shadow-md active:scale-[0.98]",
+  secondary:
+    "bg-[--cs-bg-soft] text-[--cs-title] border border-[--cs-border] hover:bg-[--cs-secondary] hover:text-white active:scale-[0.98]",
+  danger:
+    "bg-[--cs-error] text-white hover:opacity-90 active:scale-[0.98]",
+  ghost:
+    "bg-transparent text-[--cs-text-primary] hover:bg-[--cs-bg-soft] border border-transparent hover:border-[--cs-border] active:scale-[0.98]",
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
-  sm: "px-3 py-1.5 text-sm",
-  md: "px-4 py-2 text-base",
-  lg: "px-6 py-3 text-lg",
+  sm: "px-3 py-1.5 text-sm rounded-xl",
+  md: "px-4 py-2.5 text-sm rounded-2xl",
+  lg: "px-6 py-3 text-base rounded-2xl",
 };
 
 export default function Button({
@@ -35,7 +39,8 @@ export default function Button({
     <button
       disabled={disabled || isLoading}
       className={`
-        font-medium rounded-lg transition-all duration-200
+        font-medium transition-all duration-200
+        inline-flex items-center justify-center gap-2
         disabled:opacity-50 disabled:cursor-not-allowed
         ${variantStyles[variant]}
         ${sizeStyles[size]}
@@ -44,7 +49,7 @@ export default function Button({
       {...props}
     >
       {isLoading ? (
-        <span className="inline-flex items-center gap-2">
+        <>
           <svg
             className="animate-spin h-4 w-4"
             xmlns="http://www.w3.org/2000/svg"
@@ -66,7 +71,7 @@ export default function Button({
             />
           </svg>
           {children}
-        </span>
+        </>
       ) : (
         children
       )}
