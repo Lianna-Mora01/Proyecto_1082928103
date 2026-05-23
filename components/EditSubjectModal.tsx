@@ -47,13 +47,15 @@ export function EditSubjectModal({ subject, onSubmit, onCancel }: EditSubjectMod
   }, [subject]);
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white rounded-lg p-6 w-full max-w-md mx-4">
-        <h3 className="text-lg font-medium text-gray-900 mb-4">Editar Materia</h3>
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+      <div className="bg-[--cs-bg-card] border border-[--cs-border] rounded-2xl p-6 w-full max-w-md cs-shadow-elevated">
+        <h3 className="text-lg font-semibold mb-4" style={{ color: "var(--cs-title)" }}>
+          Editar Materia
+        </h3>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="edit-name" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="edit-name" className="block text-sm font-medium text-[--cs-text-primary] mb-1">
               Nombre de la materia *
             </label>
             <input
@@ -61,13 +63,13 @@ export function EditSubjectModal({ subject, onSubmit, onCancel }: EditSubjectMod
               id="edit-name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-3 py-2 border border-[--cs-border] rounded-xl text-[--cs-title] bg-[--cs-bg-card] focus:outline-none focus:ring-2 focus:ring-[--cs-primary] focus:border-transparent"
               required
             />
           </div>
 
           <div>
-            <label htmlFor="edit-color" className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="edit-color" className="block text-sm font-medium text-[--cs-text-primary] mb-1">
               Color
             </label>
             <div className="flex items-center space-x-2">
@@ -76,28 +78,28 @@ export function EditSubjectModal({ subject, onSubmit, onCancel }: EditSubjectMod
                 id="edit-color"
                 value={color}
                 onChange={(e) => setColor(e.target.value)}
-                className="w-12 h-8 border border-gray-300 rounded cursor-pointer"
+                className="w-12 h-8 border border-[--cs-border] rounded cursor-pointer"
               />
-              <span className="text-sm text-gray-600">{color}</span>
+              <span className="text-sm text-[--cs-text-secondary]">{color}</span>
             </div>
           </div>
 
           {error && (
-            <div className="text-red-600 text-sm">{error}</div>
+            <div className="text-[--cs-error] text-sm">{error}</div>
           )}
 
           <div className="flex space-x-3">
             <button
               type="submit"
               disabled={loading}
-              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="cs-gradient text-white px-4 py-2 rounded-xl font-medium shadow-sm hover:shadow-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? 'Guardando...' : 'Guardar Cambios'}
             </button>
             <button
               type="button"
               onClick={onCancel}
-              className="px-4 py-2 border border-gray-300 text-gray-700 rounded hover:bg-gray-50"
+              className="px-4 py-2 border border-[--cs-border] text-[--cs-text-primary] rounded-xl hover:bg-[--cs-bg-soft] transition-colors"
             >
               Cancelar
             </button>

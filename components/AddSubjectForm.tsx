@@ -32,12 +32,14 @@ export function AddSubjectForm({ onSubmit, onCancel }: AddSubjectFormProps) {
   };
 
   return (
-    <div className="border rounded-lg p-4 bg-gray-50">
-      <h3 className="text-lg font-medium text-gray-900 mb-4">Nueva Materia</h3>
+    <div className="border border-[--cs-border] rounded-2xl p-5 bg-[--cs-bg-soft]">
+      <h3 className="text-lg font-semibold mb-4" style={{ color: "var(--cs-title)" }}>
+        Nueva Materia
+      </h3>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="name" className="block text-sm font-medium text-[--cs-text-primary] mb-1">
             Nombre de la materia *
           </label>
           <input
@@ -45,14 +47,14 @@ export function AddSubjectForm({ onSubmit, onCancel }: AddSubjectFormProps) {
             id="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full px-3 py-2 border border-[--cs-border] rounded-xl text-[--cs-title] bg-[--cs-bg-card] focus:outline-none focus:ring-2 focus:ring-[--cs-primary] focus:border-transparent"
             placeholder="Ej: Matemáticas, Física, Literatura..."
             required
           />
         </div>
 
         <div>
-          <label htmlFor="color" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="color" className="block text-sm font-medium text-[--cs-text-primary] mb-1">
             Color
           </label>
           <div className="flex items-center space-x-2">
@@ -61,28 +63,28 @@ export function AddSubjectForm({ onSubmit, onCancel }: AddSubjectFormProps) {
               id="color"
               value={color}
               onChange={(e) => setColor(e.target.value)}
-              className="w-12 h-8 border border-gray-300 rounded cursor-pointer"
+              className="w-12 h-8 border border-[--cs-border] rounded cursor-pointer"
             />
-            <span className="text-sm text-gray-600">{color}</span>
+            <span className="text-sm text-[--cs-text-secondary]">{color}</span>
           </div>
         </div>
 
         {error && (
-          <div className="text-red-600 text-sm">{error}</div>
+          <div className="text-[--cs-error] text-sm">{error}</div>
         )}
 
         <div className="flex space-x-3">
           <button
             type="submit"
             disabled={loading || !name.trim()}
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="cs-gradient text-white px-4 py-2 rounded-xl font-medium shadow-sm hover:shadow-md transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? 'Creando...' : 'Crear Materia'}
           </button>
           <button
             type="button"
             onClick={onCancel}
-            className="px-4 py-2 border border-gray-300 text-gray-700 rounded hover:bg-gray-50"
+            className="px-4 py-2 border border-[--cs-border] text-[--cs-text-primary] rounded-xl hover:bg-[--cs-bg-card] transition-colors"
           >
             Cancelar
           </button>
