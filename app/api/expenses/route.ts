@@ -55,6 +55,12 @@ async function postHandler(req: NextRequest): Promise<NextResponse> {
   } catch (error) {
     console.error('Error en POST /api/expenses:', error);
 
+    // En desarrollo, exponer el error real al cliente para facilitar el debug
+    const devDetail =
+      process.env.NODE_ENV !== 'production' && error instanceof Error
+        ? { devMessage: error.message, devStack: error.stack?.split('\n').slice(0, 5).join('\n') }
+        : {};
+
     // RN-15: Anti-duplicado → 409 Conflict
     if (error instanceof Error) {
       if (error.message === 'DUPLICATE_EXPENSE') {
@@ -78,16 +84,19 @@ async function postHandler(req: NextRequest): Promise<NextResponse> {
         );
       }
 
-      if (error.message.includes('modo seed')) {
+      if (error.message.includes('modo seed') || error.message.includes('credentials not configured')) {
         return NextResponse.json(
-          { error: 'El sistema aún no está inicializado. Por favor ejecuta el bootstrap desde Configuración del sistema.' },
+          {
+            error: 'Supabase no está configurado. Completa .env.local con NEXT_PUBLIC_SUPABASE_URL y SUPABASE_SERVICE_ROLE_KEY, reinicia el servidor y visita /db-setup para crear las tablas.',
+            setupUrl: '/db-setup',
+          },
           { status: 503 }
         );
       }
     }
 
     return NextResponse.json(
-      { error: 'Error interno del servidor' },
+      { error: 'Error interno del servidor', ...devDetail },
       { status: 500 }
     );
   }
