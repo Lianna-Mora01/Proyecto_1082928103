@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { Target } from 'lucide-react';
 import { formatCOP } from '@/lib/format';
 
 interface BudgetBarProps {
@@ -9,66 +10,106 @@ interface BudgetBarProps {
 }
 
 export default function BudgetBar({ totalAmount, budgetPercentage }: BudgetBarProps) {
-  // Si no hay presupuesto configurado, mostrar mensaje alternativo
+  // Sin presupuesto configurado
   if (budgetPercentage === null) {
     return (
-      <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
-        <div className="text-center">
-          <p className="text-gray-600 dark:text-gray-400 text-sm mb-2">
-            No tienes un presupuesto mensual configurado
-          </p>
-          <Link
-            href="/profile"
-            className="inline-flex items-center text-green-700 hover:text-green-800 dark:text-green-500 dark:hover:text-green-400 text-sm font-medium"
+      <div className="rounded-3xl border border-[--cs-border] bg-[--cs-bg-card] p-7 cs-shadow-card">
+        <div className="flex items-center gap-3 mb-3">
+          <span
+            className="inline-flex items-center justify-center w-11 h-11 rounded-2xl text-white shrink-0"
+            style={{ background: 'var(--cs-gradient-primary)' }}
           >
-            Configurar presupuesto →
-          </Link>
+            <Target size={20} />
+          </span>
+          <div>
+            <h3 className="text-base font-semibold leading-tight" style={{ color: 'var(--cs-title)' }}>
+              Presupuesto mensual
+            </h3>
+            <p className="text-xs text-[--cs-text-secondary] mt-0.5">Sin configurar</p>
+          </div>
         </div>
+        <p className="text-sm text-[--cs-text-secondary] mb-4">
+          Define un límite mensual para seguir mejor tus gastos.
+        </p>
+        <Link
+          href="/profile"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-[--cs-bg-soft] text-[--cs-primary-darker] text-sm font-medium hover:bg-[--cs-secondary] hover:text-white transition-all duration-200"
+        >
+          Configurar presupuesto →
+        </Link>
       </div>
     );
   }
 
-  // Determinar el estado del color basado en el porcentaje
-  const getBarColor = () => {
-    if (budgetPercentage < 80) return 'bg-green-500'; // Verde hasta 79%
-    if (budgetPercentage < 100) return 'bg-orange-500'; // Naranja 80-99%
-    return 'bg-red-500'; // Rojo 100%+
-  };
+  // Estado del presupuesto
+  const status: 'ok' | 'warning' | 'over' =
+    budgetPercentage < 80 ? 'ok' : budgetPercentage < 100 ? 'warning' : 'over';
 
-  const getTextColor = () => {
-    if (budgetPercentage < 80) return 'text-green-700 dark:text-green-400';
-    if (budgetPercentage < 100) return 'text-orange-700 dark:text-orange-400';
-    return 'text-red-700 dark:text-red-400';
-  };
+  const barGradient =
+    status === 'ok'
+      ? 'linear-gradient(90deg, #5D9763 0%, #7BAE7F 50%, #A8D5A2 100%)'
+      : status === 'warning'
+      ? 'linear-gradient(90deg, #C97B1E 0%, #F4A261 50%, #FBC97D 100%)'
+      : 'linear-gradient(90deg, #B91C1C 0%, #E63946 50%, #FF6B6B 100%)';
 
-  const getMessage = () => {
-    if (budgetPercentage < 80) return 'Presupuesto bajo control';
-    if (budgetPercentage < 100) return 'Cerca del límite';
-    return 'Presupuesto excedido';
-  };
+  const subtitle =
+    status === 'ok' ? 'Presupuesto bajo control' : status === 'warning' ? 'Cerca del límite' : 'Presupuesto excedido';
+
+  const percentColor =
+    status === 'ok' ? 'var(--cs-primary-darker)' : status === 'warning' ? '#B45309' : '#B91C1C';
+
+  const glow =
+    status === 'ok'
+      ? '0 0 16px rgba(123, 174, 127, 0.45)'
+      : status === 'warning'
+      ? '0 0 16px rgba(244, 162, 97, 0.45)'
+      : '0 0 16px rgba(230, 57, 70, 0.45)';
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
-      <div className="flex items-center justify-between mb-2">
-        <h3 className="text-sm font-medium text-gray-900 dark:text-white">
-          Presupuesto mensual
-        </h3>
-        <span className={`text-sm font-medium ${getTextColor()}`}>
-          {budgetPercentage.toFixed(1)}%
-        </span>
+    <div className="rounded-3xl border border-[--cs-border] bg-[--cs-bg-card] p-7 cs-shadow-card">
+      <div className="flex items-start justify-between gap-4 mb-6">
+        <div className="flex items-center gap-3">
+          <span
+            className="inline-flex items-center justify-center w-11 h-11 rounded-2xl text-white shrink-0"
+            style={{ background: 'var(--cs-gradient-primary)' }}
+          >
+            <Target size={20} />
+          </span>
+          <div>
+            <h3 className="text-base font-semibold leading-tight" style={{ color: 'var(--cs-title)' }}>
+              Presupuesto mensual
+            </h3>
+            <p className="text-xs text-[--cs-text-secondary] mt-0.5">{subtitle}</p>
+          </div>
+        </div>
+
+        <div className="text-right shrink-0">
+          <p
+            className="text-4xl font-bold tracking-tight leading-none"
+            style={{ color: percentColor }}
+          >
+            {budgetPercentage.toFixed(0)}%
+          </p>
+          <p className="text-xs text-[--cs-text-secondary] mt-1.5">usado</p>
+        </div>
       </div>
 
-      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 mb-2">
+      {/* Barra de progreso gruesa, redondeada y con gradiente */}
+      <div className="relative w-full bg-[--cs-bg-soft] rounded-full h-4 overflow-hidden">
         <div
-          className={`h-3 rounded-full transition-all duration-300 ${getBarColor()}`}
-          style={{ width: `${Math.min(budgetPercentage, 100)}%` }}
+          className="h-full rounded-full transition-all duration-700 ease-out"
+          style={{
+            width: `${Math.min(budgetPercentage, 100)}%`,
+            background: barGradient,
+            boxShadow: glow,
+          }}
         />
       </div>
 
-      <div className="flex justify-between text-xs text-gray-600 dark:text-gray-400">
-        <span>{formatCOP(totalAmount)}</span>
-        <span className={getTextColor()}>
-          {getMessage()}
+      <div className="flex items-center justify-between mt-5 text-sm">
+        <span className="text-[--cs-text-secondary]">Total gastado este mes</span>
+        <span className="font-bold tracking-tight" style={{ color: 'var(--cs-primary-darker)' }}>
+          {formatCOP(totalAmount)}
         </span>
       </div>
     </div>

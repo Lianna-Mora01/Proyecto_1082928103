@@ -7,9 +7,21 @@ import ExpenseForm from '@/components/expenses/ExpenseForm';
 import ExpenseChart from '@/components/charts/ExpenseChart';
 import BudgetBar from '@/components/expenses/BudgetBar';
 import Modal from '@/components/ui/Modal';
-import Button from '@/components/ui/Button';
 import { useToast } from '@/components/providers/ToastProvider';
 import { formatCOP } from '@/lib/format';
+import {
+  Plus,
+  FileText,
+  FileSpreadsheet,
+  Loader2,
+  Calendar,
+  Wallet,
+  Banknote,
+  CreditCard,
+} from 'lucide-react';
+
+const actionButtonClass =
+  "inline-flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-[--cs-bg-card] border border-[--cs-primary]/40 text-[--cs-primary-darker] font-medium text-sm cs-shadow-soft hover:bg-[--cs-bg-soft] hover:border-[--cs-primary] hover:cs-shadow-card transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed";
 
 interface ExpenseFormData {
   name: string;
@@ -274,25 +286,27 @@ export default function ExpensesPage() {
         </div>
 
         <div className="flex gap-3 flex-wrap">
-          <Button onClick={() => setShowForm(true)}>
-            ➕ Nuevo gasto
-          </Button>
+          <button onClick={() => setShowForm(true)} className={actionButtonClass}>
+            <Plus size={16} />
+            Nuevo gasto
+          </button>
 
-          {/* Botones de exportación */}
-          <Button
+          <button
             onClick={handleDownloadPDF}
             disabled={exportingPDF}
-            className={exportingPDF ? 'opacity-50 cursor-not-allowed' : ''}
+            className={actionButtonClass}
           >
-            {exportingPDF ? '⏳ Generando PDF...' : '📄 Exportar PDF'}
-          </Button>
-          <Button
+            {exportingPDF ? <Loader2 size={16} className="animate-spin" /> : <FileText size={16} />}
+            {exportingPDF ? 'Generando PDF...' : 'Exportar PDF'}
+          </button>
+          <button
             onClick={handleDownloadExcel}
             disabled={exportingExcel}
-            className={exportingExcel ? 'opacity-50 cursor-not-allowed' : ''}
+            className={actionButtonClass}
           >
-            {exportingExcel ? '⏳ Generando Excel...' : '📊 Exportar Excel'}
-          </Button>
+            {exportingExcel ? <Loader2 size={16} className="animate-spin" /> : <FileSpreadsheet size={16} />}
+            {exportingExcel ? 'Generando Excel...' : 'Exportar Excel'}
+          </button>
         </div>
       </div>
 
@@ -302,30 +316,59 @@ export default function ExpensesPage() {
           {summary && <BudgetBar totalAmount={summary.totalAmount} budgetPercentage={summary.budgetPercentage} />}
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700">
-          <h3 className="text-sm font-medium text-gray-900 dark:text-white mb-3">
-            Resumen del mes
-          </h3>
-          <div className="space-y-2">
-            <div className="flex justify-between">
-              <span className="text-sm text-gray-600 dark:text-gray-400">Total gastado</span>
-              <span className="font-medium text-gray-900 dark:text-white">
-                {formatCOP(summary?.totalAmount)}
-              </span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-sm text-gray-600 dark:text-gray-400">💵 Efectivo</span>
-              <span className="text-sm text-gray-900 dark:text-white">
-                {formatCOP(paymentSummary.efectivo)}
-              </span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-sm text-gray-600 dark:text-gray-400">💳 Tarjeta</span>
-              <span className="text-sm text-gray-900 dark:text-white">
-                {formatCOP(paymentSummary.tarjeta)}
-              </span>
+        <div className="rounded-3xl border border-[--cs-border] bg-[--cs-bg-card] p-6 cs-shadow-card">
+          <div className="flex items-center gap-3 mb-5">
+            <span
+              className="inline-flex items-center justify-center w-10 h-10 rounded-2xl text-white shrink-0"
+              style={{ background: 'var(--cs-gradient-primary)' }}
+            >
+              <Calendar size={18} />
+            </span>
+            <div>
+              <h3 className="text-base font-semibold leading-tight" style={{ color: 'var(--cs-title)' }}>
+                Resumen del mes
+              </h3>
+              <p className="text-xs text-[--cs-text-secondary] mt-0.5">
+                Total y método de pago
+              </p>
             </div>
           </div>
+
+          <ul className="divide-y divide-[--cs-border-soft]">
+            <li className="flex items-center justify-between py-3">
+              <span className="inline-flex items-center gap-3 text-sm text-[--cs-text-primary]">
+                <span className="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-[--cs-bg-soft] text-[--cs-primary-darker]">
+                  <Wallet size={15} />
+                </span>
+                Total gastado
+              </span>
+              <span className="font-bold tracking-tight" style={{ color: 'var(--cs-primary-darker)' }}>
+                {formatCOP(summary?.totalAmount)}
+              </span>
+            </li>
+            <li className="flex items-center justify-between py-3">
+              <span className="inline-flex items-center gap-3 text-sm text-[--cs-text-primary]">
+                <span className="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-200">
+                  <Banknote size={15} />
+                </span>
+                Efectivo
+              </span>
+              <span className="font-bold tracking-tight" style={{ color: 'var(--cs-primary-darker)' }}>
+                {formatCOP(paymentSummary.efectivo)}
+              </span>
+            </li>
+            <li className="flex items-center justify-between py-3">
+              <span className="inline-flex items-center gap-3 text-sm text-[--cs-text-primary]">
+                <span className="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-sky-50 text-sky-700 dark:bg-sky-950/40 dark:text-sky-200">
+                  <CreditCard size={15} />
+                </span>
+                Tarjeta
+              </span>
+              <span className="font-bold tracking-tight" style={{ color: 'var(--cs-primary-darker)' }}>
+                {formatCOP(paymentSummary.tarjeta)}
+              </span>
+            </li>
+          </ul>
         </div>
       </div>
 
