@@ -129,7 +129,13 @@ export default function ExpenseCard({ expense, onEdit, onDelete }: ExpenseCardPr
         {/* Footer: metodo de pago + fecha */}
         <div className="flex items-center gap-3 text-xs text-[--cs-text-secondary]">
           <span className="inline-flex items-center gap-1">
-            <span aria-hidden>{expense.payment_method === 'Efectivo' ? '💵' : '💳'}</span>
+            <span aria-hidden>
+              {expense.payment_method === 'Efectivo'
+                ? '💵'
+                : expense.payment_method === 'Tarjeta'
+                ? '💳'
+                : '🏦'}
+            </span>
             <span>{expense.payment_method}</span>
           </span>
           <span aria-hidden>•</span>

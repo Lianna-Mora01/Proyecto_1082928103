@@ -101,7 +101,7 @@ export const createExpenseSchema = z.object({
   name: z.string().min(1, 'El nombre es requerido').max(200, 'El nombre no puede exceder 200 caracteres'),
   amount: z.number().positive('El monto debe ser mayor a cero').max(999999.99, 'El monto no puede exceder 999,999.99'),
   category: z.enum(['Fotocopias', 'Transporte', 'Comida', 'Materiales', 'Otro'], { message: 'Categoría inválida' }),
-  payment_method: z.enum(['Efectivo', 'Tarjeta'], { message: 'Método de pago inválido' }),
+  payment_method: z.enum(['Efectivo', 'Tarjeta', 'Transferencia'], { message: 'Método de pago inválido' }),
   expense_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, 'La fecha debe estar en formato YYYY-MM-DD'),
 });
 
@@ -109,7 +109,7 @@ export const updateExpenseSchema = z.object({
   name: z.string().min(1).max(200).optional(),
   amount: z.number().positive().max(999999.99).optional(),
   category: z.enum(['Fotocopias', 'Transporte', 'Comida', 'Materiales', 'Otro']).optional(),
-  payment_method: z.enum(['Efectivo', 'Tarjeta']).optional(),
+  payment_method: z.enum(['Efectivo', 'Tarjeta', 'Transferencia']).optional(),
   expense_date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
 });
 

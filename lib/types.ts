@@ -129,7 +129,7 @@ export type Expense = {
   name: string;
   amount: number;
   category: 'Fotocopias' | 'Transporte' | 'Comida' | 'Materiales' | 'Otro';
-  payment_method: 'Efectivo' | 'Tarjeta';
+  payment_method: 'Efectivo' | 'Tarjeta' | 'Transferencia';
   expense_date: string;
   created_at: string;
   updated_at: string;
@@ -152,7 +152,8 @@ export const EXPENSE_CATEGORIES = [
 
 export const PAYMENT_METHODS = [
   'Efectivo',
-  'Tarjeta'
+  'Tarjeta',
+  'Transferencia'
 ] as const;
 
 export type CreateExpenseRequest = {

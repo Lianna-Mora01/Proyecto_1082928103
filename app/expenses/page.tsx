@@ -18,6 +18,7 @@ import {
   Wallet,
   Banknote,
   CreditCard,
+  Send,
 } from 'lucide-react';
 
 const actionButtonClass =
@@ -258,11 +259,12 @@ export default function ExpensesPage() {
     }
   };
 
-  // Calcular resumen efectivo vs tarjeta
+  // Calcular resumen por metodo de pago
   const paymentSummary = summary ? {
     efectivo: summary.byPaymentMethod['Efectivo'] || 0,
     tarjeta: summary.byPaymentMethod['Tarjeta'] || 0,
-  } : { efectivo: 0, tarjeta: 0 };
+    transferencia: summary.byPaymentMethod['Transferencia'] || 0,
+  } : { efectivo: 0, tarjeta: 0, transferencia: 0 };
 
   if (loading) {
     return (
@@ -366,6 +368,17 @@ export default function ExpensesPage() {
               </span>
               <span className="font-bold tracking-tight" style={{ color: 'var(--cs-primary-darker)' }}>
                 {formatCOP(paymentSummary.tarjeta)}
+              </span>
+            </li>
+            <li className="flex items-center justify-between py-3">
+              <span className="inline-flex items-center gap-3 text-sm text-[--cs-text-primary]">
+                <span className="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-violet-50 text-violet-700 dark:bg-violet-950/40 dark:text-violet-200">
+                  <Send size={15} />
+                </span>
+                Transferencia
+              </span>
+              <span className="font-bold tracking-tight" style={{ color: 'var(--cs-primary-darker)' }}>
+                {formatCOP(paymentSummary.transferencia)}
               </span>
             </li>
           </ul>
