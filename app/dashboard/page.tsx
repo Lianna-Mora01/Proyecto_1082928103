@@ -208,38 +208,6 @@ export default function DashboardPage() {
               />
             </Card>
           )}
-
-        {/* Resumen semanal */}
-        {dashboardData?.weeklyStats && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-            <Card>
-              <p className="text-sm text-[--cs-text-secondary] mb-2">
-                Tareas Completadas (7 días)
-              </p>
-              <p className="text-2xl font-bold text-[--cs-success]">
-                {dashboardData.weeklyStats.tasksCompleted}
-              </p>
-            </Card>
-
-            <Card>
-              <p className="text-sm text-[--cs-text-secondary] mb-2">
-                Gastos Registrados (7 días)
-              </p>
-              <p className="text-2xl font-bold text-[--cs-primary]">
-                {dashboardData.weeklyStats.expensesRecorded}
-              </p>
-            </Card>
-
-            <Card>
-              <p className="text-sm text-[--cs-text-secondary] mb-2">
-                Tareas Creadas (7 días)
-              </p>
-              <p className="text-2xl font-bold text-[--cs-success]">
-                {dashboardData.weeklyStats.tasksCreated}
-              </p>
-            </Card>
-          </div>
-        )}
       </div>
     </AppLayout>
   );
